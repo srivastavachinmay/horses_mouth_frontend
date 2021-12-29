@@ -2,7 +2,7 @@ import React from 'react';
 import { createTheme, ThemeProvider } from "@mui/material";
 import LandingPage from "./components/Landing Page";
 import "@fontsource/poppins";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/MentorListing";
 
 const theme = createTheme({
     palette: {
