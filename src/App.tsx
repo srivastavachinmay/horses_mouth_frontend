@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import LandingPage from "./components/Landing Page";
 import "@fontsource/poppins";
 import Sidebar from "./components/MentorListing";
+import StudentProfileSPOV from "./components/StudentProfileSPOV";
 
 const theme = createTheme({
     palette: {
@@ -18,11 +19,13 @@ const theme = createTheme({
 function App() {
     return (
         // <ThemeProvider theme={theme}>
-        //     <LandingPage/>
-        //
+            //  <LandingPage/> 
+        
         // </ThemeProvider>
-        <Sidebar/>
+        // <Sidebar/>
+        <StudentProfileSPOV/>
     );
+
 }
 
 export default App;

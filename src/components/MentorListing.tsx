@@ -185,7 +185,7 @@ function DashboardContent() {
                         </Grid>
 
                     </Grid>
-                    <Container maxWidth="lg" sx={{ mt: 1,p:3, mb: 4, backgroundColor: '#EFEDFF' }}>
+                    <Container maxWidth="xl" sx={{ mt: 1,p:3, mb: 4, backgroundColor: '#EFEDFF' }}>
                         <Grid container spacing={3}>
                             {/* Chart */}
 
