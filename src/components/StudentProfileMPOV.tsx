@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Avatar, Chip, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
-import { mainListItems } from "./listItems";
+import { MentorSidebarList } from "./listItems";
 import Grid from "@mui/material/Grid";
 import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
@@ -68,7 +68,7 @@ const StudentProfileMPOV = () => {
           <Typography textAlign={"center"} sx={{ color: "white" }}>
             John Doe
           </Typography>
-          <List>{mainListItems}</List>
+          <List>{ MentorSidebarList}</List>
         </Drawer>
 
         <Box

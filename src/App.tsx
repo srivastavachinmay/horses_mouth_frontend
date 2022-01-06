@@ -4,6 +4,8 @@ import LandingPage from "./components/Landing Page";
 import "@fontsource/poppins";
 import Sidebar from "./components/MentorListing";
 import StudentProfileSPOV from "./components/StudentProfileSPOV";
+import MentorProfileSPOV from "./components/MentorProfileSPOV";
+import MentorListing from './components/MentorListing';
 
 const theme = createTheme({
     palette: {
@@ -13,17 +15,22 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: 'Poppins',
-    }
+    },
+    
+
 });
 
 function App() {
     return (
         // <ThemeProvider theme={theme}>
-            //  <LandingPage/> 
+        //      {/* <LandingPage/>  */}
+             
+        // <StudentProfileSPOV/>
         
-        // </ThemeProvider>
+        // </ThemeProvider> 
         // <Sidebar/>
-        <StudentProfileSPOV/>
+        // <MentorProfileSPOV/>
+        <MentorListing/>
     );
 
 }

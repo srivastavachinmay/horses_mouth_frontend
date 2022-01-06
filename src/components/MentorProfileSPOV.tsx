@@ -55,7 +55,7 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
-const StudentProfileSPOV = () => {
+const MentorProfileSPOV = () => {
 
     const [open, setOpen] = useState(false);
 
@@ -74,7 +74,7 @@ const StudentProfileSPOV = () => {
 
     const chipCSS = {
         bgcolor: "white",
-        width: 200,
+        width: 170,
         height: 45,
         margin: 1,
         border: "none",
@@ -118,8 +118,10 @@ const StudentProfileSPOV = () => {
                         sx={{
                             p: 3,
                             backgroundColor: "#EFEDFF",
-                            height: "100%",
+                            // height: "100%",
                             display: "flex",
+                            width: "100%",
+                            flexWrap: "wrap"
                         }}
                     >
                         <Grid
@@ -227,9 +229,8 @@ const StudentProfileSPOV = () => {
                                 }}
                             >
                                 <Typography fontWeight={"bold"} color={"#6E3CBC"} fontSize={30}>
-                                    About me 
+                                    About me &#128075;
                                 </Typography>
-                                
                                 <Typography
                                     fontWeight={"normal"}
                                     color={"#6E3CBC"}
@@ -256,269 +257,176 @@ const StudentProfileSPOV = () => {
                                     position: "relative",
                                     top: 100,
                                     width: 360,
-                                    borderColor: "black",
+
                                     borderWidth: 1,
-                                    borderRadius: 3,
+                                    borderRadius: 5,
                                     display: "flex",
                                     flexDirection: "column",
-                                    height: 560,
-                                    bgcolor: "#EFEDFF",
-                                    flexWrap: "wrap",
+                                    height: 600,
+                                    // bgcolor:"red"
+                                    // bgcolor: "#EFEDFF",
                                 }}
                             >
                                 <Box display={"flex"} justifyContent={"space-between"}>
-                                    <Typography
-                                        color={"#6E3CBC"}
-                                        fontSize={15}
-                                        fontWeight={700}
-                                        padding={1}
-                                    >
-                                        Upcoming appointments
-                                    </Typography>
-                                    <Typography
-                                        onClick={handleClickOpen}
-                                        color={"#6E3CBC"}
-                                        fontSize={15}
-                                        fontWeight={700}
-                                        sx={{ cursor: "pointer" }}
-                                        padding={1}
-                                    >
-                                        See all
-                                    </Typography>
+                                    {/*<Typography*/}
+                                    {/*    color={"#6E3CBC"}*/}
+                                    {/*    fontSize={15}*/}
+                                    {/*    fontWeight={700}*/}
+                                    {/*    padding={1}*/}
+                                    {/*>*/}
+                                    {/*    Upcoming appointments*/}
+                                    {/*</Typography>*/}
+                                    {/*<Typography*/}
+                                    {/*    onClick={handleClickOpen}*/}
+                                    {/*    color={"#6E3CBC"}*/}
+                                    {/*    fontSize={15}*/}
+                                    {/*    fontWeight={700}*/}
+                                    {/*    sx={{ cursor: "pointer" }}*/}
+                                    {/*    padding={1}*/}
+                                    {/*>*/}
+                                    {/*    See all*/}
+                                    {/*</Typography>*/}
                                 </Box>
+                                <List sx={{
+                                    borderRadius: 5,
+                                    paddingBottom: 2,
+                                    overflowY: "scroll",
+                                    scrollbarColor: "#6E3CBC"
+                                }}>
+                                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(( index ) => (
+                                        <ListItem>
 
-                                <Stack>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                </Stack>
-                            </Box>
-                            <Box
-                                sx={{
-                                    zIndex: 1,
-                                    position: "relative",
-                                    top: 100,
-                                    width: 360,
-                                    borderColor: "black",
-                                    borderWidth: 1,
-                                    borderRadius: 3,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    height: 560,
-                                    bgcolor: "#EFEDFF",
-                                    flexWrap: "wrap",
-                                }}
-                            >
-                                <Box display={"flex"} justifyContent={"space-between"}>
-                                    <Typography
-                                        color={"#6E3CBC"}
-                                        fontSize={15}
-                                        fontWeight={700}
-                                        padding={1}
-                                    >
-                                        Past appointments
-                                    </Typography>
-                                    <Box onClick={handleClickOpen}>
-                                        <Typography
-                                            color={"#6E3CBC"}
-                                            fontSize={15}
-                                            sx={{ cursor: "pointer" }}
-                                            fontWeight={700}
-                                            padding={1}
-                                        >
-                                            See all
-                                        </Typography>
-                                    </Box>
-                                </Box>
+                                            <Card sx={{ borderRadius: 5, m: 0.5, width: "100%" }}>
+                                                <CardHeader
+                                                    avatar={<Avatar>{index}</Avatar>}
+                                                    title={"Date"}
+                                                    titleTypographyProps={{
+                                                        fontSize: 12,
+                                                        fontWeight: "bold",
+                                                        color: "#6E3CBC"
+                                                    }}
+                                                    subheaderTypographyProps={{
+                                                        color: "#6E3CBC",
+                                                        fontWeight: 700,
+                                                        fontSize: 12,
+                                                    }}
+                                                    subheader={"Time to time"}
+                                                />
+                                            </Card>
+                                            <Button variant={"contained"}
+                                                    sx={{
+                                                        color: "white",
+                                                        fontSize:14,
+                                                        bgcolor:"#6E3CBC",
+                                                        transition: "ease-in",
+                                                        ":hover": {
+                                                            bgcolor: "white",
+                                                            color:"#6E3CBC"
+                                                        }
+                                                    }}>
+                                                Book
+                                            </Button>
+                                        </ListItem>
+                                    ))}
+                                </List>
 
-                                <Stack>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                </Stack>
                             </Box>
+
                         </Stack>
+                        <Box
+                            sx={{
+                                zIndex: 1,
+                                // position: "relative",
+                                // top: 100,
+                                borderRadius: 3,
+                                display: "flex",
+                                flexDirection: "column",
+                                // height: 200,
+                                padding: 10,
+                                paddingLeft: 9,
+                                bgcolor: "#EFEDFF",
+                            }}
+                        >
+                            <Typography color={"#6E3CBC"} fontSize={15} fontWeight={700}>
+                                John Doe’s interest / Academic qualifications
+                            </Typography>
+                            <Grid container maxWidth="xl" columns={{ xs: 1, sm: 3, md: 4, xl: 5 }}>
+                                <Chip
+                                    label={"Country of  study"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Area of study"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"University Relation"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Previous Institution"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Previous Course"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Specialisation"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Country of Origin"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"On campus job"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Scholarship"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Place of Stay"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Languages"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Current GPA"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Gmat score "}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Year of Graduation"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+
+
+                            </Grid>
+                        </Box>
+
                     </Container>
-                    <Box
-                        sx={{
-                            zIndex: 1,
-                            // position: "relative",
-                            // top: 100,
-                            borderRadius: 3,
-                            display: "flex",
-                            flexDirection: "column",
-                            height: 200,
-                            padding: 10,
-                            paddingLeft: 20,
-                            bgcolor: "#EFEDFF",
-                        }}
-                    >
-                        <Typography color={"#6E3CBC"} fontSize={15} fontWeight={700}>
-                            John Doe’s interest / Academic qualifications
-                        </Typography>
-                        <Grid container maxWidth="xl" columnGap={2}>
-                            <Chip
-                                label={"Current Education"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"1st preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"2nd preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"3rd preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Campus Preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Degree preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Language preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Previous Education"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                        </Grid>
-                    </Box>
                 </Box>
             </Box>
             <Dialog
@@ -543,7 +451,7 @@ const StudentProfileSPOV = () => {
                         scrollbarColor: '#6E3CBC',
 
                     }}>
-                        <ListItem >
+                        <ListItem>
                             <Card sx={{ borderRadius: 5, m: 0.5 }}>
                                 <CardHeader
                                     avatar={<Avatar/>}
@@ -650,4 +558,4 @@ const StudentProfileSPOV = () => {
     );
 };
 
-export default StudentProfileSPOV;
+export default MentorProfileSPOV;

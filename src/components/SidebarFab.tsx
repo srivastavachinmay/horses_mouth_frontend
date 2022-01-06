@@ -13,7 +13,7 @@ const SidebarFab = () => {
             right: 'auto',
             position: 'fixed',
         }}>
-            <Fab sx={{ bgcolor: '#6E3CBC',margin:1 }}>
+            <Fab sx={{ bgcolor: '   #6E3CBC',margin:1 }}>
                 <Home sx={{ color: 'white' }}/>
             </Fab>
             <Fab sx={{ bgcolor: '#6E3CBC' ,margin:1}}>

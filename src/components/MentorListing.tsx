@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { mainListItems } from './listItems';
-import { Avatar, Button, Checkbox, Chip, Divider, FormControlLabel, InputAdornment, TextField } from "@mui/material";
-import { CheckBox, Search } from "@mui/icons-material";
+import { MentorSidebarList } from './listItems';
+import { Avatar, Button, Checkbox, Chip, FormControlLabel, InputAdornment, TextField } from "@mui/material";
+import { Search } from "@mui/icons-material";
 
 
 const drawerWidth: number = 240;
@@ -89,7 +88,7 @@ function DashboardContent() {
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
                         John Doe
                     </Typography>
-                    <List>{mainListItems}</List>
+                    <List>{MentorSidebarList}</List>
                 </Drawer>
 
 

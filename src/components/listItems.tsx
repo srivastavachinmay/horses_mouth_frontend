@@ -2,13 +2,11 @@ import * as React from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import { CalendarToday, Notifications, Settings } from "@mui/icons-material";
+import { CalendarToday, Settings } from "@mui/icons-material";
 
-export const mainListItems = (
+export const MentorSidebarList = (
 
     <div>
         <ListItem button>
@@ -29,12 +27,6 @@ export const mainListItems = (
             </ListItemIcon>
             <ListItemText primary="Wallet" sx={{ color:"white" }} />
         </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <Notifications sx={{ color:"white" }}/>
-            </ListItemIcon>
-            <ListItemText primary="Notifications" sx={{ color:"white" }} />
-        </ListItem>
         <ListItem button >
             <ListItemIcon>
                 <Settings sx={{ color:"white" }}/>
@@ -44,26 +36,25 @@ export const mainListItems = (
     </div>
 );
 
-export const secondaryListItems = (
+export const StudentSidebarList = (
     <div>
-        <ListSubheader inset>Saved reports</ListSubheader>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <DashboardIcon sx={{ color:"white" }} />
             </ListItemIcon>
-            <ListItemText primary="Current month" />
+            <ListItemText primary="Dashboard" sx={{ color:"white" }}/>
         </ListItem>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <CalendarToday sx={{ color:"white" }}  />
             </ListItemIcon>
-            <ListItemText primary="Last quarter" />
+            <ListItemText primary="Book a Mentor" sx={{ color:"white" }}/>
         </ListItem>
-        <ListItem button>
+        <ListItem button >
             <ListItemIcon>
-                <AssignmentIcon />
+                <Settings sx={{ color:"white" }}/>
             </ListItemIcon>
-            <ListItemText primary="Year-end sale" />
+            <ListItemText primary="Settings" sx={{ color:"white" }} />
         </ListItem>
     </div>
 );
