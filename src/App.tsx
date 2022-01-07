@@ -2,10 +2,10 @@ import React from 'react';
 import { createTheme, ThemeProvider } from "@mui/material";
 import LandingPage from "./components/Landing Page";
 import "@fontsource/poppins";
-import Sidebar from "./components/MentorListing";
 import StudentProfileSPOV from "./components/StudentProfileSPOV";
 import MentorProfileSPOV from "./components/MentorProfileSPOV";
 import MentorListing from './components/MentorListing';
+import StudentProfileMPOV from "./components/StudentProfileMPOV";
 
 const theme = createTheme({
     palette: {
@@ -23,14 +23,15 @@ const theme = createTheme({
 function App() {
     return (
         // <ThemeProvider theme={theme}>
-        //      {/* <LandingPage/>  */}
+        //      <LandingPage/>
              
         // <StudentProfileSPOV/>
-        
+
+        <StudentProfileMPOV/>
         // </ThemeProvider> 
         // <Sidebar/>
         // <MentorProfileSPOV/>
-        <MentorListing/>
+        // <MentorListing/>
     );
 
 }
