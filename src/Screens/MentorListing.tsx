@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { MentorSidebarList } from './listItems';
+import { MentorSidebarList } from './Components/listItems';
 import { Avatar, Button, Checkbox, Chip, FormControlLabel, InputAdornment, TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
 

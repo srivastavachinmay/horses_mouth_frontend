@@ -1,5 +1,5 @@
 import React from 'react';
-import SidebarFab from "./SidebarFab";
+import SidebarFab from "./Components/SidebarFab";
 import { Box, Typography, Button, Card, Chip, CardHeader, Avatar } from "@mui/material";
 import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 

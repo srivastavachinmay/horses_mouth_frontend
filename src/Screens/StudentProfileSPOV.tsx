@@ -17,7 +17,7 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
-import { StudentSidebarList } from "./listItems";
+import { StudentSidebarList } from "./Components/listItems";
 import Grid from "@mui/material/Grid";
 import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
