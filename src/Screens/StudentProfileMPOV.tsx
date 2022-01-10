@@ -1,5 +1,5 @@
 import React from "react";
-import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Avatar, Chip, Link, Stack } from "@mui/material";
@@ -9,36 +9,7 @@ import { MentorSidebarList } from "./Components/listItems";
 import Grid from "@mui/material/Grid";
 import { ArrowBack, LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
-import MuiDrawer from "@mui/material/Drawer";
-
-const drawerWidth: number = 240;
-
-const Drawer = styled(MuiDrawer, {
-    shouldForwardProp: ( prop ) => prop !== "open",
-})(( { theme, open } ) => ( {
-    "& .MuiDrawer-paper": {
-        backgroundColor: "#7267CB",
-        position: "relative",
-        whiteSpace: "nowrap",
-        width: drawerWidth,
-        transition: theme.transitions.create("width", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        boxSizing: "border-box",
-        ...( !open && {
-            overflowX: "hidden",
-            transition: theme.transitions.create("width", {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-            }),
-            width: theme.spacing(7),
-            [ theme.breakpoints.up("sm") ]: {
-                width: theme.spacing(9),
-            },
-        } ),
-    },
-} ));
+import { Drawer } from "./Components/Drawer";
 
 const mdTheme = createTheme();
 
@@ -68,7 +39,7 @@ const StudentProfileMPOV = () => {
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
                         John Doe
                     </Typography>
-                    <List>{MentorSidebarList}</List>
+                    <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{MentorSidebarList}</List>
                 </Drawer>
 
                 <Box
@@ -92,8 +63,8 @@ const StudentProfileMPOV = () => {
                             display: "flex",
                         }}
                     >
-                        <Link color={'#6E3CBC'} fontWeight={"bold"} position={"absolute"} paddingLeft={10} >
-                          <ArrowBack/> Go Back
+                        <Link color={'#6E3CBC'} fontWeight={"bold"} position={"absolute"} paddingLeft={10}>
+                            <ArrowBack/> Go Back
                         </Link>
                         <Grid
                             xs={12}

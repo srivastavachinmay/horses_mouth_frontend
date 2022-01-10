@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Avatar, Button, createTheme, Divider, ListItem, Paper, Tab, Tabs, ThemeProvider } from "@mui/material";
@@ -7,37 +6,8 @@ import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import { MentorSidebarList } from "./Components/listItems";
 import Container from "@mui/material/Container";
-import MuiDrawer from "@mui/material/Drawer";
+import { Drawer } from "./Components/Drawer";
 import { MonetizationOnOutlined, PointOfSale } from "@mui/icons-material";
-
-const drawerWidth: number = 240;
-
-const Drawer = styled(MuiDrawer, {
-    shouldForwardProp: ( prop ) => prop !== "open",
-})(( { theme, open } ) => ( {
-    "& .MuiDrawer-paper": {
-        backgroundColor: "#7267CB",
-        position: "relative",
-        whiteSpace: "nowrap",
-        width: drawerWidth,
-        transition: theme.transitions.create("width", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        boxSizing: "border-box",
-        ...( !open && {
-            overflowX: "hidden",
-            transition: theme.transitions.create("width", {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-            }),
-            width: theme.spacing(7),
-            [ theme.breakpoints.up("sm") ]: {
-                width: theme.spacing(9),
-            },
-        } ),
-    },
-} ));
 
 const tabTheme = createTheme({
     palette: {
@@ -63,7 +33,7 @@ const Wallet = () => {
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
                         John Doe
                     </Typography>
-                    <List>{MentorSidebarList}</List>
+                    <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{MentorSidebarList}</List>
                 </Drawer>
 
                 <Box
@@ -330,16 +300,20 @@ const Wallet = () => {
                                 width: 620,
                                 height: 245,
                                 borderRadius: 4,
-                                p:2 
+                                p: 2
                             }}>
                                 <Typography fontSize={16} fontWeight={700} color={'#6E3CBC'}>Terms and Conditions of
                                     wallet withdrawl</Typography>
-                                <Typography fontSize={16}    color={'#6E3CBC'}>1. As a mentor you are only
+                                <Typography fontSize={16} color={'#6E3CBC'}>1. As a mentor you are only
                                     allowed to withdraw your earnings,7 days after the date of your last
                                     withdrawal. </Typography>
-                                <Typography fontSize={16} color={'#6E3CBC'}>2. It will take 24-36 hours to process your withdrawal request. </Typography>
-                                <Typography fontSize={16} color={'#6E3CBC'}>3. Once your request has been granted, your earnings counter will go to zero again.</Typography>
-                                <Typography fontSize={16} color={'#6E3CBC'}>4. Receiving penalties on the basis of rude behaviour, showing up late, not showing up and/or giving false information, will cause a deduction from your wallet, after an internal inquiry.</Typography>
+                                <Typography fontSize={16} color={'#6E3CBC'}>2. It will take 24-36 hours to process your
+                                    withdrawal request. </Typography>
+                                <Typography fontSize={16} color={'#6E3CBC'}>3. Once your request has been granted, your
+                                    earnings counter will go to zero again.</Typography>
+                                <Typography fontSize={16} color={'#6E3CBC'}>4. Receiving penalties on the basis of rude
+                                    behaviour, showing up late, not showing up and/or giving false information, will
+                                    cause a deduction from your wallet, after an internal inquiry.</Typography>
 
                             </Paper>
                         </Box>

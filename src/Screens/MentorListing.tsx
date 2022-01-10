@@ -1,72 +1,20 @@
 import * as React from 'react';
-import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { MentorSidebarList } from './Components/listItems';
+import { StudentSidebarList } from './Components/listItems';
 import { Avatar, Button, Checkbox, Chip, FormControlLabel, InputAdornment, TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
-
-
-const drawerWidth: number = 240;
-
-// interface AppBarProps extends MuiAppBarProps {
-//     open?: boolean;
-// }
-
-// const AppBar = styled(MuiAppBar, {
-//     shouldForwardProp: ( prop ) => prop !== 'open',
-// })<AppBarProps>(( { theme, open } ) => ( {
-//     zIndex: theme.zIndex.drawer + 1,
-//     transition: theme.transitions.create(['width', 'margin'], {
-//         easing: theme.transitions.easing.sharp,
-//         duration: theme.transitions.duration.leavingScreen,
-//     }),
-//     ...( open && {
-//         marginLeft: drawerWidth,
-//         width: `calc(100% - ${drawerWidth}px)`,
-//         transition: theme.transitions.create(['width', 'margin'], {
-//             easing: theme.transitions.easing.sharp,
-//             duration: theme.transitions.duration.enteringScreen,
-//         }),
-//     } ),
-// } ));
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: ( prop ) => prop !== 'open' })(
-    ( { theme, open } ) => ( {
-        '& .MuiDrawer-paper': {
-            backgroundColor: '#7267CB',
-            position: 'relative',
-            whiteSpace: 'nowrap',
-            width: drawerWidth,
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            boxSizing: 'border-box',
-            ...( !open && {
-                overflowX: 'hidden',
-                transition: theme.transitions.create('width', {
-                    easing: theme.transitions.easing.sharp,
-                    duration: theme.transitions.duration.leavingScreen,
-                }),
-                width: theme.spacing(7),
-                [ theme.breakpoints.up('sm') ]: {
-                    width: theme.spacing(9),
-                },
-            } ),
-        },
-    } ),
-);
+import { Drawer } from "./Components/Drawer";
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+export default function MentorListing() {
     const chipCSS = {
         bgcolor: '#D4CFFF',
         margin: 0.5,
@@ -88,7 +36,7 @@ function DashboardContent() {
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
                         John Doe
                     </Typography>
-                    <List>{MentorSidebarList}</List>
+                    <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{StudentSidebarList}</List>
                 </Drawer>
 
 
@@ -184,27 +132,28 @@ function DashboardContent() {
                         </Grid>
 
                     </Grid>
-                    <Container maxWidth="xl" sx={{ mt: 1,p:3, mb: 4, backgroundColor: '#EFEDFF' }}>
+                    <Container maxWidth="xl" sx={{ mt: 1, p: 3, mb: 4, backgroundColor: '#EFEDFF' }}>
                         <Grid container spacing={3}>
                             {/* Chart */}
 
 
-                            <Grid item xs={12} md={6} lg={4} display={"flex"}  alignItems={"center"} flexDirection={"row"}>
-                                <Avatar sx={{ width: 75, height: 75,zIndex:2 }} />
+                            <Grid item xs={12} md={6} lg={4} display={"flex"} alignItems={"center"}
+                                  flexDirection={"row"}>
+                                <Avatar sx={{ width: 75, height: 75, zIndex: 2 }}/>
 
                                 <Paper
                                     sx={{
-                                        zIndex:1,
-                                        ml:-5,
-                                        position:"relative",
+                                        zIndex: 1,
+                                        ml: -5,
+                                        position: "relative",
                                         p: 2,
-                                        pl:5,
-                                        width:270,
-                                        borderRadius:3,
+                                        pl: 5,
+                                        width: 270,
+                                        borderRadius: 3,
                                         display: 'inline-flex',
                                         flexDirection: 'row',
-                                        height:200,
-                                        flexWrap:'wrap'
+                                        height: 200,
+                                        flexWrap: 'wrap'
                                     }}
                                 >
                                     <Typography alignSelf={"center"} justifySelf={"center"}>John Doe</Typography>
@@ -217,13 +166,19 @@ function DashboardContent() {
                                         color: '#6E3CBC',
                                         fontWeight: "bolder",
                                         borderRadius: 2,
-                                        width:'100%'
+                                        width: '100%'
 
                                     }} label={'University of waterloo'}/>
                                     <Chip sx={chipCSS} label={'bachelor’s'}/>
                                     <Chip sx={chipCSS} label={'Mech. engg.'}/>
                                     <Button variant={'contained'}
-                                            sx={{ bgcolor: '#7267CB', fontWeight: 'bold', fontSize: 11, mt:0.5,height:30 }}>
+                                            sx={{
+                                                bgcolor: '#7267CB',
+                                                fontWeight: 'bold',
+                                                fontSize: 11,
+                                                mt: 0.5,
+                                                height: 30
+                                            }}>
                                         Book a session
                                     </Button>
                                     <Chip sx={chipCSS} label={'student'}/>
@@ -240,16 +195,10 @@ function DashboardContent() {
                                 >
                                 </Paper>
                             </Grid>
-
-
                         </Grid>
                     </Container>
                 </Box>
             </Box>
         </ThemeProvider>
     );
-}
-
-export default function Dashboard() {
-    return <DashboardContent/>;
 }

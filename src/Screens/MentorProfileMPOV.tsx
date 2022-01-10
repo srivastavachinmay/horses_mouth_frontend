@@ -17,7 +17,7 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
-import { StudentSidebarList } from "./Components/listItems";
+import { MentorSidebarList, StudentSidebarList } from "./Components/listItems";
 import Grid from "@mui/material/Grid";
 import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
@@ -25,7 +25,7 @@ import { Drawer } from "./Components/Drawer";
 
 const mdTheme = createTheme();
 
-const StudentProfileSPOV = () => {
+const MentorProfileMPOV = () => {
 
     const [open, setOpen] = useState(false);
 
@@ -68,30 +68,29 @@ const StudentProfileSPOV = () => {
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
                         John Doe
                     </Typography>
-                    <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{StudentSidebarList}</List>
+                    <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{MentorSidebarList}</List>
                 </Drawer>
 
 
                 <Box
                     component="main"
                     sx={{
-                        backgroundColor: "#EFEDFF",
+                        backgroundColor: ( theme ) =>
+                            theme.palette.mode === "light"
+                                ? theme.palette.grey[ 100 ]
+                                : theme.palette.grey[ 900 ],
                         flexGrow: 1,
                         height: "100vh",
                         overflow: "auto",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        padding: 2
                     }}
                 >
                     <Container
                         maxWidth="xl"
                         sx={{
+                            p: 3,
                             backgroundColor: "#EFEDFF",
                             height: "100%",
                             display: "flex",
-
                         }}
                     >
                         <Grid
@@ -102,7 +101,7 @@ const StudentProfileSPOV = () => {
                             display={"flex"}
                             alignItems={"center"}
                             flexDirection={"column"}
-                            marginTop={5}
+                            marginTop={10}
                             bgcolor={"#EFEDFF"}
                         >
                             {/*<Masonry columns={{ md: 1, xl: 1 }} spacing={3} sx={{ mt: 10 }}>*/}
@@ -241,18 +240,20 @@ const StudentProfileSPOV = () => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Stack>
+                        <Stack spacing={3}>
                             <Box
                                 sx={{
                                     zIndex: 1,
                                     position: "relative",
-                                    mt: 5,
+                                    top: 100,
                                     width: 360,
+                                    borderColor: "black",
+                                    borderWidth: 1,
                                     borderRadius: 3,
                                     display: "flex",
                                     flexDirection: "column",
-                                    // height: 560,
-                                    // bgcolor:"black",
+                                    height: 560,
+                                    bgcolor: "#EFEDFF",
                                     flexWrap: "wrap",
                                 }}
                             >
@@ -368,12 +369,14 @@ const StudentProfileSPOV = () => {
                                 sx={{
                                     zIndex: 1,
                                     position: "relative",
-                                    mt: 5,
+                                    top: 100,
                                     width: 360,
+                                    borderColor: "black",
+                                    borderWidth: 1,
                                     borderRadius: 3,
                                     display: "flex",
                                     flexDirection: "column",
-
+                                    height: 560,
                                     bgcolor: "#EFEDFF",
                                     flexWrap: "wrap",
                                 }}
@@ -473,19 +476,19 @@ const StudentProfileSPOV = () => {
                             zIndex: 1,
                             // position: "relative",
                             // top: 100,
-                            mt: 3,
                             borderRadius: 3,
                             display: "flex",
                             flexDirection: "column",
                             height: 200,
-                            width: '90%',
-                            p: 3,
+                            padding: 10,
+                            paddingLeft: 20,
+                            bgcolor: "#EFEDFF",
                         }}
                     >
                         <Typography color={"#6E3CBC"} fontSize={15} fontWeight={700}>
                             Your interest / Academic qualifications
                         </Typography>
-                        <Grid container columnGap={5}>
+                        <Grid container maxWidth="xl" columnGap={2}>
                             <Chip
                                 label={"Current Education"}
                                 variant={"filled"}
@@ -657,8 +660,7 @@ const StudentProfileSPOV = () => {
                 </DialogActions>
             </Dialog>
         </ThemeProvider>
-    )
-        ;
+    );
 };
 
-export default StudentProfileSPOV;
+export default MentorProfileMPOV;
