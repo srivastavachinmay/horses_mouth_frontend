@@ -1,46 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import {
-    Avatar,
-    Button,
-    Card,
-    CardHeader,
-    Chip,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    List,
-    ListItem,
-    Stack,
-    Typography,
-} from "@mui/material";
+import { Avatar, Card, CardHeader, Chip, List, Stack, Typography, } from "@mui/material";
 import { StudentSidebarList } from "./Components/listItems";
 import Grid from "@mui/material/Grid";
 import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
+import AppointmentDialog from "./Components/AppointmentDialog";
 
-const mdTheme = createTheme();
 
 const StudentProfileSPOV = () => {
 
-    const [open, setOpen] = useState(false);
+    const [pastOpenDialog, setPastOpenDialog] = useState(false);
+    const [upcomingOpenDialog, setUpcomingOpenDialog] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
+
+    const handleClickPastOpen = () => {
+        setPastOpenDialog(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handlePastClose = () => {
+        setPastOpenDialog(false);
+    };
+    const handleClickUpcomingOpen = () => {
+        setUpcomingOpenDialog(true);
     };
 
+    const handleUpcomingClose = () => {
+        setUpcomingOpenDialog(false);
+    };
 
-    useEffect(() => {
-        console.log(open)
-    }, [open])
 
     const chipCSS = {
         bgcolor: "white",
@@ -59,7 +49,7 @@ const StudentProfileSPOV = () => {
         },
     };
     return (
-        <ThemeProvider theme={mdTheme}>
+        <>
             <Box sx={{ display: "flex" }}>
                 <CssBaseline/>
                 {/*"Drawer"*/}
@@ -266,7 +256,7 @@ const StudentProfileSPOV = () => {
                                         Upcoming appointments
                                     </Typography>
                                     <Typography
-                                        onClick={handleClickOpen}
+                                        onClick={handleClickUpcomingOpen}
                                         color={"#6E3CBC"}
                                         fontSize={15}
                                         fontWeight={700}
@@ -387,7 +377,7 @@ const StudentProfileSPOV = () => {
                                     >
                                         Past appointments
                                     </Typography>
-                                    <Box onClick={handleClickOpen}>
+                                    <Box onClick={handleClickPastOpen}>
                                         <Typography
                                             color={"#6E3CBC"}
                                             fontSize={15}
@@ -530,135 +520,11 @@ const StudentProfileSPOV = () => {
                     </Box>
                 </Box>
             </Box>
-            <Dialog
-                open={open}
-                // TransitionComponent={Transition}
-                scroll={"paper"}
-                // onBackdropClick={handleClose}
-                onClose={handleClose}
-                sx={{
-                    scrollbarColor: '#6E3CBC',
-                }}
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogTitle sx={{ display: "flex", justifyContent: "center" }}><Typography color={'#6E3CBC'}
-                                                                                            fontWeight={"bold"}> Upcoming
-                    Appointments</Typography></DialogTitle>
-                <DialogContent sx={{
-                    scrollbarColor: '#6E3CBC',
-                }}>
-
-                    <List style={{
-                        height: 500, width: 330,
-                        scrollbarColor: '#6E3CBC',
-
-                    }}>
-                        <ListItem>
-                            <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                <CardHeader
-                                    avatar={<Avatar/>}
-                                    title={"You have a session on-"}
-                                    titleTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheaderTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheader={"8th November from 8:30 to 9:30"}
-                                />
-                            </Card>
-                        </ListItem>
-                        <ListItem>
-                            <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                <CardHeader
-                                    avatar={<Avatar/>}
-                                    title={"You have a session on-"}
-                                    titleTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheaderTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheader={"8th November from 8:30 to 9:30"}
-                                />
-                            </Card>
-                        </ListItem>
-                        <ListItem>
-                            <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                <CardHeader
-                                    avatar={<Avatar/>}
-                                    title={"You have a session on-"}
-                                    titleTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheaderTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheader={"8th November from 8:30 to 9:30"}
-                                />
-                            </Card>
-                        </ListItem>
-                        <ListItem>
-                            <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                <CardHeader
-                                    avatar={<Avatar/>}
-                                    title={"You have a session on-"}
-                                    titleTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheaderTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheader={"8th November from 8:30 to 9:30"}
-                                />
-                            </Card>
-                        </ListItem>
-                    </List>
-
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} sx={{
-                        bgcolor: '#6E3CBC',
-                        color: "white",
-                        ":hover": { color: '#6E3CBC', bgcolor: "white" }
-                    }}>Close</Button>
-                </DialogActions>
-            </Dialog>
-        </ThemeProvider>
-    )
-        ;
+            <AppointmentDialog open={upcomingOpenDialog} handleClose={handleUpcomingClose}
+                               title={"Upcoming Appointments"}/>
+            <AppointmentDialog open={pastOpenDialog} handleClose={handlePastClose} title={"Past Appointments"}/>
+        </>
+    );
 };
 
 export default StudentProfileSPOV;

@@ -15,6 +15,9 @@ const tabTheme = createTheme({
             main: '#6E3CBC',
         },
     },
+    typography: {
+        fontFamily: 'Poppins',
+    },
 })
 
 const Wallet = () => {

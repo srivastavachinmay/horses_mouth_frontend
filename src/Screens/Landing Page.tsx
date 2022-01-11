@@ -1,6 +1,6 @@
 import React from 'react';
 import SidebarFab from "./Components/SidebarFab";
-import { Box, Typography, Button, Card, Chip, CardHeader, Avatar } from "@mui/material";
+import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
 import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 
 
@@ -64,7 +64,7 @@ const LandingPage = () => {
                 <Avatar sx={{ width: 147, height: 147 }}
                         src={"https://www.google.com/url?sa=i&url=https%3A%2F%2Fdragonballuniverse.fandom.com%2Fwiki%2FUltra_Instinct&psig=AOvVaw156j5RHdB00_uqfdptVEm6&ust=1640591076506000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJif3Jb8gPUCFQAAAAAdAAAAABAP"}>
                 </Avatar>
-                <CardHeader sx={{ color: '#6E3CBC', fontWeight: "bold", fontSize: 60 }}  title={'John Doe'}/>
+                <CardHeader sx={{ color: '#6E3CBC', fontWeight: "bold", fontSize: 60 }} title={'John Doe'}/>
 
                 <Chip sx={chipCSS} label={'University of waterloo'}/>
                 <Chip sx={chipCSS} label={'bachelor’s'}/>
@@ -130,12 +130,12 @@ const LandingPage = () => {
             </div>
             <Box height={'80vh'} bgcolor={'#D4CFFF'} display={"flex"} flexDirection={"column"} justifyContent={"center"}
                  alignItems={"center"}>
-                <Box display={"flex"} >
+                <Box display={"flex"}>
                     <Typography fontWeight={700} fontSize={18} color={'#6E3CBC'}>
                         For students |&nbsp;
                     </Typography>
                     <Typography fontWeight={700} fontSize={18} color={'#7972fd'}>
-                         For mentors
+                        For mentors
                     </Typography>
                 </Box>
                 <ProfileCard/>
@@ -156,7 +156,8 @@ const LandingPage = () => {
                     <CustomCard/>
                     <CustomCard/>
                 </Box>
-                <Typography color={"white"} position={"relative"} fontWeight={700} textAlign={"center"} fontSize={20} top={150} right={70}>
+                <Typography color={"white"} position={"relative"} fontWeight={700} textAlign={"center"} fontSize={20}
+                            top={150} right={70}>
                     see more &gt;
                 </Typography>
             </Box>

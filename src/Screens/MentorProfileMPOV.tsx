@@ -1,46 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import {
-    Avatar,
-    Button,
-    Card,
-    CardHeader,
-    Chip,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    List,
-    ListItem,
-    Stack,
-    Typography,
-} from "@mui/material";
-import { MentorSidebarList, StudentSidebarList } from "./Components/listItems";
+import { Avatar, Card, CardHeader, Chip, List, Stack, Typography, } from "@mui/material";
+import { MentorSidebarList } from "./Components/listItems";
 import Grid from "@mui/material/Grid";
 import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
+import AppointmentDialog from "./Components/AppointmentDialog";
 
-const mdTheme = createTheme();
 
 const MentorProfileMPOV = () => {
+    const [pastOpenDialog, setPastOpenDialog] = useState(false);
+    const [upcomingOpenDialog, setUpcomingOpenDialog] = useState(false);
 
-    const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleClickPastOpen = () => {
+        setPastOpenDialog(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handlePastClose = () => {
+        setPastOpenDialog(false);
+    };
+    const handleClickUpcomingOpen = () => {
+        setUpcomingOpenDialog(true);
     };
 
+    const handleUpcomingClose = () => {
+        setUpcomingOpenDialog(false);
+    };
 
-    useEffect(() => {
-        console.log(open)
-    }, [open])
 
     const chipCSS = {
         bgcolor: "white",
@@ -59,7 +48,7 @@ const MentorProfileMPOV = () => {
         },
     };
     return (
-        <ThemeProvider theme={mdTheme}>
+        <>
             <Box sx={{ display: "flex" }}>
                 <CssBaseline/>
                 {/*"Drawer"*/}
@@ -75,15 +64,15 @@ const MentorProfileMPOV = () => {
                 <Box
                     component="main"
                     sx={{
-                        backgroundColor: ( theme ) =>
-                            theme.palette.mode === "light"
-                                ? theme.palette.grey[ 100 ]
-                                : theme.palette.grey[ 900 ],
+                        backgroundColor: "#EFEDFF",
                         flexGrow: 1,
                         height: "100vh",
                         overflow: "auto",
-                    }}
-                >
+                    }}>
+                    <Box position={"static"} mt={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
+                        <Typography fontWeight={"bold"}>University of Waterloo</Typography>
+                        <Typography fontWeight={"bold"}>Bachelor’s, Mechanical engineering </Typography>
+                    </Box>
                     <Container
                         maxWidth="xl"
                         sx={{
@@ -91,6 +80,7 @@ const MentorProfileMPOV = () => {
                             backgroundColor: "#EFEDFF",
                             height: "100%",
                             display: "flex",
+                            flexWrap: "wrap"
                         }}
                     >
                         <Grid
@@ -101,7 +91,6 @@ const MentorProfileMPOV = () => {
                             display={"flex"}
                             alignItems={"center"}
                             flexDirection={"column"}
-                            marginTop={10}
                             bgcolor={"#EFEDFF"}
                         >
                             {/*<Masonry columns={{ md: 1, xl: 1 }} spacing={3} sx={{ mt: 10 }}>*/}
@@ -217,7 +206,7 @@ const MentorProfileMPOV = () => {
                                     flexWrap: "wrap",
                                 }}
                             >
-                                <Typography fontWeight={"bold"} color={"#6E3CBC"} fontSize={30}>
+                                <Typography fontWeight={"bold"} fontSize={30}>
                                     About me
                                 </Typography>
 
@@ -240,19 +229,19 @@ const MentorProfileMPOV = () => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Stack spacing={3}>
+                        <Stack>
                             <Box
                                 sx={{
                                     zIndex: 1,
                                     position: "relative",
-                                    top: 100,
+
                                     width: 360,
                                     borderColor: "black",
                                     borderWidth: 1,
                                     borderRadius: 3,
                                     display: "flex",
                                     flexDirection: "column",
-                                    height: 560,
+                                    height: 400,
                                     bgcolor: "#EFEDFF",
                                     flexWrap: "wrap",
                                 }}
@@ -267,7 +256,7 @@ const MentorProfileMPOV = () => {
                                         Upcoming appointments
                                     </Typography>
                                     <Typography
-                                        onClick={handleClickOpen}
+                                        onClick={handleClickUpcomingOpen}
                                         color={"#6E3CBC"}
                                         fontSize={15}
                                         fontWeight={700}
@@ -369,15 +358,14 @@ const MentorProfileMPOV = () => {
                                 sx={{
                                     zIndex: 1,
                                     position: "relative",
-                                    top: 100,
+
                                     width: 360,
                                     borderColor: "black",
                                     borderWidth: 1,
                                     borderRadius: 3,
                                     display: "flex",
                                     flexDirection: "column",
-                                    height: 560,
-                                    bgcolor: "#EFEDFF",
+
                                     flexWrap: "wrap",
                                 }}
                             >
@@ -390,7 +378,7 @@ const MentorProfileMPOV = () => {
                                     >
                                         Past appointments
                                     </Typography>
-                                    <Box onClick={handleClickOpen}>
+                                    <Box onClick={handleClickPastOpen}>
                                         <Typography
                                             color={"#6E3CBC"}
                                             fontSize={15}
@@ -470,197 +458,80 @@ const MentorProfileMPOV = () => {
                                 </List>
                             </Box>
                         </Stack>
+                        <Box
+                            sx={{
+                                zIndex: 1,
+                                // position: "relative",
+                                // top: 100,
+                                borderRadius: 3,
+                                display: "flex",
+                                flexDirection: "column",
+                                height: 200,
+                                m: 2,
+                                ml: 10,
+                                // alignItems:"center",
+                                width: '85%',
+                                // padding: 10,
+                                // paddingLeft: 20,
+                                bgcolor: "#EFEDFF",
+                            }}
+                        >
+                            <Typography fontSize={15} fontWeight={700}>
+                                Your interest / Academic qualifications
+                            </Typography>
+                            <Grid container maxWidth="100%" columnGap={5}>
+                                <Chip
+                                    label={"Current Education"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"1st preference course"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"2nd preference course"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"3rd preference course"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Campus Preference"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Degree preference"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Language preference"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                                <Chip
+                                    label={"Previous Education"}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                            </Grid>
+                        </Box>
                     </Container>
-                    <Box
-                        sx={{
-                            zIndex: 1,
-                            // position: "relative",
-                            // top: 100,
-                            borderRadius: 3,
-                            display: "flex",
-                            flexDirection: "column",
-                            height: 200,
-                            padding: 10,
-                            paddingLeft: 20,
-                            bgcolor: "#EFEDFF",
-                        }}
-                    >
-                        <Typography color={"#6E3CBC"} fontSize={15} fontWeight={700}>
-                            Your interest / Academic qualifications
-                        </Typography>
-                        <Grid container maxWidth="xl" columnGap={2}>
-                            <Chip
-                                label={"Current Education"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"1st preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"2nd preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"3rd preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Campus Preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Degree preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Language preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Previous Education"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                        </Grid>
-                    </Box>
+
                 </Box>
             </Box>
-            <Dialog
-                open={open}
-                // TransitionComponent={Transition}
-                scroll={"paper"}
-                // onBackdropClick={handleClose}
-                onClose={handleClose}
-                sx={{
-                    scrollbarColor: '#6E3CBC',
-                }}
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogTitle sx={{ display: "flex", justifyContent: "center" }}><Typography color={'#6E3CBC'}
-                                                                                            fontWeight={"bold"}> Upcoming
-                    Appointments</Typography></DialogTitle>
-                <DialogContent sx={{
-                    scrollbarColor: '#6E3CBC',
-                }}>
-
-                    <List style={{
-                        height: 500, width: 330,
-                        scrollbarColor: '#6E3CBC',
-
-                    }}>
-                        <ListItem>
-                            <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                <CardHeader
-                                    avatar={<Avatar/>}
-                                    title={"You have a session on-"}
-                                    titleTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheaderTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheader={"8th November from 8:30 to 9:30"}
-                                />
-                            </Card>
-                        </ListItem>
-                        <ListItem>
-                            <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                <CardHeader
-                                    avatar={<Avatar/>}
-                                    title={"You have a session on-"}
-                                    titleTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheaderTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheader={"8th November from 8:30 to 9:30"}
-                                />
-                            </Card>
-                        </ListItem>
-                        <ListItem>
-                            <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                <CardHeader
-                                    avatar={<Avatar/>}
-                                    title={"You have a session on-"}
-                                    titleTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheaderTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheader={"8th November from 8:30 to 9:30"}
-                                />
-                            </Card>
-                        </ListItem>
-                        <ListItem>
-                            <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                <CardHeader
-                                    avatar={<Avatar/>}
-                                    title={"You have a session on-"}
-                                    titleTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheaderTypographyProps={{
-                                        sx: {
-                                            color: "#6E3CBC",
-                                            fontWeight: 700,
-                                            fontSize: 12,
-                                        },
-                                    }}
-                                    subheader={"8th November from 8:30 to 9:30"}
-                                />
-                            </Card>
-                        </ListItem>
-                    </List>
-
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} sx={{
-                        bgcolor: '#6E3CBC',
-                        color: "white",
-                        ":hover": { color: '#6E3CBC', bgcolor: "white" }
-                    }}>Close</Button>
-                </DialogActions>
-            </Dialog>
-        </ThemeProvider>
-    );
+            <AppointmentDialog open={upcomingOpenDialog} handleClose={handleUpcomingClose}
+                               title={"Upcoming Appointments"}/>
+            <AppointmentDialog open={pastOpenDialog} handleClose={handlePastClose} title={"Past Appointments"}/>
+        </>
+    )
+        ;
 };
 
 export default MentorProfileMPOV;
