@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Avatar, Card, CardHeader, Chip, List, Stack, Typography, } from "@mui/material";
+import { Avatar, Button, Card, CardHeader, Chip, List, ListItem, Stack, Typography, } from "@mui/material";
 import { MentorSidebarList } from "./Components/listItems";
 import Grid from "@mui/material/Grid";
-import { LinkedIn, Verified } from "@mui/icons-material";
+import { LinkedIn, Mail, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
 import AppointmentDialog from "./Components/AppointmentDialog";
@@ -69,6 +69,7 @@ const MentorProfileMPOV = () => {
                         height: "100vh",
                         overflow: "auto",
                     }}>
+
                     <Box position={"static"} mt={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
                         <Typography fontWeight={"bold"}>University of Waterloo</Typography>
                         <Typography fontWeight={"bold"}>Bachelor’s, Mechanical engineering </Typography>
@@ -253,7 +254,7 @@ const MentorProfileMPOV = () => {
                                         fontWeight={700}
                                         padding={1}
                                     >
-                                        Upcoming appointments
+                                        Upcoming Sessions
                                     </Typography>
                                     <Typography
                                         onClick={handleClickUpcomingOpen}
@@ -289,69 +290,7 @@ const MentorProfileMPOV = () => {
                                             subheader={"8th November from 8:30 to 9:30"}
                                         />
                                     </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
+
                                 </List>
                             </Box>
                             <Box
@@ -376,7 +315,7 @@ const MentorProfileMPOV = () => {
                                         fontWeight={700}
                                         padding={1}
                                     >
-                                        Past appointments
+                                        Previous Sessions
                                     </Typography>
                                     <Box onClick={handleClickPastOpen}>
                                         <Typography
@@ -392,69 +331,80 @@ const MentorProfileMPOV = () => {
                                 </Box>
 
                                 <List sx={{ overflowY: "auto", height: 150 }}>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
-                                    <Card sx={{ borderRadius: 5, m: 0.5 }}>
-                                        <CardHeader
-                                            avatar={<Avatar/>}
-                                            title={"You have a session on-"}
-                                            titleTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheaderTypographyProps={{
-                                                sx: {
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                },
-                                            }}
-                                            subheader={"8th November from 8:30 to 9:30"}
-                                        />
-                                    </Card>
+                                    <ListItem   >
+                                        <Card sx={{ borderRadius: 5,width:"80%", m: 0.5 }}>
+                                            <CardHeader
+                                                avatar={<Avatar/>}
+                                                title={"6th november"}
+                                                titleTypographyProps={{
+                                                    sx: {
+                                                        color: "#6E3CBC",
+                                                        fontWeight: 700,
+                                                        fontSize: 12,
+                                                    },
+                                                }}
+                                                subheaderTypographyProps={{
+                                                    sx: {
+                                                        color: "#6E3CBC",
+                                                        fontWeight: 700,
+                                                        fontSize: 12,
+                                                    },
+                                                }}
+                                                subheader={"10:30 to 11:30 "}
+                                            />
+                                        </Card>
+                                        <Button variant={"contained"}
+                                                sx={{
+                                                    color: "white",
+                                                    height: 67,
+                                                    width: 84,
+                                                    borderRadius: 5,
+                                                    fontSize: 14,
+                                                    bgcolor: "#6E3CBC",
+                                                    transition: "ease-in",
+                                                    ":hover": {
+                                                        bgcolor: "white",
+                                                        color: "#6E3CBC"
+                                                    }
+                                                }}><Mail/></Button>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Card sx={{ borderRadius: 5,width:"80%", m: 0.5 }}>
+                                            <CardHeader
+                                                avatar={<Avatar/>}
+                                                title={"6th november"}
+                                                titleTypographyProps={{
+                                                    sx: {
+                                                        color: "#6E3CBC",
+                                                        fontWeight: 700,
+                                                        fontSize: 12,
+                                                    },
+                                                }}
+                                                subheaderTypographyProps={{
+                                                    sx: {
+                                                        color: "#6E3CBC",
+                                                        fontWeight: 700,
+                                                        fontSize: 12,
+                                                    },
+                                                }}
+                                                subheader={"10:30 to 11:30 "}
+                                            />
+                                        </Card>
+                                        <Button variant={"contained"}
+                                                sx={{
+                                                    color: "white",
+                                                    height: 67,
+                                                    width: 84,
+                                                    borderRadius: 5,
+                                                    fontSize: 14,
+                                                    bgcolor: "#6E3CBC",
+                                                    transition: "ease-in",
+                                                    ":hover": {
+                                                        bgcolor: "white",
+                                                        color: "#6E3CBC"
+                                                    }
+                                                }}><Mail/></Button>
+                                    </ListItem>
                                 </List>
                             </Box>
                         </Stack>
@@ -527,8 +477,8 @@ const MentorProfileMPOV = () => {
                 </Box>
             </Box>
             <AppointmentDialog open={upcomingOpenDialog} handleClose={handleUpcomingClose}
-                               title={"Upcoming Appointments"}/>
-            <AppointmentDialog open={pastOpenDialog} handleClose={handlePastClose} title={"Past Appointments"}/>
+                               title={"Upcoming Sessions"}/>
+            <AppointmentDialog open={pastOpenDialog} handleClose={handlePastClose} title={"Previous Sessions"}/>
         </>
     )
         ;

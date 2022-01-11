@@ -60,9 +60,6 @@ const StudentProfileMPOV = () => {
                             display: "flex",
                         }}
                     >
-                        <Link color={'#6E3CBC'} fontWeight={"bold"} position={"absolute"} paddingLeft={10}>
-                            <ArrowBack/> Go Back
-                        </Link>
                         <Grid
                             xs={12}
                             md={6}

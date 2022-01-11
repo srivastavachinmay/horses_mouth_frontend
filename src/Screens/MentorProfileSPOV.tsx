@@ -5,11 +5,11 @@ import {
     Avatar,
     Button,
     Card,
-    CardHeader,
+    CardHeader, Checkbox,
     Chip,
     FormControl,
     List,
-    ListItem,
+    ListItem, ListItemIcon,
     MenuItem,
     Select,
     SelectChangeEvent,
@@ -21,11 +21,24 @@ import Grid from "@mui/material/Grid";
 import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
+import { pink } from "@mui/material/colors";
 
 
 const MentorProfileSPOV = () => {
+    const [checked, setChecked] = React.useState([0]);
 
+    const handleToggle = ( value: number ) => () => {
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
 
+        if(currentIndex === -1) {
+            newChecked.push(value);
+        } else {
+            newChecked.splice(currentIndex, 1);
+        }
+
+        setChecked(newChecked);
+    };
     const [day, setDay] = React.useState('');
 
     const handleChange = ( event: SelectChangeEvent ) => {
@@ -47,6 +60,7 @@ const MentorProfileSPOV = () => {
         border: "none",
         fontSize: 15,
         color: "#6E3CBC",
+        mr:4,
         fontWeight: "bolder",
         borderRadius: 20,
         ":hover": {
@@ -70,19 +84,21 @@ const MentorProfileSPOV = () => {
             <Box
                 component="main"
                 sx={{
-                    backgroundColor: ( theme ) =>
-                        theme.palette.mode === "light"
-                            ? theme.palette.grey[ 100 ]
-                            : theme.palette.grey[ 900 ],
+                    backgroundColor: "#EFEDFF",
                     flexGrow: 1,
                     height: "100vh",
                     overflow: "auto",
                 }}
             >
+                <Box position={"static"} mt={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
+                    <Typography fontWeight={"bold"}>University of Waterloo</Typography>
+                    <Typography fontWeight={"bold"}>Bachelor’s, Mechanical engineering </Typography>
+                </Box>
                 <Container
                     maxWidth="xl"
                     sx={{
                         p: 3,
+                        pt: 0,
                         backgroundColor: "#EFEDFF",
                         // height: "100%",
                         display: "flex",
@@ -90,28 +106,7 @@ const MentorProfileSPOV = () => {
                         flexWrap: "wrap"
                     }}
                 >
-                    <Typography position={"absolute"} sx={{
-                        width: 205,
-                        height: 26,
-                        left: 716,
-                        top: 50,
-                        fontSize: 17,
-                        color: "#6E3CBC",
-                        fontWeight: 700
-                    }}>
-                        University of WaterLoo
-                    </Typography>
-                    <Typography position={"absolute"} sx={{
-                        width: 205,
-                        height: 26,
-                        left: 716,
-                        top: 71,
-                        fontSize: 17,
-                        color: "#6E3CBC",
-                        fontWeight: 700
-                    }}>
-                        Bachelor’s, Mechanical engineering
-                    </Typography>
+
                     <Grid
                         xs={12}
                         md={6}
@@ -120,7 +115,7 @@ const MentorProfileSPOV = () => {
                         display={"flex"}
                         alignItems={"center"}
                         flexDirection={"column"}
-                        marginTop={10}
+                        marginTop={4}
                         bgcolor={"#EFEDFF"}
                     >
                         {/*<Masonry columns={{ md: 1, xl: 1 }} spacing={3} sx={{ mt: 10 }}>*/}
@@ -239,7 +234,7 @@ const MentorProfileSPOV = () => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Stack spacing={3} sx={{ mt: 10 }}>
+                    <Stack spacing={3} sx={{ mt: 4 }}>
                         <Typography color={'#6E3CBC'} fontWeight={700} fontSize={13}>John Doe’s available
                             slots</Typography>
                         <FormControl variant={"standard"} sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
@@ -304,7 +299,19 @@ const MentorProfileSPOV = () => {
                             }}>
                                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(( index ) => (
                                     <ListItem>
-
+                                        <ListItemIcon>
+                                            <Checkbox
+                                                edge="start"
+                                                onClick={handleToggle(index)}
+                                                disableRipple
+                                                color={"primary"}
+                                                checked={checked.indexOf(index) !== -1}
+                                                tabIndex={-1}
+                                                sx={{
+                                                    color: '#6E3CBC80'
+                                                }}
+                                            />
+                                        </ListItemIcon>
                                         <Card sx={{ borderRadius: 5, m: 0.5, width: "100%" }}>
                                             <CardHeader
                                                 avatar={<Avatar>{index}</Avatar>}
@@ -362,7 +369,7 @@ const MentorProfileSPOV = () => {
                         <Typography color={"#6E3CBC"} fontSize={15} fontWeight={700}>
                             John Doe’s interest / Academic qualifications
                         </Typography>
-                        <Grid container maxWidth="xl" columns={{ xs: 1, sm: 3, md: 4, xl: 5 }}>
+                        <Grid container maxWidth="xl"  columnSpacing={4} columns={{ xs: 1, sm: 3, md: 4, xl: 5 }}>
                             <Chip
                                 label={"Country of  study"}
                                 variant={"filled"}
