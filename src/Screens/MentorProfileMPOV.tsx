@@ -10,9 +10,54 @@ import { Drawer } from "./Components/Drawer";
 import AppointmentDialog from "./Components/AppointmentDialog";
 
 
+function useHover() {
+    const [hovering, setHovering] = useState(false)
+    const onHoverProps = {
+        onMouseEnter: () => setHovering(true),
+        onMouseLeave: () => setHovering(false),
+    }
+    return [hovering, onHoverProps]
+}
+
+
 const MentorProfileMPOV = () => {
     const [pastOpenDialog, setPastOpenDialog] = useState(false);
     const [upcomingOpenDialog, setUpcomingOpenDialog] = useState(false);
+
+    const [buttonAIsHovering, buttonAHoverProps] = useHover()
+    const [buttonBIsHovering, buttonBHoverProps] = useHover()
+    const [buttonCIsHovering, buttonCHoverProps] = useHover()
+    const [buttonDIsHovering, buttonDHoverProps] = useHover()
+    const [buttonEIsHovering, buttonEHoverProps] = useHover()
+    const [buttonFIsHovering, buttonFHoverProps] = useHover()
+    const [buttonGIsHovering, buttonGHoverProps] = useHover()
+    const [buttonHIsHovering, buttonHHoverProps] = useHover()
+    const [buttonIIsHovering, buttonIHoverProps] = useHover()
+    const [buttonJIsHovering, buttonJHoverProps] = useHover()
+    const [buttonKIsHovering, buttonKHoverProps] = useHover()
+    const [buttonLIsHovering, buttonLHoverProps] = useHover()
+    const [buttonMIsHovering, buttonMHoverProps] = useHover()
+    const [buttonNIsHovering, buttonNHoverProps] = useHover()
+    const [buttonOIsHovering, buttonOHoverProps] = useHover()
+
+    let countryStudy="Canada"
+    let areaOfStudy="STem"
+    let UniversityRelation=""
+    let previousE = "h"
+    let yearOfGrafuation="12324"
+    let specialization=""
+    let onCampusExp="123"
+    let onCampusJob="NA"
+    let Scholarship=""
+    let placeOfStay=""
+    let languages=""
+    let currentGPA=""
+    let GMATscore=""
+    let SATscore=""
+    let country=""
+    let upcomingSessions = []
+    let prevSessions = []
+    let aboutMe = "hello"
 
 
     const handleClickPastOpen = () => {
@@ -331,8 +376,8 @@ const MentorProfileMPOV = () => {
                                 </Box>
 
                                 <List sx={{ overflowY: "auto", height: 150 }}>
-                                    <ListItem   >
-                                        <Card sx={{ borderRadius: 5,width:"80%", m: 0.5 }}>
+                                    <ListItem>
+                                        <Card sx={{ borderRadius: 5, width: "80%", m: 0.5 }}>
                                             <CardHeader
                                                 avatar={<Avatar/>}
                                                 title={"6th november"}
@@ -369,7 +414,7 @@ const MentorProfileMPOV = () => {
                                                 }}><Mail/></Button>
                                     </ListItem>
                                     <ListItem>
-                                        <Card sx={{ borderRadius: 5,width:"80%", m: 0.5 }}>
+                                        <Card sx={{ borderRadius: 5, width: "80%", m: 0.5 }}>
                                             <CardHeader
                                                 avatar={<Avatar/>}
                                                 title={"6th november"}

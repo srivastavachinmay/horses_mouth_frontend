@@ -53,7 +53,7 @@ export const StudentSidebarList = (
                 <ListItemIcon>
                     <CalendarToday sx={{ color: "white" }}/>
                 </ListItemIcon>
-                <ListItemText primary="Book a Mentor" sx={{ color: "white" }}/>
+                <ListItemText primary="Book a IMentor" sx={{ color: "white" }}/>
             </ListItem>
         </Link>
         <ListItem button>

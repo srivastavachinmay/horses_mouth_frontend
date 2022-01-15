@@ -2,16 +2,15 @@ import React from "react";
 import { createTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Avatar, Chip, Link, Stack } from "@mui/material";
+import { Avatar, Chip, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import { MentorSidebarList } from "./Components/listItems";
 import Grid from "@mui/material/Grid";
-import { ArrowBack, LinkedIn, Verified } from "@mui/icons-material";
+import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
 
-const mdTheme = createTheme();
 
 const StudentProfileMPOV = () => {
     const chipCSS = {

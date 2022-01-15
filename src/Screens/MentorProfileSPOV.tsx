@@ -5,11 +5,13 @@ import {
     Avatar,
     Button,
     Card,
-    CardHeader, Checkbox,
+    CardHeader,
+    Checkbox,
     Chip,
     FormControl,
     List,
-    ListItem, ListItemIcon,
+    ListItem,
+    ListItemIcon,
     MenuItem,
     Select,
     SelectChangeEvent,
@@ -21,7 +23,6 @@ import Grid from "@mui/material/Grid";
 import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
-import { pink } from "@mui/material/colors";
 
 
 const MentorProfileSPOV = () => {

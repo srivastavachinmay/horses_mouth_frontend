@@ -84,7 +84,7 @@ const Wallet = () => {
                                     <Tab label={'Credit History'}/> |
                                     <Tab label={'Debit History'}/>
                                 </Tabs>
-                                {selectedTab == 0 &&
+                                {selectedTab === 0 &&
                                 <List sx={{ overflowY: "auto", height: 300, width: 300 }}>
 
                                     <ListItem
@@ -124,7 +124,7 @@ const Wallet = () => {
                                     </ListItem>
 
                                 </List>}
-                                {selectedTab == 1 &&
+                                {selectedTab === 1 &&
                                 <List sx={{ overflowY: "auto", height: 300, width: 300 }}>
 
                                     <ListItem
@@ -324,8 +324,7 @@ const Wallet = () => {
                 </Box>
             </Box>
         </ThemeProvider>
-    )
-        ;
+    );
 };
 
 export default Wallet;

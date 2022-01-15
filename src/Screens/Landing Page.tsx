@@ -5,6 +5,9 @@ import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 
 
 const LandingPage = () => {
+
+    
+
     const chipCSS = {
         bgcolor: '#D4CFFF',
         margin: 0.5,
@@ -47,6 +50,8 @@ const LandingPage = () => {
             </Box>
         )
     }
+
+
     const CustomCard = () => {
         return <div>
 

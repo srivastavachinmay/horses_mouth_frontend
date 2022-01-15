@@ -9,12 +9,42 @@ import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
 import AppointmentDialog from "./Components/AppointmentDialog";
 
+function useHover() {
+    const [hovering, setHovering] = useState(false)
+    const onHoverProps = {
+        onMouseEnter: () => setHovering(true),
+        onMouseLeave: () => setHovering(false),
+    }
+    return [hovering, onHoverProps]
+}
+
+const baseUrl = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
 
 const StudentProfileSPOV = () => {
+    const [buttonAIsHovering, buttonAHoverProps] = useHover()
+    const [buttonBIsHovering, buttonBHoverProps] = useHover()
+    const [buttonCIsHovering, buttonCHoverProps] = useHover()
+    const [buttonDIsHovering, buttonDHoverProps] = useHover()
+    const [buttonEIsHovering, buttonEHoverProps] = useHover()
+    const [buttonFIsHovering, buttonFHoverProps] = useHover()
+    const [buttonGIsHovering, buttonGHoverProps] = useHover()
+    const [buttonHIsHovering, buttonHHoverProps] = useHover()
+
+    let currentE = ""
+    let firstPreference = ""
+    let secondPreference = ""
+    let thirdPreference = ""
+    let campus = ""
+    let degree = ""
+    let language = ""
+    let previousE = ""
+    let upcomingAppointment = []
+    let pastAppointments = []
+    let aboutMe = ""
+
 
     const [pastOpenDialog, setPastOpenDialog] = useState(false);
     const [upcomingOpenDialog, setUpcomingOpenDialog] = useState(false);
-
 
     const handleClickPastOpen = () => {
         setPastOpenDialog(true);
@@ -477,42 +507,50 @@ const StudentProfileSPOV = () => {
                         </Typography>
                         <Grid container columnGap={5}>
                             <Chip
-                                label={"Current Education"}
+                                {...buttonAHoverProps}
+                                label={buttonAIsHovering ? "" : "Current Education"}
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
                             <Chip
-                                label={"1st preference course"}
+                                {...buttonBHoverProps}
+                                label={buttonBIsHovering ? "" : "1st preference course"}
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
                             <Chip
-                                label={"2nd preference course"}
+                                {...buttonCHoverProps}
+                                label={buttonCIsHovering ? "" : "2nd preference course"}
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
                             <Chip
-                                label={"3rd preference course"}
+                                {...buttonDHoverProps}
+                                label={buttonDIsHovering ? "STEP" : "3rd preference course"}
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
                             <Chip
-                                label={"Campus Preference"}
+                                {...buttonEHoverProps}
+                                label={buttonEIsHovering ? "Canada" : "Campus Preference"}
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
                             <Chip
-                                label={"Degree preference"}
+                                {...buttonFHoverProps}
+                                label={buttonFIsHovering ? "" : "Degree preference"}
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
                             <Chip
-                                label={"Language preference"}
+                                {...buttonGHoverProps}
+                                label={buttonGIsHovering ? "" : "Language preference"}
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
                             <Chip
-                                label={"Previous Education"}
+                                {...buttonHHoverProps}
+                                label={buttonHIsHovering ? "" : "Previous Education"}
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
