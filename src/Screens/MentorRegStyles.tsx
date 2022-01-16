@@ -5,9 +5,8 @@ const useStyles = makeStyles(( theme ) => ( {
         backgroundColor: '#fffff',
         display: "flex",
         flexDirection: "column",
-        width: "70vw",
+        width: "99vw",
         justifyContent: "center",
-        // overflow:"scroll",
         alignItems: "center",
 
 
@@ -17,9 +16,10 @@ const useStyles = makeStyles(( theme ) => ( {
         display: "flex",
         flexDirection: "column",
         overflowY: "auto",
+        // overflowY: "scroll",
         width: "55vw",
         padding: "30px 30px",
-        height: "200vh",
+        height: "250vh",
         borderRadius: "7px"
     },
     title: {},
