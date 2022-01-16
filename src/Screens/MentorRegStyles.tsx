@@ -5,7 +5,7 @@ const useStyles = makeStyles(( theme ) => ( {
         backgroundColor: '#fffff',
         display: "flex",
         flexDirection: "column",
-        width: "70vw",
+        width: "100vw",
         justifyContent: "center",
         // overflow:"scroll",
         alignItems: "center",
