@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Avatar, Button, Card, CardHeader, Chip, List, ListItem, Stack, Typography, } from "@mui/material";
@@ -8,6 +8,8 @@ import { LinkedIn, Mail, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
 import AppointmentDialog from "./Components/AppointmentDialog";
+import { getMentor } from "../axios/Mentor";
+import { IUser } from "../models/IUser";
 
 
 function useHover() {
@@ -23,7 +25,6 @@ function useHover() {
 const MentorProfileMPOV = () => {
     const [pastOpenDialog, setPastOpenDialog] = useState(false);
     const [upcomingOpenDialog, setUpcomingOpenDialog] = useState(false);
-
     const [buttonAIsHovering, buttonAHoverProps] = useHover()
     const [buttonBIsHovering, buttonBHoverProps] = useHover()
     const [buttonCIsHovering, buttonCHoverProps] = useHover()
@@ -40,24 +41,63 @@ const MentorProfileMPOV = () => {
     const [buttonNIsHovering, buttonNHoverProps] = useHover()
     const [buttonOIsHovering, buttonOHoverProps] = useHover()
 
-    let countryStudy="Canada"
-    let areaOfStudy="STem"
-    let UniversityRelation=""
-    let previousE = "h"
-    let yearOfGrafuation="12324"
-    let specialization=""
-    let onCampusExp="123"
-    let onCampusJob="NA"
-    let Scholarship=""
-    let placeOfStay=""
-    let languages=""
-    let currentGPA=""
-    let GMATscore=""
-    let SATscore=""
-    let country=""
+    const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering, buttonIIsHovering, buttonJIsHovering, buttonKIsHovering, buttonLIsHovering, buttonMIsHovering, buttonNIsHovering, buttonOIsHovering]
+    const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps, buttonIHoverProps, buttonJHoverProps, buttonKHoverProps, buttonLHoverProps, buttonMHoverProps, buttonNHoverProps, buttonOHoverProps]
+
+    let id = "1"
     let upcomingSessions = []
     let prevSessions = []
     let aboutMe = "hello"
+
+    const [mentorData, setMentorData] = useState<IUser>()
+    const [chipData, setChipData] = useState({
+        "Country of study": "",
+        "Area of study": "",
+        "University Relation": "",
+        "Previous Education": "",
+        // "Year of Graduation": "",
+        "Specialization": "",
+        "On Campus Exp.": "",
+        // "On Campus Job": "",
+        "Scholarship": "",
+        "Place of Stay": "",
+        "Languages": "",
+        "Current GPA": "",
+        "GMAT Score": "",
+        "SAT Score": "",
+        "Country": ""
+    })
+    const chipDataValue = useState([])
+
+    useEffect(() => {
+        ( async () => {
+            const mentorD = ( await getMentor(id) )
+
+            if(!mentorD) {
+                // TODO: SHOW ERROR
+                return;
+            }
+            setMentorData(mentorD!)
+            const mentorMeta = mentorD[ "mentorMeta" ]
+            setChipData({
+                "Country of study": mentorMeta.countryOfStudy,
+                "Area of study": mentorMeta.major,
+                "University Relation": mentorMeta.campusInfo.,
+                "Previous Education": mentorMeta.campusInfo.previousInstitute,
+                "Specialization": mentorMeta.campusInfo.specialisation,
+                "On Campus Exp.": mentorMeta.campusInfo.campusExperience,
+                "Scholarship": mentorMeta.campusInfo.scholarship,
+                "Place of Stay": mentorMeta.campusInfo.placeOfStay,
+                "Languages": mentorMeta.languages[ 0 ],
+                "Current GPA": mentorMeta.campusInfo.scores.gpa,
+                "GMAT Score": mentorMeta.campusInfo.scores.gmat,
+                "SAT Score": mentorMeta.campusInfo.scores.sat,
+                "Country": mentorMeta.countryOfOrigin,
+            })
+
+
+        } )()
+    }, [])
 
 
     const handleClickPastOpen = () => {
@@ -474,47 +514,21 @@ const MentorProfileMPOV = () => {
                             <Typography fontSize={15} fontWeight={700}>
                                 Your interest / Academic qualifications
                             </Typography>
-                            <Grid container maxWidth="100%" columnGap={5}>
-                                <Chip
-                                    label={"Current Education"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"1st preference course"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"2nd preference course"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"3rd preference course"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"Campus Preference"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"Degree preference"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"Language preference"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"Previous Education"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
+                            <Grid container maxWidth="100%" columnGap={5} pb={2}>
+                                {Object.keys(chipData).map(( key, index ) => {
+
+                                    const hoverProp = buttonHoverProps[ index ]
+                                    const isHovering = buttonIsHovering[ index ]
+
+                                    return <Chip
+                                        {...hoverProp}
+                                        // @ts-ignore
+                                        label={( !isHovering ? key : chipData[ key ] as string )}
+                                        variant={"filled"}
+                                        sx={chipCSS}
+                                    />
+                                })}
+
                             </Grid>
                         </Box>
                     </Container>
@@ -523,7 +537,8 @@ const MentorProfileMPOV = () => {
             </Box>
             <AppointmentDialog open={upcomingOpenDialog} handleClose={handleUpcomingClose}
                                title={"Upcoming Sessions"}/>
-            <AppointmentDialog open={pastOpenDialog} handleClose={handlePastClose} title={"Previous Sessions"}/>
+            <AppointmentDialog open={pastOpenDialog} handleClose={handlePastClose}
+                               title={"Previous Sessions"}/>
         </>
     )
         ;

@@ -61,7 +61,7 @@ const MentorProfileSPOV = () => {
         border: "none",
         fontSize: 15,
         color: "#6E3CBC",
-        mr:4,
+        mr: 4,
         fontWeight: "bolder",
         borderRadius: 20,
         ":hover": {
@@ -370,7 +370,7 @@ const MentorProfileSPOV = () => {
                         <Typography color={"#6E3CBC"} fontSize={15} fontWeight={700}>
                             John Doe’s interest / Academic qualifications
                         </Typography>
-                        <Grid container maxWidth="xl"  columnSpacing={4} columns={{ xs: 1, sm: 3, md: 4, xl: 5 }}>
+                        <Grid container maxWidth="xl" columnSpacing={4} columns={{ xs: 1, sm: 3, md: 4, xl: 5 }}>
                             <Chip
                                 label={"Country of  study"}
                                 variant={"filled"}

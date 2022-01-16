@@ -14,7 +14,7 @@ export const getSchedule = async () => {
 
 export const updateSchedule = async ( data: ISchedule ) => {
     try {
-        await axios.patch(baseUrl + '/schedule', data,{ headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
+        await axios.patch(baseUrl + '/schedule', data, { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
     } catch (e) {
         console.log(e)
     }

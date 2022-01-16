@@ -14,7 +14,7 @@ export const getWithdrawals = async () => {
 
 export const createWithdrawals = async ( data: IWithdrawals ) => {
     try {
-        await axios.post(baseUrl + '/withdrawal', data,{ headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
+        await axios.post(baseUrl + '/withdrawal', data, { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
     } catch (e) {
         console.log(e)
     }

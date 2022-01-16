@@ -1,12 +1,16 @@
 import axios from "axios";
 import { IMentor } from "../models/IMentor";
+import { IUser } from "../models/IUser";
 
 const baseUrl = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
 
-export const getMentor = async () => {
+export const getMentor = async ( id: string ) => {
     try {
-        const response = await axios.get(baseUrl + '/mentor', { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
-        return response.data as IMentor
+        const response = await axios.get(baseUrl + '/mentor', {
+            params: { "id": id },
+            headers: { 'Authorization': 'bearer $AUTH_TOKEN', }
+        })
+        return response.data as IUser
     } catch (e) {
         console.log(e)
     }
@@ -14,7 +18,7 @@ export const getMentor = async () => {
 
 export const getMentorSearch = async () => {
     try {
-        const response = await axios.get(baseUrl + '/mentor/search', { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
+        const response = await axios.get(baseUrl + '/mentor/search', {params:{}, headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
         return response.data as IMentor
     } catch (e) {
         console.log(e)

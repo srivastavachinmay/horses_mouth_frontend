@@ -6,7 +6,7 @@ const baseUrl = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/product
 export const getUser = async () => {
     try {
         const response = await axios.get(baseUrl + '/user', { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
-        return response.data as IUser
+        return response.data.users as IUser
     } catch (e) {
         console.log(e)
     }
@@ -14,7 +14,7 @@ export const getUser = async () => {
 
 export const createUser = async ( data: IUser ) => {
     try {
-        await axios.post(baseUrl + '/user', data,{ headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
+        await axios.post(baseUrl + '/user', data, { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
     } catch (e) {
         console.log(e)
     }
@@ -22,7 +22,7 @@ export const createUser = async ( data: IUser ) => {
 
 export const updateUser = async ( data: IUser ) => {
     try {
-        await axios.patch(baseUrl + '/user', data,{ headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
+        await axios.patch(baseUrl + '/user', data, { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
     } catch (e) {
         console.log(e)
     }

@@ -14,7 +14,7 @@ export const getUniversity = async () => {
 
 export const createUniversity = async ( data: IUniversity ) => {
     try {
-        await axios.post(baseUrl + '/university', data,{ headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
+        await axios.post(baseUrl + '/university', data, { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
     } catch (e) {
         console.log(e)
     }

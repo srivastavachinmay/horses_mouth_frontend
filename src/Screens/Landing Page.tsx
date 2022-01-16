@@ -2,11 +2,21 @@ import React from 'react';
 import SidebarFab from "./Components/SidebarFab";
 import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
 import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
-
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const LandingPage = () => {
-
-    
+    const history = useNavigate();
+    onAuthStateChanged(auth, ( user ) => {
+        if(!user) {
+            history("/register");
+            return null;
+        } else {
+            // localStorage.setItem("token", user.accessToken);
+            console.log(user);
+        }
+    })
 
     const chipCSS = {
         bgcolor: '#D4CFFF',

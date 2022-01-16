@@ -10,7 +10,6 @@ import Wallet from "./Screens/Wallet";
 import MentorProfileSPOV from "./Screens/MentorProfileSPOV";
 import StudentProfileMPOV from "./Screens/StudentProfileMPOV";
 import MentorListing from "./Screens/MentorListing";
-import LandingPage from "./Screens/Landing Page";
 import MentorReg from "./Screens/MentorReg";
 
 
@@ -44,7 +43,7 @@ function App() {
             <ThemeProvider theme={theme}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<LandingPage/>}/>
+                        <Route path="/" element={<MentorProfileMPOV/>}/>
                         <Route path="register" element={<MentorReg/>}/>
                         <Route path="calender" element={<Calender/>}/>
                         <Route path="wallet" element={<Wallet/>}/>
