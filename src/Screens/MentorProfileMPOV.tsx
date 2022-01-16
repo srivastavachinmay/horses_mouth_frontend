@@ -53,7 +53,7 @@ const MentorProfileMPOV = () => {
     const [chipData, setChipData] = useState({
         "Country of study": "",
         "Area of study": "",
-        "University Relation": "",
+        // "University Relation": "",
         "Previous Education": "",
         // "Year of Graduation": "",
         "Specialization": "",
@@ -82,7 +82,7 @@ const MentorProfileMPOV = () => {
             setChipData({
                 "Country of study": mentorMeta.countryOfStudy,
                 "Area of study": mentorMeta.major,
-                "University Relation": mentorMeta.campusInfo.,
+                // "University Relation": mentorMeta.campusInfo.,
                 "Previous Education": mentorMeta.campusInfo.previousInstitute,
                 "Specialization": mentorMeta.campusInfo.specialisation,
                 "On Campus Exp.": mentorMeta.campusInfo.campusExperience,
