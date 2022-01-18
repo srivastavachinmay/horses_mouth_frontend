@@ -1,23 +1,26 @@
 import { Button } from '@mui/material'
-import { GoogleAuthProvider,signInWithPopup,getIdToken } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../utils/firebase'
-import React,{ useState,useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const LoginUser = () => {
     const url="https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
     const [authenticate, setauthenticate] = useState(false)
-    const [data, setdata] = useState({})
+    const [data, setdata] = useState<object>()
     const [already, setalready] = useState(true)
     const navigate = useNavigate()
-    let id=undefined;
+    let id;
+    // @ts-ignore
     localStorage.setItem("idtoken",id)
     useEffect(() => {
         if(authenticate)
         { 
+
             axios.get(`${url}/user`,
             {
+                // @ts-ignore
                 headers: { Authorization: `Bearer ${data.accessToken}` },
             })
             .then((res)=>{
@@ -25,18 +28,20 @@ const LoginUser = () => {
                 navigate('/')
             })
             .catch((err)=>{
-                setalready(true)
+                setalready(false)
             }) 
-            if(already===false) 
+            if(!already)
             {    
             axios.post(`${url}/user`,
             {
                 "institute": "Nil",
+                // @ts-ignore
                 "name": `${data.displayName}`,
                 "type": "user",
                 "interests": []
             },
             {
+                // @ts-ignore
                 headers: { Authorization: `Bearer ${data.accessToken}` },
             })
             .then((res)=>{
@@ -49,13 +54,17 @@ const LoginUser = () => {
             }
         }
 
-    }, [authenticate])
+    }, [authenticate,already])
     const gauthentication = () =>{
         let googleprovider= new GoogleAuthProvider();
         signInWithPopup(auth,googleprovider)
         .then((res)=>{
+            // @ts-ignore
             setdata(res.user);
-            console.log(data.accessToken)
+
+            console.log(typeof (res.user))
+            // @ts-ignore
+            console.log(res.user.accessToken)
             setauthenticate(true)
         })
         .catch((err)=>{

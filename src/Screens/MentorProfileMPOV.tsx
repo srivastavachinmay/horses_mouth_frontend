@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Avatar, Button, Card, CardHeader, Chip, List, ListItem, Stack, Typography, } from "@mui/material";
@@ -8,7 +8,6 @@ import { LinkedIn, Mail, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
 import AppointmentDialog from "./Components/AppointmentDialog";
-import { getMentor } from "../axios/Mentor";
 import { IUser } from "../models/IUser";
 
 
