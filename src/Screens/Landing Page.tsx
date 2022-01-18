@@ -3,7 +3,7 @@ import SidebarFab from "./Components/SidebarFab";
 import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
 import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged,getIdToken } from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 const LandingPage = () => {
@@ -28,7 +28,23 @@ const LandingPage = () => {
         fontWeight: "bolder",
         borderRadius: 2
     }
+
+    const savetoken = () =>{
+        console.log("called function")
+        getIdToken(true).then(function(idToken) {
+            console.log("Got token"+idToken)
+            localStorage.setItem("idtoken",idToken)
+          }).catch(function(error) {
+              console.log("Got error")
+            console.log(error)
+          });
+    }
+
+
+
+      
     const ProfileCard = () => {
+        savetoken()
         return (
             <Box display={"flex"}>
                 <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
