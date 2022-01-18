@@ -1,19 +1,10 @@
 export interface IMentor {
-    institute: string
-    campusPreference: string
-    profilePic: string
-    name: string
-    about: string
-    facebook: string
-    linkedIn: string
-    email: string
-    id: string
-    type: string
-    interests: string[]
-    mentorMeta: MentorMeta
+    nextPage: number
+    total: number
+    mentors: Mentor[]
 }
 
-export interface MentorMeta {
+export interface Mentor {
     id: string
     name: string
     status: string

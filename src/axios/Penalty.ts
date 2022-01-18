@@ -12,12 +12,3 @@ export const getPenalty = async () => {
         console.log(e)
     }
 }
-
-export const createPenalty = async (data:any) => {
-    try {
-        await axios.post(baseUrl + '/penalty',data, { headers: { 'Authorization': 'bearer $AUTH_TOKEN', } })
-
-    } catch (e) {
-        console.log(e)
-    }
-}

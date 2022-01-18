@@ -9,7 +9,7 @@ export interface Withdrawl {
     mentor: Mentor
     date: number
     amount: number
-    state: string
+    state: "waiting" | "paid"
 }
 
 export interface Mentor {

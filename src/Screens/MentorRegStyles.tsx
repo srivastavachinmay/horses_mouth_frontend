@@ -15,6 +15,7 @@ const useStyles = makeStyles(( theme ) => ( {
         backgroundColor: "#EFEDFF",
         display: "flex",
         flexDirection: "column",
+        overflowY: "auto",
         // overflowY: "scroll",
         width: "55vw",
         padding: "30px 30px",
