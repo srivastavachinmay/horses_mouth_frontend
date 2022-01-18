@@ -12,9 +12,6 @@ const firebaseConfig = {
     measurementId: "G-K53SDRSMJH"
 };
 
-export const googleAuthProvider = new GoogleAuthProvider();
-googleAuthProvider.setCustomParameters({ prompt: 'select_account' });
-
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
