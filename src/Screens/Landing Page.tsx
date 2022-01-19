@@ -8,12 +8,21 @@ import { auth } from "../utils/firebase";
 
 const LandingPage = () => {
     const history = useNavigate();
+
     onAuthStateChanged(auth, ( user ) => {
         if(!user) {
             history("/register");
             return null;
         } else {
             // localStorage.setItem("token", user.accessToken);
+            user.getIdToken(true).then(function(idToken) {
+                console.log("Got token"+idToken)
+                localStorage.setItem("idtoken",idToken)
+            }).catch(function(error) {
+                console.log("Got error")
+                console.log(error)
+
+            });
             console.log(user);
         }
     })
@@ -28,6 +37,17 @@ const LandingPage = () => {
         fontWeight: "bolder",
         borderRadius: 2
     }
+
+    const savetoken = async() =>{
+        console.log("called function")
+        //@ts-ignore
+        let idToken=""
+        // let idToken= await auth.currentUser.getIdToken(true);
+        // localStorage.setItem("idtoken",idToken)
+        console.log(idToken)
+    }
+
+      
     const ProfileCard = () => {
         return (
             <Box display={"flex"}>
@@ -61,7 +81,7 @@ const LandingPage = () => {
         )
     }
 
-
+    savetoken()
     const CustomCard = () => {
         return <div>
 
@@ -95,7 +115,6 @@ const LandingPage = () => {
     }
     return (
         <div>
-            <SidebarFab/>
             <Box sx={{
                 position: "absolute",
                 borderRadius: '50%',

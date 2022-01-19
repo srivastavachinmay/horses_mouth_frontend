@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Avatar, Button, Card, CardHeader, Chip, List, ListItem, Stack, Typography, } from "@mui/material";
@@ -8,7 +8,6 @@ import { LinkedIn, Mail, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
 import AppointmentDialog from "./Components/AppointmentDialog";
-import { getMentor } from "../axios/Mentor";
 import { IUser } from "../models/IUser";
 
 
@@ -69,35 +68,35 @@ const MentorProfileMPOV = () => {
     })
     const chipDataValue = useState([])
 
-    useEffect(() => {
-        ( async () => {
-            const mentorD = ( await getMentor(id) )
+    // useEffect(() => {
+    //     ( async () => {
+    //         const mentorD = ( await getMentor(id) )
 
-            if(!mentorD) {
-                // TODO: SHOW ERROR
-                return;
-            }
-            setMentorData(mentorD!)
-            const mentorMeta = mentorD[ "mentorMeta" ]
-            setChipData({
-                "Country of study": mentorMeta.countryOfStudy,
-                "Area of study": mentorMeta.major,
-                // "University Relation": mentorMeta.campusInfo.,
-                "Previous Education": mentorMeta.campusInfo.previousInstitute,
-                "Specialization": mentorMeta.campusInfo.specialisation,
-                "On Campus Exp.": mentorMeta.campusInfo.campusExperience,
-                "Scholarship": mentorMeta.campusInfo.scholarship,
-                "Place of Stay": mentorMeta.campusInfo.placeOfStay,
-                "Languages": mentorMeta.languages[ 0 ],
-                "Current GPA": mentorMeta.campusInfo.scores.gpa,
-                "GMAT Score": mentorMeta.campusInfo.scores.gmat,
-                "SAT Score": mentorMeta.campusInfo.scores.sat,
-                "Country": mentorMeta.countryOfOrigin,
-            })
+    //         if(!mentorD) {
+    //             // TODO: SHOW ERROR
+    //             return;
+    //         }
+    //         setMentorData(mentorD!)
+    //         const mentorMeta = mentorD[ "mentorMeta" ]
+    //         setChipData({
+    //             "Country of study": mentorMeta.countryOfStudy,
+    //             "Area of study": mentorMeta.major,
+    //             // "University Relation": mentorMeta.campusInfo.,
+    //             "Previous Education": mentorMeta.campusInfo.previousInstitute,
+    //             "Specialization": mentorMeta.campusInfo.specialisation,
+    //             "On Campus Exp.": mentorMeta.campusInfo.campusExperience,
+    //             "Scholarship": mentorMeta.campusInfo.scholarship,
+    //             "Place of Stay": mentorMeta.campusInfo.placeOfStay,
+    //             "Languages": mentorMeta.languages[ 0 ],
+    //             "Current GPA": mentorMeta.campusInfo.scores.gpa,
+    //             "GMAT Score": mentorMeta.campusInfo.scores.gmat,
+    //             "SAT Score": mentorMeta.campusInfo.scores.sat,
+    //             "Country": mentorMeta.countryOfOrigin,
+    //         })
 
 
-        } )()
-    }, [])
+    //     } )()
+    // }, [])
 
 
     const handleClickPastOpen = () => {

@@ -12,6 +12,8 @@ import StudentProfileMPOV from "./Screens/StudentProfileMPOV";
 import MentorListing from "./Screens/MentorListing";
 import MentorReg from "./Screens/MentorReg";
 import LoginUser from "./Screens/LoginUser";
+import LoginMentor from "./Screens/LoginMentor";
+import LandingPage from "./Screens/Landing Page";
 
 
 const theme = createTheme({
@@ -44,7 +46,7 @@ function App() {
             <ThemeProvider theme={theme}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<MentorProfileMPOV/>}/>
+                        <Route path="/" element={<LandingPage/>}/>
                         <Route path="register" element={<MentorReg/>}/>
                         <Route path="calender" element={<Calender/>}/>
                         <Route path="wallet" element={<Wallet/>}/>
@@ -54,6 +56,8 @@ function App() {
                         <Route path="studentProfileM" element={<StudentProfileMPOV/>}/>
                         <Route path="mentors" element={<MentorListing/>}/>
                         <Route path="user/login" element={<LoginUser/>}/>
+                        <Route path="mentor/login" element={<LoginMentor/>}/>
+                        <Route path="mentor/login/form" element={<MentorReg/>}/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>
