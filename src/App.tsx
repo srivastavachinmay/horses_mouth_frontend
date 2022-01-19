@@ -56,6 +56,7 @@ function App() {
                         <Route path="mentors" element={<MentorListing/>}/>
                         <Route path="user/login" element={<LoginUser/>}/>
                         <Route path="mentor/login" element={<LoginMentor/>}/>
+                        <Route path="mentor/login/form" element={<MentorReg/>}/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>

@@ -44,7 +44,7 @@ const LoginUser = () => {
             })
             .then((res)=>{
                 console.log(res)
-                navigate('/')
+                navigate('/mentor/login/form')
             })
             .catch((err)=>{
                 console.log(err)
