@@ -41,8 +41,10 @@ const LandingPage = () => {
     const savetoken = async() =>{
         console.log("called function")
         //@ts-ignore
-        let idToken= await auth.currentUser.getIdToken(true);
-        localStorage.setItem("idtoken",idToken)
+        let idToken=""
+        // let idToken= await auth.currentUser.getIdToken(true);
+        // localStorage.setItem("idtoken",idToken)
+        console.log(idToken)
     }
 
       
@@ -79,7 +81,7 @@ const LandingPage = () => {
         )
     }
 
-
+    savetoken()
     const CustomCard = () => {
         return <div>
 
@@ -113,8 +115,6 @@ const LandingPage = () => {
     }
     return (
         <div>
-            {savetoken()}
-            <SidebarFab/>
             <Box sx={{
                 position: "absolute",
                 borderRadius: '50%',
