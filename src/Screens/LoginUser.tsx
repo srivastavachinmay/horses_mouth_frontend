@@ -4,11 +4,12 @@ import { auth } from '../utils/firebase'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { UserCredential } from "firebase/auth";
 
 const LoginUser = () => {
     const url="https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
     const [authenticate, setauthenticate] = useState(false)
-    const [data, setdata] = useState<object>()
+    const [data, setdata] = useState<UserCredential>()
     const [already, setalready] = useState(true)
     const navigate = useNavigate()
     let id;
@@ -21,7 +22,7 @@ const LoginUser = () => {
             axios.get(`${url}/user`,
             {
                 // @ts-ignore
-                headers: { Authorization: `Bearer ${data.accessToken}` },
+                headers: { Authorization: `Bearer ${data?.user?.getIdToken}` },
             })
             .then((res)=>{
                 console.log(res);

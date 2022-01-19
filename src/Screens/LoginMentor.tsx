@@ -4,22 +4,21 @@ import { auth } from '../utils/firebase'
 import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { UserCredential } from "firebase/auth";
 
 const LoginUser = () => {
     const url = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
     const [authenticate, setauthenticate] = useState(false)
-    const [data, setdata] = useState<object>()
+    const [data, setdata] = useState<UserCredential>()
     const [already, setalready] = useState(false)
     const navigate = useNavigate()
-    // @ts-ignore
     useEffect(() => {
         if(authenticate)
         { 
 
             axios.get(`${url}/user`,
             {
-                // @ts-ignore
-                headers: { Authorization: `Bearer ${data.accessToken}` },
+                headers: { Authorization: `Bearer ${data?.user?.getIdToken}` },
             })
             .then((res)=>{
                 console.log(res);
@@ -33,14 +32,12 @@ const LoginUser = () => {
             axios.post(`${url}/user`,
             {
                 "institute": "Nil",
-                // @ts-ignore
-                "name": `${data.displayName}`,
+                "name": `${data?.user?.displayName}`,
                 "type": "mentor",
                 "interests": []
             },
             {
-                // @ts-ignore
-                headers: { Authorization: `Bearer ${data.accessToken}` },
+                headers: { Authorization: `Bearer ${data?.user?.getIdToken}` },
             })
             .then((res)=>{
                 console.log(res)
@@ -58,7 +55,7 @@ const LoginUser = () => {
         signInWithPopup(auth, googleprovider)
             .then(( res ) => {
                 console.log(typeof (res.user))
-                setdata(res.user);
+                setdata(res);
                 // console.log(data.accessToken)
                 setauthenticate(true)
             })

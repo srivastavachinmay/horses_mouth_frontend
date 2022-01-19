@@ -46,7 +46,7 @@ function App() {
             <ThemeProvider theme={theme}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<MentorProfileMPOV/>}/>
+                        <Route path="/" element={<LandingPage/>}/>
                         <Route path="register" element={<MentorReg/>}/>
                         <Route path="calender" element={<Calender/>}/>
                         <Route path="wallet" element={<Wallet/>}/>
@@ -58,7 +58,6 @@ function App() {
                         <Route path="user/login" element={<LoginUser/>}/>
                         <Route path="mentor/login" element={<LoginMentor/>}/>
                         <Route path="mentor/login/form" element={<MentorReg/>}/>
-                        <Route path="landing" element={<LandingPage/>}/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>
