@@ -38,23 +38,15 @@ const LandingPage = () => {
         borderRadius: 2
     }
 
-    // const savetoken = () =>{
-    //     console.log("called function")
-    //     auth.currentUser.getIdToken(true).then(function(idToken) {
-    //         console.log("Got token"+idToken)
-    //         localStorage.setItem("idtoken",idToken)
-    //       }).catch(function(error) {
-    //           console.log("Got error")
-    //         console.log(error)
-    //
-    //       });
-    // }
-
-
+    const savetoken = async() =>{
+        console.log("called function")
+        //@ts-ignore
+        let idToken= await auth.currentUser.getIdToken(true);
+        localStorage.setItem("idtoken",idToken)
+    }
 
       
     const ProfileCard = () => {
-        // savetoken()
         return (
             <Box display={"flex"}>
                 <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
@@ -121,6 +113,7 @@ const LandingPage = () => {
     }
     return (
         <div>
+            {savetoken()}
             <SidebarFab/>
             <Box sx={{
                 position: "absolute",

@@ -13,6 +13,7 @@ import MentorListing from "./Screens/MentorListing";
 import MentorReg from "./Screens/MentorReg";
 import LoginUser from "./Screens/LoginUser";
 import LoginMentor from "./Screens/LoginMentor";
+import LandingPage from "./Screens/Landing Page";
 
 
 const theme = createTheme({
@@ -57,6 +58,7 @@ function App() {
                         <Route path="user/login" element={<LoginUser/>}/>
                         <Route path="mentor/login" element={<LoginMentor/>}/>
                         <Route path="mentor/login/form" element={<MentorReg/>}/>
+                        <Route path="landing" element={<LandingPage/>}/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>
