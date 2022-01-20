@@ -16,9 +16,6 @@ const LoginUser = () => {
     // @ts-ignore
     localStorage.setItem("idtoken",id)
     useEffect(() => {
-        if(authenticate)
-        { 
-
             axios.get(`${url}/user`,
             {
                 // @ts-ignore
@@ -37,13 +34,13 @@ const LoginUser = () => {
             {
                 "institute": "Nil",
                 // @ts-ignore
-                "name": `${data.displayName}`,
+                "name": `${data?.user?.displayName}`,
                 "type": "user",
                 "interests": []
             },
             {
                 // @ts-ignore
-                headers: { Authorization: `Bearer ${data.accessToken}` },
+                headers: { Authorization: `Bearer ${data?.user?.getIdToken}` },
             })
             .then((res)=>{
                 console.log(res)
@@ -53,9 +50,10 @@ const LoginUser = () => {
                 console.log(err)
             })
             }
-        }
 
     }, [authenticate,already])
+
+    
     const gauthentication = () =>{
         let googleprovider= new GoogleAuthProvider();
         signInWithPopup(auth,googleprovider)
@@ -65,8 +63,8 @@ const LoginUser = () => {
 
             console.log(typeof (res.user))
             // @ts-ignore
-            console.log(res.user.accessToken)
-            setauthenticate(true)
+            console.log(res.user.accessToken);
+            (authenticate)?setauthenticate(false):setauthenticate(true);
         })
         .catch((err)=>{
             console.log(err)

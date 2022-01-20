@@ -11,7 +11,7 @@ const LandingPage = () => {
 
     onAuthStateChanged(auth, ( user ) => {
         if(!user) {
-            history("/register");
+            history("/user/login");
             return null;
         } else {
             // localStorage.setItem("token", user.accessToken);
