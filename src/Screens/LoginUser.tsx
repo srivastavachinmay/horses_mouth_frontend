@@ -18,7 +18,6 @@ const LoginUser = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authenticate) {
       (async () => {
         const token = await data?.user?.getIdToken(true);
         let idtoken:string = token!;
@@ -42,7 +41,6 @@ const LoginUser = () => {
         }
         setLoading(false);
       })();
-    }
   }, [authenticate]);
 
   const googleAuthentication = async () => {
@@ -54,10 +52,10 @@ const LoginUser = () => {
       }
     );
     if (!res) {
-      alert("Bhak bc");
+      console.log("No response received")
     } else {
       setData(res);
-      setAuthenticate(true);
+      (authenticate)?setAuthenticate(false):setAuthenticate(true);
       setLoading(true);
     }
   };
