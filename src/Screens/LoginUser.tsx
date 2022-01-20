@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithCredential } from 'firebase/auth';
 import { auth } from '../utils/firebase'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ const LoginUser = () => {
     const [authenticate, setauthenticate] = useState(false)
     const [data, setdata] = useState<UserCredential>()
     const [already, setalready] = useState(true)
+    const [updatedid, setupdatedid] = useState("")
     const navigate = useNavigate()
     let id;
     // @ts-ignore
@@ -19,7 +20,7 @@ const LoginUser = () => {
             axios.get(`${url}/user`,
             {
                 // @ts-ignore
-                headers: { Authorization: `Bearer ${data?.user?.getIdToken}` },
+                headers: { Authorization: `Bearer ${updatedid}` },
             })
             .then((res)=>{
                 console.log(res);
@@ -40,7 +41,7 @@ const LoginUser = () => {
             },
             {
                 // @ts-ignore
-                headers: { Authorization: `Bearer ${data?.user?.getIdToken}` },
+                headers: { Authorization: `Bearer ${updatedid}` },
             })
             .then((res)=>{
                 console.log(res)
@@ -53,11 +54,12 @@ const LoginUser = () => {
 
     }, [authenticate,already])
 
-    
+
     const gauthentication = () =>{
         let googleprovider= new GoogleAuthProvider();
         signInWithPopup(auth,googleprovider)
         .then((res)=>{
+            onGoogleSignIn(res.user);
             // @ts-ignore
             setdata(res.user);
 
@@ -70,6 +72,15 @@ const LoginUser = () => {
             console.log(err)
         })
     }
+
+    function onGoogleSignIn(googleUser: any) {
+        let googleIdToken = googleUser.getAuthResponse().id_token;
+        signInWithCredential(auth,GoogleAuthProvider.credential(googleIdToken));
+        setupdatedid(googleIdToken);
+        console.log(googleIdToken)
+      }
+
+
     return (
         <>
             <Button variant="contained" color="primary" onClick={gauthentication}>Sign In with Google</Button>
