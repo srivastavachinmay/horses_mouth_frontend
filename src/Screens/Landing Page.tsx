@@ -1,17 +1,48 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import SidebarFab from "./Components/SidebarFab";
 import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
 import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged,GoogleAuthProvider,signInWithPopup,UserCredential, } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import axios from "axios";
 
 const LandingPage = () => {
-    const history = useNavigate();
+    const url =
+    "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
+  const [authenticate, setAuthenticate] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<UserCredential>();
+  const navigate = useNavigate();
+  useEffect(() => {
+    (async () => {
+      const token = await data?.user?.getIdToken(true);
+      let idtoken:string = token!;
+      localStorage.setItem("idtoken",idtoken)
+
+      const res = await axios
+        .get(`${url}/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .catch((err: any) => {
+          console.log(err);
+          setLoading(false);
+        });
+
+      console.log(res);
+
+      if (res?.data?.users?.length !== 0) {
+        navigate("/");
+      } else {
+        alert("response not received");
+      }
+      setLoading(false);
+    })();
+}, [authenticate]);
 
     onAuthStateChanged(auth, ( user ) => {
         if(!user) {
-            history("/user/login");
+            navigate("/register");
             return null;
         } else {
             // localStorage.setItem("token", user.accessToken);
@@ -26,6 +57,22 @@ const LandingPage = () => {
             console.log(user);
         }
     })
+    const googleAuthentication = async () => {
+        let googleProvider = new GoogleAuthProvider();
+    
+        const res = await signInWithPopup(auth, googleProvider).catch(
+          (err: any) => {
+            console.log(err);
+          }
+        );
+        if (!res) {
+          console.log("No response received")
+        } else {
+          setData(res);
+          (authenticate)?setAuthenticate(false):setAuthenticate(true);
+          setLoading(true);
+        }
+      };
 
     const chipCSS = {
         bgcolor: '#D4CFFF',
@@ -153,11 +200,11 @@ const LandingPage = () => {
                     right: 20,
                     position: 'absolute',
                 }}>
-                    <Button variant={'outlined'} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}>
+                    <Button variant={'outlined'} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }} onClick={googleAuthentication}>
                         Login
                     </Button>
                     <Button variant={'contained'}
-                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}>
+                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }} onClick={()=>{navigate("/register")}}>
                         Sign up
                     </Button>
                 </div>
