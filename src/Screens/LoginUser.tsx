@@ -37,7 +37,7 @@ const LoginUser = () => {
         if (res?.data?.users?.length !== 0) {
           navigate("/");
         } else {
-          alert("Bhak bc");
+          alert("response not received");
         }
         setLoading(false);
       })();
