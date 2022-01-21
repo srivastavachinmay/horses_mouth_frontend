@@ -1,10 +1,10 @@
-import { Button, Checkbox, FormControlLabel, Typography } from '@mui/material'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import cred from '../utils/creds.json'
-import { signOut } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import styling from './MentorRegStyles'
+import { Button, Checkbox, FormControlLabel, Typography } from '@mui/material';
+import axios                                              from 'axios';
+import { signOut }                                        from "firebase/auth";
+import React, { useEffect, useState }                     from 'react';
+import cred                                               from '../utils/creds.json';
+import { auth }                                           from "../utils/firebase";
+import styling                                            from './MentorRegStyles';
 
 
 const Register = () => {

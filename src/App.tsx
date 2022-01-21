@@ -1,19 +1,19 @@
-import React from 'react';
 import "@fontsource/poppins";
-import StudentProfileSPOV from "./Screens/StudentProfileSPOV";
-import MentorProfileMPOV from "./Screens/MentorProfileMPOV";
-import { createTheme, ThemeProvider } from "@mui/material";
-import './App.css';
+import { createTheme, ThemeProvider }   from "@mui/material";
+import React                            from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Calender from "./Screens/Calender";
-import Wallet from "./Screens/Wallet";
-import MentorProfileSPOV from "./Screens/MentorProfileSPOV";
-import StudentProfileMPOV from "./Screens/StudentProfileMPOV";
-import MentorListing from "./Screens/MentorListing";
-import MentorReg from "./Screens/MentorReg";
-import LoginUser from "./Screens/LoginUser";
-import LoginMentor from "./Screens/LoginMentor";
-import LandingPage from "./Screens/Landing Page";
+import './App.css';
+import Calender                         from "./Screens/Calender";
+import LandingPage                      from "./Screens/Landing Page";
+import LoginMentor                      from "./Screens/LoginMentor";
+import LoginUser                        from "./Screens/LoginUser";
+import MentorListing                    from "./Screens/MentorListing";
+import MentorProfileMPOV                from "./Screens/MentorProfileMPOV";
+import MentorProfileSPOV                from "./Screens/MentorProfileSPOV";
+import MentorReg                        from "./Screens/MentorReg";
+import StudentProfileMPOV               from "./Screens/StudentProfileMPOV";
+import StudentProfileSPOV               from "./Screens/StudentProfileSPOV";
+import Wallet                           from "./Screens/Wallet";
 
 
 const theme = createTheme({

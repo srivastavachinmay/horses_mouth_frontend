@@ -1,5 +1,5 @@
-import axios from "axios";
-import { IPenalty } from "../models/IPenalty";
+import axios          from "axios";
+import { IPenalty }   from "../models/IPenalty";
 import { AUTH_TOKEN } from "../utils/authController";
 
 

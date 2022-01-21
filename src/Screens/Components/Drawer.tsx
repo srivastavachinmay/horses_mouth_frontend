@@ -1,5 +1,5 @@
+import MuiDrawer  from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
-import MuiDrawer from "@mui/material/Drawer";
 
 const drawerWidth: number = 240;
 

@@ -1,6 +1,3 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import {
     Avatar,
     FormControl,
@@ -10,12 +7,15 @@ import {
     Stack,
     ToggleButton,
     ToggleButtonGroup
-} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
+}                            from "@mui/material";
+import Box                   from "@mui/material/Box";
+import Container             from "@mui/material/Container";
+import CssBaseline           from "@mui/material/CssBaseline";
+import List                  from "@mui/material/List";
+import Typography            from "@mui/material/Typography";
+import React                 from "react";
+import { Drawer }            from "./Components/Drawer";
 import { MentorSidebarList } from "./Components/listItems";
-import Container from "@mui/material/Container";
-import { Drawer } from "./Components/Drawer";
 
 
 const Calender = () => {

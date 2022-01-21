@@ -1,6 +1,4 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
+import { LinkedIn, Verified } from "@mui/icons-material";
 import {
     Avatar,
     Button,
@@ -17,42 +15,45 @@ import {
     SelectChangeEvent,
     Stack,
     Typography,
-} from "@mui/material";
+}                             from "@mui/material";
+import Box                    from "@mui/material/Box";
+import Container              from "@mui/material/Container";
+import CssBaseline            from "@mui/material/CssBaseline";
+import Grid                   from "@mui/material/Grid";
+import React                  from "react";
+import { Drawer }             from "./Components/Drawer";
 import { StudentSidebarList } from "./Components/listItems";
-import Grid from "@mui/material/Grid";
-import { LinkedIn, Verified } from "@mui/icons-material";
-import Container from "@mui/material/Container";
-import { Drawer } from "./Components/Drawer";
 
 
 const MentorProfileSPOV = () => {
     const [checked, setChecked] = React.useState([0]);
-
+    
+    
     const handleToggle = ( value: number ) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
-
+        
         if(currentIndex === -1) {
             newChecked.push(value);
         } else {
             newChecked.splice(currentIndex, 1);
         }
-
+        
         setChecked(newChecked);
     };
     const [day, setDay] = React.useState('');
-
+    
     const handleChange = ( event: SelectChangeEvent ) => {
         setDay(event.target.value);
     };
-
+    
     const selectCSS = {
         alignSelf: "center",
         justifyContent: "center",
         color: '#6E3CBC',
         fontWeight: "bold"
-    }
-
+    };
+    
     const chipCSS = {
         bgcolor: "white",
         width: 170,
@@ -67,7 +68,7 @@ const MentorProfileSPOV = () => {
         ":hover": {
             bgcolor: "#6E3CBC",
             color: "white",
-
+            
         },
     };
     return (
@@ -81,7 +82,7 @@ const MentorProfileSPOV = () => {
                 </Typography>
                 <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{StudentSidebarList}</List>
             </Drawer>
-
+            
             <Box
                 component="main"
                 sx={{
@@ -107,7 +108,7 @@ const MentorProfileSPOV = () => {
                         flexWrap: "wrap"
                     }}
                 >
-
+                    
                     <Grid
                         xs={12}
                         md={6}
@@ -158,7 +159,7 @@ const MentorProfileSPOV = () => {
                                         color: "#0FA958",
                                     }}
                                 />
-
+                                
                                 <Typography
                                     fontWeight={"bold"}
                                     fontSize={16}
@@ -196,7 +197,7 @@ const MentorProfileSPOV = () => {
                                 </Box>
                             </Box>
                         </Box>
-
+                        
                         <Grid
                             item
                             sx={{
@@ -239,7 +240,7 @@ const MentorProfileSPOV = () => {
                         <Typography color={'#6E3CBC'} fontWeight={700} fontSize={13}>John Doe’s available
                             slots</Typography>
                         <FormControl variant={"standard"} sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
-
+                            
                             <Select
                                 labelId="demo-simple-select-filled-label"
                                 id="demo-simple-select-filled"
@@ -272,7 +273,7 @@ const MentorProfileSPOV = () => {
                                 <MenuItem sx={selectCSS} value={"Thursday"}>Thursday</MenuItem>
                                 <MenuItem sx={selectCSS} value={"Friday"}>Friday</MenuItem>
                                 <MenuItem sx={selectCSS} value={"Saturday"}>Saturday</MenuItem>
-
+                            
                             </Select>
                         </FormControl>
                         <Box
@@ -281,7 +282,7 @@ const MentorProfileSPOV = () => {
                                 position: "relative",
                                 // top: 100,
                                 width: 360,
-
+                                
                                 borderWidth: 1,
                                 borderRadius: 5,
                                 display: "flex",
@@ -291,7 +292,7 @@ const MentorProfileSPOV = () => {
                                 // bgcolor: "#EFEDFF",
                             }}
                         >
-
+                            
                             <List sx={{
                                 borderRadius: 5,
                                 paddingBottom: 2,
@@ -349,9 +350,9 @@ const MentorProfileSPOV = () => {
                                     </ListItem>
                                 ))}
                             </List>
-
+                        
                         </Box>
-
+                    
                     </Stack>
                     <Box
                         sx={{
@@ -441,15 +442,15 @@ const MentorProfileSPOV = () => {
                                 variant={"filled"}
                                 sx={chipCSS}
                             />
-
-
+                        
+                        
                         </Grid>
                     </Box>
-
+                
                 </Container>
             </Box>
         </Box>
-
+    
     );
 };
 

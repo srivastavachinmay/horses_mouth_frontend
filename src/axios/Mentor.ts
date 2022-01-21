@@ -1,7 +1,6 @@
-import axios from "axios";
+import axios               from "axios";
 import { IMentor, Mentor } from "../models/IMentor";
-import { User } from "../models/IUser";
-import { AUTH_TOKEN } from "../utils/authController";
+import { AUTH_TOKEN }      from "../utils/authController";
 
 const baseUrl = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
 

@@ -1,10 +1,9 @@
-import { Button } from '@mui/material'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../utils/firebase'
-import React, { useState,useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
-import { UserCredential } from "firebase/auth";
+import { Button }                                              from '@mui/material';
+import axios                                                   from 'axios';
+import { GoogleAuthProvider, signInWithPopup, UserCredential } from 'firebase/auth';
+import React, { useEffect, useState }                          from 'react';
+import { useNavigate }                                         from 'react-router-dom';
+import { auth }                                                from '../utils/firebase';
 
 const LoginUser = () => {
     const url = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
@@ -49,7 +48,7 @@ const LoginUser = () => {
             }
         }
 
-    }, [authenticate,already])
+    }, [authenticate, already, data?.user?.getIdToken, data?.user?.displayName, navigate])
     const gauthentication = () => {
         let googleprovider = new GoogleAuthProvider();
         signInWithPopup(auth, googleprovider)

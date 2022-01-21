@@ -1,6 +1,6 @@
-import React from 'react';
-import { Fab } from "@mui/material";
 import { ChatBubble, ConnectWithoutContact, FactCheck, Home, Person } from "@mui/icons-material";
+import { Fab }                                                        from "@mui/material";
+import React                                                          from 'react';
 
 const SidebarFab = () => {
     return (

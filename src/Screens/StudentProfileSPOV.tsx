@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
+import { LinkedIn, Verified }                                       from "@mui/icons-material";
 import { Avatar, Card, CardHeader, Chip, List, Stack, Typography, } from "@mui/material";
-import { StudentSidebarList } from "./Components/listItems";
-import Grid from "@mui/material/Grid";
-import { LinkedIn, Verified } from "@mui/icons-material";
-import Container from "@mui/material/Container";
-import { Drawer } from "./Components/Drawer";
-import AppointmentDialog from "./Components/AppointmentDialog";
-import { useHover } from "../Hooks/useHover";
-import { getUser } from "../axios/User";
-import { User } from "../models/IUser";
+import Box                                                          from "@mui/material/Box";
+import Container                                                    from "@mui/material/Container";
+import CssBaseline                                                  from "@mui/material/CssBaseline";
+import Grid                                                         from "@mui/material/Grid";
+import React, { useEffect, useState }                               from "react";
+import { getUser }                                                  from "../axios/User";
+import { useHover }                                                 from "../Hooks/useHover";
+import { User }                                                     from "../models/IUser";
+import AppointmentDialog                                            from "./Components/AppointmentDialog";
+import { Drawer }                                                   from "./Components/Drawer";
+import { StudentSidebarList }                                       from "./Components/listItems";
 
 
 const StudentProfileSPOV = () => {

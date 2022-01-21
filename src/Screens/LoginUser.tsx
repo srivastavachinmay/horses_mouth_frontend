@@ -1,9 +1,9 @@
-import { Button } from "@mui/material";
+import { Button }                                               from "@mui/material";
+import axios                                                    from "axios";
 import { GoogleAuthProvider, signInWithPopup, UserCredential, } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState }                           from "react";
+import { useNavigate }                                          from "react-router-dom";
+import { auth }                                                 from "../utils/firebase";
 
 const LoginUser = () => {
     const url =
@@ -37,7 +37,7 @@ const LoginUser = () => {
                 setLoading(false);
             } )();
         }
-    }, [authenticate]);
+    }, [authenticate, data?.user, navigate]);
 
     const googleAuthentication = async () => {
         let googleProvider = new GoogleAuthProvider();

@@ -1,17 +1,69 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import { Avatar, Chip, Stack } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import { MentorSidebarList } from "./Components/listItems";
-import Grid from "@mui/material/Grid";
-import { LinkedIn, Verified } from "@mui/icons-material";
-import Container from "@mui/material/Container";
-import { Drawer } from "./Components/Drawer";
+import { LinkedIn, Verified }         from "@mui/icons-material";
+import { Avatar, Chip, Stack }        from "@mui/material";
+import Box                            from "@mui/material/Box";
+import Container                      from "@mui/material/Container";
+import CssBaseline                    from "@mui/material/CssBaseline";
+import Grid                           from "@mui/material/Grid";
+import List                           from "@mui/material/List";
+import Typography                     from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
+import { getUser }                    from "../axios/User";
+import { useHover }                   from "../Hooks/useHover";
+import { User }                       from "../models/IUser";
+import { Drawer }                     from "./Components/Drawer";
+import { MentorSidebarList }          from "./Components/listItems";
 
 
 const StudentProfileMPOV = () => {
+
+    const [buttonAIsHovering, buttonAHoverProps] = useHover()
+    const [buttonBIsHovering, buttonBHoverProps] = useHover()
+    const [buttonCIsHovering, buttonCHoverProps] = useHover()
+    const [buttonDIsHovering, buttonDHoverProps] = useHover()
+    const [buttonEIsHovering, buttonEHoverProps] = useHover()
+    const [buttonFIsHovering, buttonFHoverProps] = useHover()
+    const [buttonGIsHovering, buttonGHoverProps] = useHover()
+    const [buttonHIsHovering, buttonHHoverProps] = useHover()
+
+    const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering]
+    const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps]
+
+
+    const [mentorData, setMentorData] = useState<User>()
+    const [chipData, setChipData] = useState({
+        "1st Preference Course": "",
+        "2nd Preference Course": "",
+        "3rd Preference Course": "",
+        "Current Institute": "",
+        "Campus Preference": "",
+        "Language Preference": "",
+        "Previous Institute": "",
+    })
+
+    useEffect(() => {
+        ( async () => {
+            const mentorD = await getUser()
+
+            if(!mentorD) {
+                // TODO: SHOW ERROR
+                return;
+            }
+            setMentorData(mentorD!)
+            const mentorMeta = mentorData?.[ "mentorMeta" ]
+            setChipData({
+                "1st Preference Course": "" || " ",
+                "2nd Preference Course": "" || " ",
+                "3rd Preference Course": "" || " ",
+                "Current Institute": "" || " ",
+                "Campus Preference": mentorData?.campusPreference! || " ",
+                "Language Preference": mentorMeta?.languages[ 0 ]! || " ",
+                "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || " "
+            })
+
+
+        } )()
+    }, [mentorData])
+
     const chipCSS = {
         bgcolor: "white",
         width: 340,
@@ -209,46 +261,19 @@ const StudentProfileMPOV = () => {
                                 John Doe’s interest / Academic qualifications
                             </Typography>
                             <Stack>
-                                <Chip
-                                    label={"Current Education"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"1st preference course"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"2nd preference course"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"3rd preference course"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"Campus Preference"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"Degree preference"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"Language preference"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
-                                <Chip
-                                    label={"Previous Education"}
-                                    variant={"filled"}
-                                    sx={chipCSS}
-                                />
+                                {Object.keys(chipData).map(( key, index ) => {
+
+                                    const hoverProp = buttonHoverProps[ index ]
+                                    const isHovering = buttonIsHovering[ index ]
+
+                                    return <Chip
+                                        {...hoverProp}
+                                        // @ts-ignore
+                                        label={( !isHovering ? key : chipData[ key ].length > 0 ? ( chipData[ key ] as string ) : "NA" )}
+                                        variant={"filled"}
+                                        sx={chipCSS}
+                                    />
+                                })}
                             </Stack>
                         </Box>
                     </Container>
