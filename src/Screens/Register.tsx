@@ -67,6 +67,13 @@ const LoginUser = () => {
             });
         }
         console.log(res);
+        if(res?.status===200)
+        {
+            const token = await data?.user?.getIdToken(true);
+            let idtoken:string = token!;
+            localStorage.setItem("idtoken",idtoken)
+            navigate("/")
+        }
         setLoading(false);
       })();
   }, [authenticate]);
