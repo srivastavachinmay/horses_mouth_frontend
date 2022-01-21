@@ -1,9 +1,10 @@
 import axios from "axios";
-import { IMentor } from "../models/IMentor";
-import { IUser } from "../models/IUser";
+import { IMentor, Mentor } from "../models/IMentor";
+import { User } from "../models/IUser";
+import { AUTH_TOKEN } from "../utils/authController";
 
 const baseUrl = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
-const AUTH_TOKEN = localStorage.getItem("token")
+
 
 
 export const getMentor = async ( id: string ) => {
@@ -12,15 +13,15 @@ export const getMentor = async ( id: string ) => {
             params: { "id": id },
             headers: { 'Authorization': `bearer ${AUTH_TOKEN}`, }
         })
-        return response.data as IUser
+        return response.data as Mentor
     } catch (e) {
         console.log(e)
     }
 }
 
-export const getMentorSearch = async () => {
+export const getMentorSearch = async (param:object) => {
     try {
-        const response = await axios.get(baseUrl + '/mentor/search', {params:{}, headers: { 'Authorization': `bearer ${AUTH_TOKEN}`, } })
+        const response = await axios.get(baseUrl + '/mentor/search', {params:param, headers: { 'Authorization': `bearer ${AUTH_TOKEN}`, } })
         return response.data as IMentor
     } catch (e) {
         console.log(e)

@@ -1,4 +1,10 @@
 export interface IUser {
+    nextPage: number
+    total: number
+    users: User[]
+}
+
+export interface User {
     institute: string
     campusPreference: string
     profilePic: string
@@ -16,6 +22,7 @@ export interface IUser {
 export interface MentorMeta {
     id: string
     name: string
+    profilePic: string
     status: string
     degree: string
     major: string
@@ -43,6 +50,8 @@ export interface CampusInfo {
     placeOfStay: string
     previousInstitute: string
     courseName: string
+    yearOfGrad: number
+    campusJob: string
 }
 
 export interface UniEmail {

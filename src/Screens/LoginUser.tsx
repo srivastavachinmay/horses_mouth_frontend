@@ -1,82 +1,73 @@
-import { Button } from '@mui/material'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../utils/firebase'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { UserCredential } from "firebase/auth";
+import { Button } from "@mui/material";
+import { GoogleAuthProvider, signInWithPopup, UserCredential, } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginUser = () => {
-    const url="https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
-    const [authenticate, setauthenticate] = useState(false)
-    const [data, setdata] = useState<UserCredential>()
-    const [already, setalready] = useState(true)
-    const navigate = useNavigate()
-    let id;
-    // @ts-ignore
-    localStorage.setItem("idtoken",id)
+    const url =
+        "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
+    const [authenticate, setAuthenticate] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<UserCredential>();
+    const navigate = useNavigate();
+
     useEffect(() => {
-        if(authenticate)
-        { 
+        if(authenticate) {
+            ( async () => {
+                const token = await data?.user?.getIdToken();
 
-            axios.get(`${url}/user`,
-            {
-                // @ts-ignore
-                headers: { Authorization: `Bearer ${data?.user?.getIdToken}` },
-            })
-            .then((res)=>{
+                const res = await axios
+                    .get(`${url}/user`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    })
+                    .catch(( err: any ) => {
+                        console.log(err);
+                        setLoading(false);
+                    });
+
                 console.log(res);
-                navigate('/')
-            })
-            .catch((err)=>{
-                setalready(false)
-            }) 
-            if(!already)
-            {    
-            axios.post(`${url}/user`,
-            {
-                "institute": "Nil",
-                // @ts-ignore
-                "name": `${data.displayName}`,
-                "type": "user",
-                "interests": []
-            },
-            {
-                // @ts-ignore
-                headers: { Authorization: `Bearer ${data.accessToken}` },
-            })
-            .then((res)=>{
-                console.log(res)
-                navigate('/')
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-            }
+
+                if(res?.data?.users?.length !== 0) {
+                    navigate("/");
+                } else {
+                    alert("Bhak bc");
+                }
+                setLoading(false);
+            } )();
         }
+    }, [authenticate]);
 
-    }, [authenticate,already])
-    const gauthentication = () =>{
-        let googleprovider= new GoogleAuthProvider();
-        signInWithPopup(auth,googleprovider)
-        .then((res)=>{
-            // @ts-ignore
-            setdata(res.user);
+    const googleAuthentication = async () => {
+        let googleProvider = new GoogleAuthProvider();
 
-            console.log(typeof (res.user))
-            // @ts-ignore
-            console.log(res.user.accessToken)
-            setauthenticate(true)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-    }
+        const res = await signInWithPopup(auth, googleProvider).catch(
+            ( err: any ) => {
+                console.log(err);
+            }
+        );
+        if(!res) {
+            alert("Bhak bc");
+        } else {
+            setData(res);
+            setAuthenticate(true);
+            setLoading(true);
+        }
+    };
+
     return (
         <>
-            <Button variant="contained" color="primary" onClick={gauthentication}>Sign In with Google</Button>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={googleAuthentication}
+            >
+                Sign In with Google
+            </Button>
+            {loading && <> Please wait</>}
         </>
-    )
-}
+    );
+};
 
-export default LoginUser
+export default LoginUser;

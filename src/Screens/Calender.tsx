@@ -109,7 +109,7 @@ const Calender = () => {
                                      }}/>
                                 <Typography color={'#6E3CBC'} fontSize={12} fontWeight={700} lineHeight={1}>Red
                                     zones: most no. of
-                                    sessions schedeuled </Typography>
+                                    sessions scheduled </Typography>
                             </Box>
 
                             <Box display={"flex"}>
@@ -121,7 +121,7 @@ const Calender = () => {
                                          height: 18
                                      }}/>
                                 <Typography color={'#6E3CBC'} fontSize={12} fontWeight={700} lineHeight={1}>yellow
-                                    zones: moderate no. of sessions schedeuled </Typography>
+                                    zones: moderate no. of sessions scheduled </Typography>
                             </Box>
 
                             <Box display={"flex"}>
@@ -133,7 +133,7 @@ const Calender = () => {
                                          height: 18
                                      }}/>
                                 <Typography color={'#6E3CBC'} fontSize={12} fontWeight={700} lineHeight={1}>green
-                                    zones: least no. of sessions schedeuled </Typography>
+                                    zones: least no. of sessions scheduled </Typography>
                             </Box>
                         </Box>
                         <Typography sx={{
@@ -143,7 +143,7 @@ const Calender = () => {
                             textAlign: "start",
                             width: '100%'
                         }}>
-                            Schedeule your available slots
+                            Schedule your available slots
                         </Typography>
                         <Box display={"flex"} flexWrap={"wrap"} width={'100%'}
                              justifyContent={"space-around"}>

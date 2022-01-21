@@ -16,7 +16,7 @@ const LandingPage = () => {
         } else {
             // localStorage.setItem("token", user.accessToken);
             user.getIdToken(true).then(function(idToken) {
-                console.log("Got token"+idToken)
+                console.log("Got token "+idToken)
                 localStorage.setItem("idtoken",idToken)
             }).catch(function(error) {
                 console.log("Got error")
@@ -65,7 +65,7 @@ const LandingPage = () => {
                     <Avatar sx={{ width: 147, height: 147 }}>
                     </Avatar>
                     <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20} textAlign={"center"}>
-                        Step 2 : SCHEDEULE A CALL WITH THE BEST MENTORS AROUND THE WORLD
+                        Step 2 : SCHEDULE A CALL WITH THE BEST MENTORS AROUND THE WORLD
                     </Typography>
                 </Box>
                 <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
@@ -153,7 +153,7 @@ const LandingPage = () => {
                     right: 20,
                     position: 'absolute',
                 }}>
-                    <Button variant={'outlined'} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}>
+                    <Button variant={'outlined'} onClick={()=>{history('/user/login')}} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}>
                         Login
                     </Button>
                     <Button variant={'contained'}

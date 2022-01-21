@@ -7,6 +7,7 @@ export interface IMentor {
 export interface Mentor {
     id: string
     name: string
+    profilePic: string
     status: string
     degree: string
     major: string
@@ -34,6 +35,8 @@ export interface CampusInfo {
     placeOfStay: string
     previousInstitute: string
     courseName: string
+    yearOfGrad: number
+    campusJob: string
 }
 
 export interface UniEmail {

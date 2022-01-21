@@ -50,10 +50,10 @@ function App() {
                         <Route path="register" element={<MentorReg/>}/>
                         <Route path="calender" element={<Calender/>}/>
                         <Route path="wallet" element={<Wallet/>}/>
-                        <Route path="mentorProfileS" element={<MentorProfileSPOV/>}/>
-                        <Route path="studentProfileS" element={<StudentProfileSPOV/>}/>
-                        <Route path="mentorProfileM" element={<MentorProfileMPOV/>}/>
-                        <Route path="studentProfileM" element={<StudentProfileMPOV/>}/>
+                        <Route path="mentorProfile/:id" element={<MentorProfileSPOV/>}/>
+                        <Route path="studentProfile" element={<StudentProfileSPOV/>}/>
+                        <Route path="mentorProfile" element={<MentorProfileMPOV/>}/>
+                        <Route path="studentProfile/:id" element={<StudentProfileMPOV/>}/>
                         <Route path="mentors" element={<MentorListing/>}/>
                         <Route path="user/login" element={<LoginUser/>}/>
                         <Route path="mentor/login" element={<LoginMentor/>}/>

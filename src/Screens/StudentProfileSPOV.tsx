@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Avatar, Card, CardHeader, Chip, List, Stack, Typography, } from "@mui/material";
@@ -8,19 +8,13 @@ import { LinkedIn, Verified } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
 import AppointmentDialog from "./Components/AppointmentDialog";
+import { useHover } from "../Hooks/useHover";
+import { getUser } from "../axios/User";
+import { User } from "../models/IUser";
 
-function useHover() {
-    const [hovering, setHovering] = useState(false)
-    const onHoverProps = {
-        onMouseEnter: () => setHovering(true),
-        onMouseLeave: () => setHovering(false),
-    }
-    return [hovering, onHoverProps]
-}
-
-const baseUrl = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
 
 const StudentProfileSPOV = () => {
+
     const [buttonAIsHovering, buttonAHoverProps] = useHover()
     const [buttonBIsHovering, buttonBHoverProps] = useHover()
     const [buttonCIsHovering, buttonCHoverProps] = useHover()
@@ -30,21 +24,48 @@ const StudentProfileSPOV = () => {
     const [buttonGIsHovering, buttonGHoverProps] = useHover()
     const [buttonHIsHovering, buttonHHoverProps] = useHover()
 
-    let currentE = ""
-    let firstPreference = ""
-    let secondPreference = ""
-    let thirdPreference = ""
-    let campus = ""
-    let degree = ""
-    let language = ""
-    let previousE = ""
-    let upcomingAppointment = []
-    let pastAppointments = []
-    let aboutMe = ""
+    const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering]
+    const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps]
 
 
+    const [mentorData, setMentorData] = useState<User>()
+    const [chipData, setChipData] = useState({
+        "1st Preference Course": "",
+        "2nd Preference Course": "",
+        "3rd Preference Course": "",
+        "Current Institute": "",
+        "Campus Preference": "",
+        "Degree Preference": "",
+        "Language Preference": "",
+        "Previous Institute": "",
+    })
     const [pastOpenDialog, setPastOpenDialog] = useState(false);
     const [upcomingOpenDialog, setUpcomingOpenDialog] = useState(false);
+
+    useEffect(() => {
+        ( async () => {
+            const mentorD = await getUser()
+
+            if(!mentorD) {
+                // TODO: SHOW ERROR
+                return;
+            }
+            setMentorData(mentorD!)
+            const mentorMeta = mentorData?.[ "mentorMeta" ]
+            setChipData({
+                "1st Preference Course": "" || " ",
+                "2nd Preference Course": "" || " ",
+                "3rd Preference Course": "" || " ",
+                "Current Institute": "" || " ",
+                "Campus Preference": mentorData?.campusPreference! || " ",
+                "Degree Preference": mentorMeta?.degree! || " ",
+                "Language Preference": mentorMeta?.languages[ 0 ]! || " ",
+                "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || " "
+            })
+
+
+        } )()
+    }, [mentorData])
 
     const handleClickPastOpen = () => {
         setPastOpenDialog(true);
@@ -254,10 +275,7 @@ const StudentProfileSPOV = () => {
                                         top: 563.34,
                                     }}
                                 >
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea commodo consequat.
+                                    {mentorData?.about}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -506,54 +524,19 @@ const StudentProfileSPOV = () => {
                             Your interest / Academic qualifications
                         </Typography>
                         <Grid container columnGap={5}>
-                            <Chip
-                                {...buttonAHoverProps}
-                                label={buttonAIsHovering ? "" : "Current Education"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                {...buttonBHoverProps}
-                                label={buttonBIsHovering ? "" : "1st preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                {...buttonCHoverProps}
-                                label={buttonCIsHovering ? "" : "2nd preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                {...buttonDHoverProps}
-                                label={buttonDIsHovering ? "STEP" : "3rd preference course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                {...buttonEHoverProps}
-                                label={buttonEIsHovering ? "Canada" : "Campus Preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                {...buttonFHoverProps}
-                                label={buttonFIsHovering ? "" : "Degree preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                {...buttonGHoverProps}
-                                label={buttonGIsHovering ? "" : "Language preference"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                {...buttonHHoverProps}
-                                label={buttonHIsHovering ? "" : "Previous Education"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
+                            {Object.keys(chipData).map(( key, index ) => {
+
+                                const hoverProp = buttonHoverProps[ index ]
+                                const isHovering = buttonIsHovering[ index ]
+
+                                return <Chip
+                                    {...hoverProp}
+                                    // @ts-ignore
+                                    label={( !isHovering ? key : chipData[ key ].length > 0 ? ( chipData[ key ] as string ) : "NA" )}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />
+                            })}
                         </Grid>
                     </Box>
                 </Box>
