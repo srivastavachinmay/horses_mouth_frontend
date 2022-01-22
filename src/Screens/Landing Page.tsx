@@ -30,16 +30,18 @@ const LandingPage = () => {
                 });
             
             if (res?.data?.users?.length !== 0 && res!==undefined) {
-                // (res?.data?.users[0]?.type==="mentor")?
-                // navigate("/mentorProfile"):
-                // navigate("/studentProfile")
+                alert("Inside the function");
+                console.log(res?.data?.users[0]?.type);
+                (res?.data?.users[0]?.type==="user")?
+                navigate("/studentProfile"):
+                navigate("/mentorProfile")
                 
             } else {
                 alert("response not received");
             }
             setLoading(false);
         })();
-    }, [authenticate, data]);
+    }, [authenticate]);
     
     onAuthStateChanged(auth, ( user ) => {
         if(!user) {
