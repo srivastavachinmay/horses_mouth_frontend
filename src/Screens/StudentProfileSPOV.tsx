@@ -107,7 +107,7 @@ const StudentProfileSPOV = () => {
                 <Drawer variant="permanent" open={true} sx={{ bgcolor: "#7267CB" }}>
                     <Avatar sx={{ alignSelf: "center", margin: 2 }}/>
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
-                        John Doe
+                        {`${mentorData?.name}`}
                     </Typography>
                     <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{StudentSidebarList}</List>
                 </Drawer>

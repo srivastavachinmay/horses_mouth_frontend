@@ -1,19 +1,18 @@
+import React from 'react';
 import "@fontsource/poppins";
-import { createTheme, ThemeProvider }   from "@mui/material";
-import React                            from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import StudentProfileSPOV from "./Screens/StudentProfileSPOV";
+import MentorProfileMPOV from "./Screens/MentorProfileMPOV";
+import { createTheme, ThemeProvider } from "@mui/material";
 import './App.css';
-import Calender                         from "./Screens/Calender";
-import LandingPage                      from "./Screens/Landing Page";
-import LoginMentor                      from "./Screens/LoginMentor";
-import LoginUser                        from "./Screens/LoginUser";
-import MentorListing                    from "./Screens/MentorListing";
-import MentorProfileMPOV                from "./Screens/MentorProfileMPOV";
-import MentorProfileSPOV                from "./Screens/MentorProfileSPOV";
-import MentorReg                        from "./Screens/MentorReg";
-import StudentProfileMPOV               from "./Screens/StudentProfileMPOV";
-import StudentProfileSPOV               from "./Screens/StudentProfileSPOV";
-import Wallet                           from "./Screens/Wallet";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Calender from "./Screens/Calender";
+import Wallet from "./Screens/Wallet";
+import MentorProfileSPOV from "./Screens/MentorProfileSPOV";
+import StudentProfileMPOV from "./Screens/StudentProfileMPOV";
+import MentorListing from "./Screens/MentorListing";
+import MentorReg from "./Screens/MentorReg";
+import Register from "./Screens/Register";
+import LandingPage from "./Screens/Landing Page";
 
 
 const theme = createTheme({
@@ -37,8 +36,6 @@ const theme = createTheme({
 
 });
 
-const studentSignIn = false
-
 
 function App() {
     return (
@@ -47,7 +44,6 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<LandingPage/>}/>
-                        <Route path="register" element={<MentorReg/>}/>
                         <Route path="calender" element={<Calender/>}/>
                         <Route path="wallet" element={<Wallet/>}/>
                         <Route path="mentorProfile/:id" element={<MentorProfileSPOV/>}/>
@@ -55,8 +51,8 @@ function App() {
                         <Route path="mentorProfile" element={<MentorProfileMPOV/>}/>
                         <Route path="studentProfile/:id" element={<StudentProfileMPOV/>}/>
                         <Route path="mentors" element={<MentorListing/>}/>
-                        <Route path="user/login" element={<LoginUser/>}/>
-                        <Route path="mentor/login" element={<LoginMentor/>}/>
+                        {/*<Route path="login" element={<LoginUser/>}/>*/}
+                        <Route path="register" element={<Register/>}/>
                         <Route path="mentor/login/form" element={<MentorReg/>}/>
                     </Routes>
                 </BrowserRouter>

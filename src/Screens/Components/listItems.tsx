@@ -10,7 +10,7 @@ import { Link }                    from 'react-router-dom';
 export const MentorSidebarList = (
 
     <div>
-        <Link to={'/'} style={{ textDecoration: "none" }}>
+        <Link to={'/mentorProfile'} style={{ textDecoration: "none" }}>
             <ListItem button>
                 <ListItemIcon>
                     <DashboardIcon sx={{ color: "white" }}/>
@@ -40,7 +40,7 @@ export const MentorSidebarList = (
 
 export const StudentSidebarList = (
     <div>
-        <Link to={'/'} style={{ textDecoration: "none" }}>
+        <Link to={'/studentProfile'} style={{ textDecoration: "none" }}>
             <ListItem button>
                 <ListItemIcon>
                     <DashboardIcon sx={{ color: "white" }}/>
@@ -53,7 +53,7 @@ export const StudentSidebarList = (
                 <ListItemIcon>
                     <CalendarToday sx={{ color: "white" }}/>
                 </ListItemIcon>
-                <ListItemText primary="Book a IMentor" sx={{ color: "white" }}/>
+                <ListItemText primary="Book a Mentor" sx={{ color: "white" }}/>
             </ListItem>
         </Link>
         <ListItem button>
