@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
+import mentorimage from '../images/mentor.jpg'
 
 const useStyles = makeStyles(( theme ) => ( {
     box: {
@@ -52,6 +53,37 @@ const useStyles = makeStyles(( theme ) => ( {
         '&:hover': {
             backgroundColor: "#6E3CBC"
         },
+    },
+    interface:{
+        display:"flex",
+        width:"100vw",
+        height:"100vh",
+        justifyContent:"space-evenly",
+        alignItems:"center"
+    },
+    student:{
+        width:"30%",
+        height:"50%",
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"flex-end",
+        backgroundImage:`url(${mentorimage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        padding:"30px 30px",
+        border:"2px solid black"
+    },
+    mentors:{
+        width:"30%",
+        height:"100%",
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    maintitle:{
+        color:"#FFFFFF"
     }
 } ))
 

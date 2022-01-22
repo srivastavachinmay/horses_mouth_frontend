@@ -8,6 +8,8 @@ import { auth } from "../utils/firebase";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import styling from './MentorRegStyles'
+import mentorimage from '../images/mentor.jpg'
 
 const LoginUser = () => {
   const url =
@@ -53,7 +55,7 @@ const LoginUser = () => {
             {
                 "institute": "Nil",
                 // @ts-ignore
-                "name": `${data?.displayName}`,
+                "name": `${data?.user?.displayName}`,
                 "type": "user",
                 "interests": []
             },
@@ -105,8 +107,11 @@ const LoginUser = () => {
     }
   };
 
+  const classes = styling();
   return (
     <>
+    <div className={classes.interface}>
+      <div className={classes.student}>
       <Button
         variant="contained"
         color="primary"
@@ -116,6 +121,8 @@ const LoginUser = () => {
       >
         Sign Up as a student
       </Button>
+      </div>
+      <div className={classes.mentors}>
       <Button
         variant="contained"
         color="primary"
@@ -125,6 +132,8 @@ const LoginUser = () => {
       >
         Sign Up as a mentor
       </Button>
+      </div>
+    </div>
       {loading && <> Please wait</>}
       {(error)?alert("account already exists"):null}
     </>
