@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream
 import React,{useState, useEffect} from 'react';
 import SidebarFab from "./Components/SidebarFab";
-=======
-import React from 'react';
->>>>>>> Stashed changes
 import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
 import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -88,7 +84,6 @@ const LandingPage = () => {
         fontWeight: "bolder",
         borderRadius: 2
     }
-<<<<<<< Updated upstream
 
     const savetoken = async() =>{
         console.log("called function")
@@ -98,22 +93,6 @@ const LandingPage = () => {
         // localStorage.setItem("idtoken",idToken)
         console.log(idToken)
     }
-=======
-    //
-    // const savetoken = () =>{
-    //     console.log("called function")
-    //     getIdToken(true).then(function(idToken) {
-    //         console.log("Got token"+idToken)
-    //         localStorage.setItem("idtoken",idToken)
-    //       }).catch(function(error) {
-    //           console.log("Got error")
-    //         console.log(error)
-    //
-    //       });
-    // // }
-
-
->>>>>>> Stashed changes
 
       
     const ProfileCard = () => {
@@ -221,18 +200,12 @@ const LandingPage = () => {
                     right: 20,
                     position: 'absolute',
                 }}>
-<<<<<<< Updated upstream
                     <Button variant={'outlined'} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }} onClick={googleAuthentication}>
                         Login
                     </Button>
                     <Button variant={'contained'}
                             sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }} onClick={()=>{navigate("/register")}}>
                         Sign up
-=======
-                    <Button variant={'contained'}
-                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}>
-                        Login / Sign up
->>>>>>> Stashed changes
                     </Button>
                 </div>
             </div>

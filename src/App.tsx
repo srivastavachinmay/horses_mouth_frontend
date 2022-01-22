@@ -12,11 +12,7 @@ import StudentProfileMPOV from "./Screens/StudentProfileMPOV";
 import MentorListing from "./Screens/MentorListing";
 import MentorReg from "./Screens/MentorReg";
 import LoginUser from "./Screens/LoginUser";
-<<<<<<< Updated upstream
 import Register from "./Screens/Register";
-=======
-import LoginMentor from "./Screens/LoginMentor";
->>>>>>> Stashed changes
 import LandingPage from "./Screens/Landing Page";
 
 
@@ -51,10 +47,6 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<LandingPage/>}/>
-<<<<<<< Updated upstream
-=======
-                        <Route path="register" element={<MentorReg/>}/>
->>>>>>> Stashed changes
                         <Route path="calender" element={<Calender/>}/>
                         <Route path="wallet" element={<Wallet/>}/>
                         <Route path="mentorProfileS" element={<MentorProfileSPOV/>}/>
