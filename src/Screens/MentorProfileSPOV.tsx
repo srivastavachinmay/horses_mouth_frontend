@@ -1,4 +1,4 @@
-import { LinkedIn, Verified } from "@mui/icons-material";
+import { LinkedIn, Verified }         from "@mui/icons-material";
 import {
     Avatar,
     Button,
@@ -15,19 +15,98 @@ import {
     SelectChangeEvent,
     Stack,
     Typography,
-}                             from "@mui/material";
-import Box                    from "@mui/material/Box";
-import Container              from "@mui/material/Container";
-import CssBaseline            from "@mui/material/CssBaseline";
-import Grid                   from "@mui/material/Grid";
-import React                  from "react";
-import { Drawer }             from "./Components/Drawer";
-import { StudentSidebarList } from "./Components/listItems";
-
+}                                     from "@mui/material";
+import Box                            from "@mui/material/Box";
+import Container                      from "@mui/material/Container";
+import CssBaseline                    from "@mui/material/CssBaseline";
+import Grid                           from "@mui/material/Grid";
+import React, { useEffect, useState } from "react";
+import { getUser }                    from "../axios/User";
+import { useHover }                   from "../Hooks/useHover";
+import { Schedule, User }             from "../models/IUser";
+import { Drawer }                     from "./Components/Drawer";
+import { StudentSidebarList }         from "./Components/listItems";
 
 const MentorProfileSPOV = () => {
     const [checked, setChecked] = React.useState([0]);
     
+    const [buttonAIsHovering, buttonAHoverProps] = useHover();
+    const [buttonBIsHovering, buttonBHoverProps] = useHover();
+    const [buttonCIsHovering, buttonCHoverProps] = useHover();
+    const [buttonDIsHovering, buttonDHoverProps] = useHover();
+    const [buttonEIsHovering, buttonEHoverProps] = useHover();
+    const [buttonFIsHovering, buttonFHoverProps] = useHover();
+    const [buttonGIsHovering, buttonGHoverProps] = useHover();
+    const [buttonHIsHovering, buttonHHoverProps] = useHover();
+    const [buttonIIsHovering, buttonIHoverProps] = useHover();
+    const [buttonJIsHovering, buttonJHoverProps] = useHover();
+    const [buttonKIsHovering, buttonKHoverProps] = useHover();
+    const [buttonLIsHovering, buttonLHoverProps] = useHover();
+    const [buttonMIsHovering, buttonMHoverProps] = useHover();
+    const [buttonNIsHovering, buttonNHoverProps] = useHover();
+    const [buttonOIsHovering, buttonOHoverProps] = useHover();
+    
+    const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering, buttonIIsHovering, buttonJIsHovering, buttonKIsHovering, buttonLIsHovering, buttonMIsHovering, buttonNIsHovering, buttonOIsHovering];
+    const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps, buttonIHoverProps, buttonJHoverProps, buttonKHoverProps, buttonLHoverProps, buttonMHoverProps, buttonNHoverProps, buttonOHoverProps];
+    const [slots, setSlots] = useState<Schedule>();
+    const [mentorData, setMentorData] = useState<User>();
+    const [chipData, setChipData] = useState({
+                                                 "Country of study": "",
+                                                 "Area of study": "",
+                                                 "University Relation": "",
+                                                 "Previous Institution": "",
+                                                 "Year of Graduation": "",
+                                                 "Specialization": "",
+                                                 "On Campus Exp.": "",
+                                                 "On Campus Job": "",
+                                                 "Scholarship": "",
+                                                 "Place of Stay": "",
+                                                 "Languages": "",
+                                                 "Current GPA": "",
+                                                 "GMAT Score": "",
+                                                 "SAT Score": "",
+                                                 "Country": ""
+                                             });
+    const weekDays = ["sunday",
+                      "monday",
+                      "tuesday",
+                      "wednesday",
+                      "thursday",
+                      "friday",
+                      "saturday"];
+    // const chipDataValue = useState([])
+    
+    useEffect(() => {
+        ( async () => {
+            const mentorD = await getUser();
+            
+            if(!mentorD) {
+                // TODO: SHOW ERROR
+                return;
+            }
+            setMentorData(mentorD!);
+            const mentorMeta = mentorD[ "mentorMeta" ];
+            setSlots(mentorMeta.schedule);
+            setChipData({
+                            "Country of study": mentorMeta.countryOfStudy || "NA",
+                            "Area of study": mentorMeta.major || "NA",
+                            "University Relation": mentorMeta.status || "NA",
+                            "Previous Institution": mentorMeta.campusInfo.previousInstitute || "NA",
+                            "Year of Graduation": mentorMeta.campusInfo.yearOfGrad as unknown as string || "NA",
+                            "Specialization": mentorMeta.campusInfo.specialisation || "NA",
+                            "On Campus Exp.": mentorMeta.campusInfo.campusExperience || "NA",
+                            "On Campus Job": mentorMeta.campusInfo.campusJob || "NA",
+                            "Scholarship": mentorMeta.campusInfo.scholarship || "NA",
+                            "Place of Stay": mentorMeta.campusInfo.placeOfStay || "NA",
+                            "Languages": mentorMeta.languages.join(', ') || "NA",
+                            "Current GPA": mentorMeta.campusInfo.scores.gpa || "NA",
+                            "GMAT Score": mentorMeta.campusInfo.scores.gmat || "NA",
+                            "SAT Score": mentorMeta.campusInfo.scores.sat || "NA",
+                            "Country": mentorMeta.countryOfOrigin || "NA",
+                        });
+            
+        } )();
+    }, []);
     
     const handleToggle = ( value: number ) => () => {
         const currentIndex = checked.indexOf(value);
@@ -71,14 +150,16 @@ const MentorProfileSPOV = () => {
             
         },
     };
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline/>
             {/*"Drawer"*/}
             <Drawer variant="permanent" open={true} sx={{ bgcolor: "#7267CB" }}>
-                <Avatar sx={{ alignSelf: "center", margin: 2 }}/>
+                <Avatar sx={{ alignSelf: "center", margin: 2 }} src={mentorData?.profilePic}/>
                 <Typography textAlign={"center"} sx={{ color: "white" }}>
-                    John Doe
+                    {mentorData?.name}
                 </Typography>
                 <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{StudentSidebarList}</List>
             </Drawer>
@@ -93,8 +174,8 @@ const MentorProfileSPOV = () => {
                 }}
             >
                 <Box position={"static"} mt={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
-                    <Typography fontWeight={"bold"}>University of Waterloo</Typography>
-                    <Typography fontWeight={"bold"}>Bachelor’s, Mechanical engineering </Typography>
+                    <Typography fontWeight={"bold"}>{mentorData?.mentorMeta.campusInfo.uniName}</Typography>
+                    <Typography fontWeight={"bold"}>{mentorData?.mentorMeta.campusInfo.courseName} </Typography>
                 </Box>
                 <Container
                     maxWidth="xl"
@@ -150,7 +231,7 @@ const MentorProfileSPOV = () => {
                                     fontSize={40}
                                     color={"#6E3CBC"}
                                 >
-                                    John Doe
+                                    {mentorData?.name}
                                 </Typography>
                                 <Verified
                                     sx={{
@@ -229,10 +310,7 @@ const MentorProfileSPOV = () => {
                                     top: 563.34,
                                 }}
                             >
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat.
+                                {mentorData?.about}
                             </Typography>
                         </Grid>
                     </Grid>
@@ -245,7 +323,7 @@ const MentorProfileSPOV = () => {
                                 labelId="demo-simple-select-filled-label"
                                 id="demo-simple-select-filled"
                                 value={day}
-                                defaultValue={"Day"}
+                                defaultValue={weekDays[ new Date(Date.now()).getUTCDay() ]}
                                 inputProps={{
                                     underline: {
                                         "&&&:before": {
@@ -266,13 +344,13 @@ const MentorProfileSPOV = () => {
                                 }}
                                 onChange={handleChange}
                             >
-                                <MenuItem sx={selectCSS} value={"Sunday"}>Sunday</MenuItem>
-                                <MenuItem sx={selectCSS} value={"Monday"}>Monday</MenuItem>
-                                <MenuItem sx={selectCSS} value={"Tuesday"}>Tuesday</MenuItem>
-                                <MenuItem sx={selectCSS} value={"Wednesday"}>Wednesday</MenuItem>
-                                <MenuItem sx={selectCSS} value={"Thursday"}>Thursday</MenuItem>
-                                <MenuItem sx={selectCSS} value={"Friday"}>Friday</MenuItem>
-                                <MenuItem sx={selectCSS} value={"Saturday"}>Saturday</MenuItem>
+                                <MenuItem sx={selectCSS} value={"sunday"}>Sunday</MenuItem>
+                                <MenuItem sx={selectCSS} value={"monday"}>Monday</MenuItem>
+                                <MenuItem sx={selectCSS} value={"tuesday"}>Tuesday</MenuItem>
+                                <MenuItem sx={selectCSS} value={"wednesday"}>Wednesday</MenuItem>
+                                <MenuItem sx={selectCSS} value={"thursday"}>Thursday</MenuItem>
+                                <MenuItem sx={selectCSS} value={"friday"}>Friday</MenuItem>
+                                <MenuItem sx={selectCSS} value={"saturday"}>Saturday</MenuItem>
                             
                             </Select>
                         </FormControl>
@@ -299,56 +377,61 @@ const MentorProfileSPOV = () => {
                                 overflowY: "scroll",
                                 scrollbarColor: "#6E3CBC"
                             }}>
-                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(( index ) => (
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Checkbox
-                                                edge="start"
-                                                onClick={handleToggle(index)}
-                                                disableRipple
-                                                color={"primary"}
-                                                checked={checked.indexOf(index) !== -1}
-                                                tabIndex={-1}
-                                                sx={{
-                                                    color: '#6E3CBC80'
-                                                }}
-                                            />
-                                        </ListItemIcon>
-                                        <Card sx={{ borderRadius: 5, m: 0.5, width: "100%" }}>
-                                            <CardHeader
-                                                avatar={<Avatar>{index}</Avatar>}
-                                                title={"Date"}
-                                                titleTypographyProps={{
-                                                    fontSize: 12,
-                                                    fontWeight: "bold",
-                                                    color: "#6E3CBC"
-                                                }}
-                                                subheaderTypographyProps={{
-                                                    color: "#6E3CBC",
-                                                    fontWeight: 700,
-                                                    fontSize: 12,
-                                                }}
-                                                subheader={"Time to time"}
-                                            />
-                                        </Card>
-                                        <Button variant={"contained"}
-                                                sx={{
-                                                    color: "white",
-                                                    height: 67,
-                                                    width: 84,
-                                                    borderRadius: 5,
-                                                    fontSize: 14,
-                                                    bgcolor: "#6E3CBC",
-                                                    transition: "ease-in",
-                                                    ":hover": {
-                                                        bgcolor: "white",
-                                                        color: "#6E3CBC"
-                                                    }
-                                                }}>
-                                            Book
-                                        </Button>
-                                    </ListItem>
-                                ))}
+                                
+                                {// @ts-ignore
+                                    slots?.days[ day ]
+                                        .map(( d: {
+                                            start: string
+                                            end: string
+                                            lastBookedFor: number
+                                        }, index: number ) => (
+                                            <ListItem disabled={d.lastBookedFor - Date.now() >= 1800000}>
+                                                <ListItemIcon>
+                                                    <Checkbox
+                                                        edge="start"
+                                                        onClick={handleToggle(index)}
+                                                        disableRipple
+                                                        color={"primary"}
+                                                        checked={checked.indexOf(index) !== -1}
+                                                        tabIndex={-1}
+                                                        sx={{ color: '#6E3CBC80' }}
+                                                    />
+                                                </ListItemIcon>
+                                                <Card sx={{ borderRadius: 5, m: 0.5, width: "100%" }}>
+                                                    <CardHeader
+                                                        avatar={<Avatar>{index}</Avatar>}
+                                                        title={"Date"}
+                                                        titleTypographyProps={{
+                                                            fontSize: 12,
+                                                            fontWeight: "bold",
+                                                            color: "#6E3CBC"
+                                                        }}
+                                                        subheaderTypographyProps={{
+                                                            color: "#6E3CBC",
+                                                            fontWeight: 700,
+                                                            fontSize: 12,
+                                                        }}
+                                                        subheader={`${d.start} to ${d.end}`}
+                                                    />
+                                                </Card>
+                                                <Button variant={"contained"}
+                                                        sx={{
+                                                            color: "white",
+                                                            height: 67,
+                                                            width: 84,
+                                                            borderRadius: 5,
+                                                            fontSize: 14,
+                                                            bgcolor: "#6E3CBC",
+                                                            transition: "ease-in",
+                                                            ":hover": {
+                                                                bgcolor: "white",
+                                                                color: "#6E3CBC"
+                                                            }
+                                                        }}>
+                                                    Book
+                                                </Button>
+                                            </ListItem>
+                                        ))}
                             </List>
                         
                         </Box>
@@ -369,79 +452,23 @@ const MentorProfileSPOV = () => {
                         }}
                     >
                         <Typography color={"#6E3CBC"} fontSize={15} fontWeight={700}>
-                            John Doe’s interest / Academic qualifications
+                            {`${mentorData?.name} interest / Academic qualifications`}
                         </Typography>
                         <Grid container maxWidth="xl" columnSpacing={4} columns={{ xs: 1, sm: 3, md: 4, xl: 5 }}>
-                            <Chip
-                                label={"Country of  study"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Area of study"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"University Relation"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Previous Institution"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Previous Course"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Specialisation"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Country of Origin"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"On campus job"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Scholarship"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Place of Stay"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Languages"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Current GPA"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Gmat score "}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
-                            <Chip
-                                label={"Year of Graduation"}
-                                variant={"filled"}
-                                sx={chipCSS}
-                            />
+                            {Object.keys(chipData).map(( key, index ) => {
+                                
+                                const hoverProp = buttonHoverProps[ index ];
+                                const isHovering = buttonIsHovering[ index ];
+                                
+                                return <Chip
+                                    {...hoverProp}
+                                    label={!isHovering ?
+                                        // @ts-ignore
+                                           key : chipData[ key ] as string}
+                                    variant={"filled"}
+                                    sx={chipCSS}
+                                />;
+                            })}
                         
                         
                         </Grid>

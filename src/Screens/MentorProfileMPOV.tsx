@@ -35,16 +35,12 @@ const MentorProfileMPOV = () => {
     const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering, buttonIIsHovering, buttonJIsHovering, buttonKIsHovering, buttonLIsHovering, buttonMIsHovering, buttonNIsHovering, buttonOIsHovering];
     const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps, buttonIHoverProps, buttonJHoverProps, buttonKHoverProps, buttonLHoverProps, buttonMHoverProps, buttonNHoverProps, buttonOHoverProps];
     
-    let upcomingSessions = [];
-    let prevSessions = [];
-    let aboutMe = "hello";
-    
     const [mentorData, setMentorData] = useState<User>();
     const [chipData, setChipData] = useState({
                                                  "Country of study": "",
                                                  "Area of study": "",
                                                  // "University Relation": "",
-                                                 "Previous Education": "",
+                                                 "Previous Institution": "",
                                                  "Year of Graduation": "",
                                                  "Specialization": "",
                                                  "On Campus Exp.": "",
@@ -73,7 +69,7 @@ const MentorProfileMPOV = () => {
                             "Country of study": mentorMeta.countryOfStudy || "NA",
                             "Area of study": mentorMeta.major || "NA",
                             // "University Relation": mentorMeta.campusInfoNA.,
-                            "Previous Education": mentorMeta.campusInfo.previousInstitute || "NA",
+                            "Previous Institution": mentorMeta.campusInfo.previousInstitute || "NA",
                             "Year of Graduation": mentorMeta.campusInfo.yearOfGrad as unknown as string || "NA",
                             "Specialization": mentorMeta.campusInfo.specialisation || "NA",
                             "On Campus Exp.": mentorMeta.campusInfo.campusExperience || "NA",
@@ -87,10 +83,8 @@ const MentorProfileMPOV = () => {
                             "Country": mentorMeta.countryOfOrigin || "NA",
                         });
             
-            
         } )();
     }, []);
-    
     
     const handleClickPastOpen = () => {
         setPastOpenDialog(true);
@@ -106,7 +100,6 @@ const MentorProfileMPOV = () => {
     const handleUpcomingClose = () => {
         setUpcomingOpenDialog(false);
     };
-    
     
     const chipCSS = {
         bgcolor: "white",
@@ -131,9 +124,9 @@ const MentorProfileMPOV = () => {
                 <CssBaseline/>
                 {/*"Drawer"*/}
                 <Drawer variant="permanent" open={true} sx={{ bgcolor: "#7267CB" }}>
-                    <Avatar sx={{ alignSelf: "center", margin: 2 }}/>
+                    <Avatar sx={{ alignSelf: "center", margin: 2 }} src={mentorData.profilePic}/>
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
-                        John Doe
+                        {mentorData.name}
                     </Typography>
                     <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{MentorSidebarList}</List>
                 </Drawer>
@@ -149,8 +142,8 @@ const MentorProfileMPOV = () => {
                     }}>
                     
                     <Box position={"static"} mt={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
-                        <Typography fontWeight={"bold"}>University of Waterloo</Typography>
-                        <Typography fontWeight={"bold"}>Bachelor’s, Mechanical engineering </Typography>
+                        <Typography fontWeight={"bold"}>{mentorData?.mentorMeta.campusInfo.uniName}</Typography>
+                        <Typography fontWeight={"bold"}>{mentorData?.mentorMeta.campusInfo.courseName}</Typography>
                     </Box>
                     <Container
                         maxWidth="xl"
@@ -509,7 +502,6 @@ const MentorProfileMPOV = () => {
                                     
                                     const hoverProp = buttonHoverProps[ index ];
                                     const isHovering = buttonIsHovering[ index ];
-                                    
                                     
                                     return <Chip
                                         {...hoverProp}

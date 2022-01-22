@@ -13,57 +13,54 @@ import { User }                       from "../models/IUser";
 import { Drawer }                     from "./Components/Drawer";
 import { MentorSidebarList }          from "./Components/listItems";
 
-
 const StudentProfileMPOV = () => {
-
-    const [buttonAIsHovering, buttonAHoverProps] = useHover()
-    const [buttonBIsHovering, buttonBHoverProps] = useHover()
-    const [buttonCIsHovering, buttonCHoverProps] = useHover()
-    const [buttonDIsHovering, buttonDHoverProps] = useHover()
-    const [buttonEIsHovering, buttonEHoverProps] = useHover()
-    const [buttonFIsHovering, buttonFHoverProps] = useHover()
-    const [buttonGIsHovering, buttonGHoverProps] = useHover()
-    const [buttonHIsHovering, buttonHHoverProps] = useHover()
-
-    const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering]
-    const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps]
-
-
-    const [mentorData, setMentorData] = useState<User>()
+    
+    const [buttonAIsHovering, buttonAHoverProps] = useHover();
+    const [buttonBIsHovering, buttonBHoverProps] = useHover();
+    const [buttonCIsHovering, buttonCHoverProps] = useHover();
+    const [buttonDIsHovering, buttonDHoverProps] = useHover();
+    const [buttonEIsHovering, buttonEHoverProps] = useHover();
+    const [buttonFIsHovering, buttonFHoverProps] = useHover();
+    const [buttonGIsHovering, buttonGHoverProps] = useHover();
+    const [buttonHIsHovering, buttonHHoverProps] = useHover();
+    
+    const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering];
+    const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps];
+    
+    const [mentorData, setMentorData] = useState<User>();
     const [chipData, setChipData] = useState({
-        "1st Preference Course": "",
-        "2nd Preference Course": "",
-        "3rd Preference Course": "",
-        "Current Institute": "",
-        "Campus Preference": "",
-        "Language Preference": "",
-        "Previous Institute": "",
-    })
-
+                                                 "1st Preference Course": "",
+                                                 "2nd Preference Course": "",
+                                                 "3rd Preference Course": "",
+                                                 "Current Institute": "",
+                                                 "Campus Preference": "",
+                                                 "Language Preference": "",
+                                                 "Previous Institute": "",
+                                             });
+    
     useEffect(() => {
         ( async () => {
-            const mentorD = await getUser()
-
+            const mentorD = await getUser();
+            
             if(!mentorD) {
                 // TODO: SHOW ERROR
                 return;
             }
-            setMentorData(mentorD!)
-            const mentorMeta = mentorData?.[ "mentorMeta" ]
+            setMentorData(mentorD!);
+            const mentorMeta = mentorData?.[ "mentorMeta" ];
             setChipData({
-                "1st Preference Course": "" || " ",
-                "2nd Preference Course": "" || " ",
-                "3rd Preference Course": "" || " ",
-                "Current Institute": "" || " ",
-                "Campus Preference": mentorData?.campusPreference! || " ",
-                "Language Preference": mentorMeta?.languages[ 0 ]! || " ",
-                "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || " "
-            })
-
-
-        } )()
-    }, [mentorData])
-
+                            "1st Preference Course": "" || "NA",
+                            "2nd Preference Course": "" || "NA",
+                            "3rd Preference Course": "" || "NA",
+                            "Current Institute": mentorData?.institute || "NA",
+                            "Campus Preference": mentorData?.campusPreference! || "NA",
+                            "Language Preference": mentorMeta?.languages[ 0 ]! || "NA",
+                            "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || "NA",
+                        });
+            
+        } )();
+    }, [mentorData]);
+    
     const chipCSS = {
         bgcolor: "white",
         width: 340,
@@ -85,13 +82,13 @@ const StudentProfileMPOV = () => {
                 <CssBaseline/>
                 {/*"Drawer"*/}
                 <Drawer variant="permanent" open={true} sx={{ bgcolor: "#7267CB" }}>
-                    <Avatar sx={{ alignSelf: "center", margin: 2 }}/>
+                    <Avatar sx={{ alignSelf: "center", margin: 2 }} src={mentorData?.profilePic} />
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
-                        John Doe
+                        {mentorData?.name}
                     </Typography>
                     <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{MentorSidebarList}</List>
                 </Drawer>
-
+                
                 <Box
                     component="main"
                     sx={{
@@ -160,7 +157,7 @@ const StudentProfileMPOV = () => {
                                             color: "#0FA958",
                                         }}
                                     />
-
+                                    
                                     <Typography
                                         fontWeight={"bold"}
                                         fontSize={25}
@@ -197,7 +194,7 @@ const StudentProfileMPOV = () => {
                                     </Box>
                                 </Box>
                             </Box>
-
+                            
                             <Grid
                                 item
                                 sx={{
@@ -229,10 +226,7 @@ const StudentProfileMPOV = () => {
                                         // top: 563.34,
                                     }}
                                 >
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea commodo consequat.
+                                    {mentorData?.about || "NA"}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -262,17 +256,20 @@ const StudentProfileMPOV = () => {
                             </Typography>
                             <Stack>
                                 {Object.keys(chipData).map(( key, index ) => {
-
-                                    const hoverProp = buttonHoverProps[ index ]
-                                    const isHovering = buttonIsHovering[ index ]
-
+                                    
+                                    const hoverProp = buttonHoverProps[ index ];
+                                    const isHovering = buttonIsHovering[ index ];
+                                    
                                     return <Chip
                                         {...hoverProp}
-                                        // @ts-ignore
-                                        label={( !isHovering ? key : chipData[ key ].length > 0 ? ( chipData[ key ] as string ) : "NA" )}
+                                        
+                                        label={!isHovering ?
+                                               key :
+                                            // @ts-ignore
+                                               chipData[ key ]}
                                         variant={"filled"}
                                         sx={chipCSS}
-                                    />
+                                    />;
                                 })}
                             </Stack>
                         </Box>
