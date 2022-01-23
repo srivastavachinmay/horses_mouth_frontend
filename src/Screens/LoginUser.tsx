@@ -35,9 +35,7 @@ const LoginUser = () => {
         console.log(res);
 
         if (res?.data?.users?.length !== 0) {
-          (res?.data?.user[0]?.type==="user")?
-          navigate("/studentProfileS"):
-          navigate("/mentorProfileM")
+          navigate("/");
         } else {
           alert("response not received");
         }

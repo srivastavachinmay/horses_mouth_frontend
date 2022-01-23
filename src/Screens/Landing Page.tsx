@@ -30,14 +30,11 @@ const LandingPage = () => {
         });
 
       console.log(res);
-    //   console.log(res?.data?.users?.length);
 
-      if (res?.data?.users?.length !== 0 && res!==undefined) {
-        (res?.data?.users[0]?.type==="user")?
-        navigate("/mentorProfileM"):
-        navigate("/studentProfileS")
+      if (res?.data?.users?.length !== 0) {
+        navigate("/");
       } else {
-        // alert("response not received");
+        alert("response not received");
       }
       setLoading(false);
     })();
@@ -88,6 +85,15 @@ const LandingPage = () => {
         borderRadius: 2
     }
 
+    const savetoken = async() =>{
+        console.log("called function")
+        //@ts-ignore
+        let idToken=""
+        // let idToken= await auth.currentUser.getIdToken(true);
+        // localStorage.setItem("idtoken",idToken)
+        console.log(idToken)
+    }
+
       
     const ProfileCard = () => {
         return (
@@ -122,6 +128,7 @@ const LandingPage = () => {
         )
     }
 
+    savetoken()
     const CustomCard = () => {
         return <div>
 
