@@ -158,7 +158,10 @@ const LoginUser = () => {
     </div>
       {loading && <> Please wait</>}
       {(error)?alert("account already exists"):null}
-    </div>:
+    </div>
+    
+    :
+
     <div style={{ overflowY: "auto" }} className={classes.box}>
     <Typography variant="h4" style={{ color: "#6E3CBC", fontWeight: "700", margin: "10px 0px" }}
     >Mentor sign up</Typography>
