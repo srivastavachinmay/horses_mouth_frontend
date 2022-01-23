@@ -37,7 +37,7 @@ const LandingPage = () => {
         navigate("/mentorProfileM"):
         navigate("/studentProfileS")
       } else {
-        alert("response not received");
+        // alert("response not received");
       }
       setLoading(false);
     })();

@@ -57,33 +57,55 @@ const useStyles = makeStyles(( theme ) => ( {
     interface:{
         display:"flex",
         width:"100vw",
-        height:"100vh",
+        height:"60vh",
         justifyContent:"space-evenly",
         alignItems:"center"
     },
     student:{
-        width:"30%",
-        height:"50%",
+        width:"25%",
+        height:"80%",
+        display:"flex",
+        flexDirection:"column",
+        boxShadow: "0px 0px 14px 0px #000000",
+        alignItems:"center",
+        justifyContent:"flex-end",
+        padding:"30px 30px",
+        // border:"2px solid black",
+        borderRadius:"18px",
+        backgroundColor:"#f1f1f1",
+        cursor: "pointer",
+        '&:hover':{
+            transform:"scale(1.1)",
+            transition:"transform 2s",
+            transitionTimingFunction: "ease-in-out"
+        }
+    },
+    mentors:{
+        width:"25%",
+        height:"80%",
         display:"flex",
         flexDirection:"column",
         alignItems:"center",
         justifyContent:"flex-end",
-        backgroundImage:`url(${mentorimage})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
+        boxShadow: "0px 0px 14px 0px #000000",
         padding:"30px 30px",
-        border:"2px solid black"
-    },
-    mentors:{
-        width:"30%",
-        height:"100%",
-        display:"flex",
-        flexDirection:"column",
-        alignItems:"center",
-        justifyContent:"center"
+        // border:"2px solid black",
+        borderRadius:"18px",
+        backgroundColor:"#f1f1f1",
+        cursor: "pointer",
+        '&:hover':{
+            transform:"scale(1.1)",
+            transition:"transform 2s",
+            transitionTimingFunction: "ease-in-out"
+        }
     },
     maintitle:{
-        color:"#FFFFFF"
+        color:"#FFFFFF",
+        fontSize:"45px",
+        width:"100vw",
+        height:"25vh",
+        padding:"3rem 0rem",
+        textAlign:"center",
     }
 } ))
 
