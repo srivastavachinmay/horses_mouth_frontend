@@ -49,17 +49,17 @@ const StudentProfileMPOV = () => {
             setMentorData(mentorD!);
             const mentorMeta = mentorData?.[ "mentorMeta" ];
             setChipData({
-                            "1st Preference Course": "" || "NA",
-                            "2nd Preference Course": "" || "NA",
-                            "3rd Preference Course": "" || "NA",
-                            "Current Institute": mentorData?.institute || "NA",
-                            "Campus Preference": mentorData?.campusPreference! || "NA",
-                            "Language Preference": mentorMeta?.languages[ 0 ]! || "NA",
-                            "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || "NA",
+                            "1st Preference Course": mentorData?.interests[ 0 ] || "N/A",
+                            "2nd Preference Course": mentorData?.interests[ 1 ] || "N/A",
+                            "3rd Preference Course": mentorData?.interests[ 2 ] || "N/A",
+                            "Current Institute": mentorData?.institute || "N/A",
+                            "Campus Preference": mentorData?.campusPreference! || "N/A",
+                            "Language Preference": mentorMeta?.languages.join(', ')! || "N/A",
+                            "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || "N/A",
                         });
             
         } )();
-    }, [mentorData]);
+    }, []);
     
     const chipCSS = {
         bgcolor: "white",
@@ -82,7 +82,7 @@ const StudentProfileMPOV = () => {
                 <CssBaseline/>
                 {/*"Drawer"*/}
                 <Drawer variant="permanent" open={true} sx={{ bgcolor: "#7267CB" }}>
-                    <Avatar sx={{ alignSelf: "center", margin: 2 }} src={mentorData?.profilePic} />
+                    <Avatar sx={{ alignSelf: "center", margin: 2 }} src={mentorData?.profilePic}/>
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
                         {mentorData?.name}
                     </Typography>

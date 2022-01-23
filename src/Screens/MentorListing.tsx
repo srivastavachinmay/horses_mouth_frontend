@@ -7,12 +7,17 @@ import Grid                                                                     
 import List                                                                            from '@mui/material/List';
 import Paper                                                                           from '@mui/material/Paper';
 import Typography                                                                      from '@mui/material/Typography';
-import * as React                                                                      from 'react';
+import * as React                                                                      from "react";
+import { useEffect }                                                                   from "react";
 import { Drawer }                                                                      from "./Components/Drawer";
 import { StudentSidebarList }                                                          from './Components/listItems';
 
-
 export default function MentorListing() {
+    
+    useEffect(() => {
+    
+    }, []);
+    
     const chipCSS = {
         bgcolor: '#D4CFFF',
         margin: 0.5,
@@ -22,8 +27,8 @@ export default function MentorListing() {
         color: '#6E3CBC',
         fontWeight: "bolder",
         borderRadius: 2
-    }
-
+    };
+    
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline/>
@@ -35,8 +40,8 @@ export default function MentorListing() {
                 </Typography>
                 <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{StudentSidebarList}</List>
             </Drawer>
-
-
+            
+            
             <Box
                 component="main"
                 sx={{
@@ -61,14 +66,14 @@ export default function MentorListing() {
                                        color: "white",
                                        backgroundColor: "white",
                                        borderRadius: 2,
-
+                            
                                        height: 40
                                    }}
-
+                        
                         />
                     </Paper>
                     {/*</Grid>*/}
-
+                    
                     <Grid container spacing={2} margin={2}>
                         <Grid item>
                             <FormControlLabel
@@ -94,7 +99,7 @@ export default function MentorListing() {
                                 }}/>}
                             />
                         </Grid>
-
+                        
                         <Grid item>
                             <FormControlLabel
                                 label={<Typography fontWeight={"bold"}>master's</Typography>}
@@ -106,7 +111,7 @@ export default function MentorListing() {
                                     },
                                 }}/>}
                             />
-
+                        
                         </Grid>
                         <Grid item>
                             <FormControlLabel
@@ -119,12 +124,12 @@ export default function MentorListing() {
                                     },
                                 }}/>}
                             />
-
+                        
                         </Grid>
-
-
+                    
+                    
                     </Grid>
-
+                
                 </Grid>
                 <Container maxWidth="xl" sx={{
                     mt: 1,
@@ -136,12 +141,12 @@ export default function MentorListing() {
                 }}>
                     <Grid container spacing={3}>
                         {/* Chart */}
-
-
+                        
+                        
                         <Grid item xs={12} md={6} lg={4} display={"flex"} alignItems={"center"}
                               flexDirection={"row"}>
                             <Avatar sx={{ width: 75, height: 75, zIndex: 2 }}/>
-
+                            
                             <Paper
                                 sx={{
                                     zIndex: 1,
@@ -176,7 +181,7 @@ export default function MentorListing() {
                                     fontWeight: "bolder",
                                     borderRadius: 2,
                                     width: '100%'
-
+                                    
                                 }} label={'University of waterloo'}/>
                                 <Chip sx={chipCSS} label={'bachelor’s'}/>
                                 <Chip sx={chipCSS} label={'Mech. engg.'}/>
@@ -193,7 +198,7 @@ export default function MentorListing() {
                                 <Chip sx={chipCSS} label={'student'}/>
                             </Paper>
                         </Grid>
-
+                    
                     </Grid>
                 </Container>
             </Box>
