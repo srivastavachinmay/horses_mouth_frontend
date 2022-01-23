@@ -39,7 +39,7 @@ const MentorProfileMPOV = () => {
     const [chipData, setChipData] = useState({
                                                  "Country of study": "",
                                                  "Area of study": "",
-                                                 // "University Relation": "",
+                                                 "University Relation": "",
                                                  "Previous Institution": "",
                                                  "Year of Graduation": "",
                                                  "Specialization": "",
@@ -66,21 +66,21 @@ const MentorProfileMPOV = () => {
             setMentorData(mentorD!);
             const mentorMeta = mentorD[ "mentorMeta" ];
             setChipData({
-                            "Country of study": mentorMeta.countryOfStudy || "NA",
-                            "Area of study": mentorMeta.major || "NA",
-                            // "University Relation": mentorMeta.campusInfoNA.,
-                            "Previous Institution": mentorMeta.campusInfo.previousInstitute || "NA",
-                            "Year of Graduation": mentorMeta.campusInfo.yearOfGrad as unknown as string || "NA",
-                            "Specialization": mentorMeta.campusInfo.specialisation || "NA",
-                            "On Campus Exp.": mentorMeta.campusInfo.campusExperience || "NA",
-                            "On Campus Job": mentorMeta.campusInfo.campusJob || "NA",
-                            "Scholarship": mentorMeta.campusInfo.scholarship || "NA",
-                            "Place of Stay": mentorMeta.campusInfo.placeOfStay || "NA",
-                            "Languages": mentorMeta.languages[ 0 ] || "NA",
-                            "Current GPA": mentorMeta.campusInfo.scores.gpa || "NA",
-                            "GMAT Score": mentorMeta.campusInfo.scores.gmat || "NA",
-                            "SAT Score": mentorMeta.campusInfo.scores.sat || "NA",
-                            "Country": mentorMeta.countryOfOrigin || "NA",
+                            "Country of study": mentorMeta.countryOfStudy || "N/A",
+                            "Area of study": mentorMeta.major || "N/A",
+                            "University Relation": mentorMeta.status || "N/A",
+                            "Previous Institution": mentorMeta.campusInfo.previousInstitute || "N/A",
+                            "Year of Graduation": mentorMeta.campusInfo.yearOfGrad as unknown as string || "N/A",
+                            "Specialization": mentorMeta.campusInfo.specialisation || "N/A",
+                            "On Campus Exp.": mentorMeta.campusInfo.campusExperience || "N/A",
+                            "On Campus Job": mentorMeta.campusInfo.campusJob || "N/A",
+                            "Scholarship": mentorMeta.campusInfo.scholarship || "N/A",
+                            "Place of Stay": mentorMeta.campusInfo.placeOfStay || "N/A",
+                            "Languages": mentorMeta.languages.join(', ') || "N/A",
+                            "Current GPA": mentorMeta.campusInfo.scores.gpa || "N/A",
+                            "GMAT Score": mentorMeta.campusInfo.scores.gmat || "N/A",
+                            "SAT Score": mentorMeta.campusInfo.scores.sat || "N/A",
+                            "Country": mentorMeta.countryOfOrigin || "N/A",
                         });
             
         } )();

@@ -7,11 +7,17 @@ import Grid                                                                     
 import List                                                                            from '@mui/material/List';
 import Paper                                                                           from '@mui/material/Paper';
 import Typography                                                                      from '@mui/material/Typography';
-import * as React                                                                      from 'react';
+import * as React                                                                      from "react";
+import { useEffect }                                                                   from "react";
 import { Drawer }                                                                      from "./Components/Drawer";
 import { StudentSidebarList }                                                          from './Components/listItems';
 
 export default function MentorListing() {
+    
+    useEffect(() => {
+    
+    }, []);
+    
     const chipCSS = {
         bgcolor: '#D4CFFF',
         margin: 0.5,

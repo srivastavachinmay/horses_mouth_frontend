@@ -8,7 +8,6 @@ import LandingPage                      from "./Screens/Landing Page";
 import MentorListing                    from "./Screens/MentorListing";
 import MentorProfileMPOV                from "./Screens/MentorProfileMPOV";
 import MentorProfileSPOV                from "./Screens/MentorProfileSPOV";
-import MentorReg                        from "./Screens/MentorReg";
 import Register                         from "./Screens/Register";
 import StudentProfileMPOV               from "./Screens/StudentProfileMPOV";
 import StudentProfileSPOV               from "./Screens/StudentProfileSPOV";
@@ -51,7 +50,6 @@ function App() {
                         <Route path="studentProfile/:id" element={<StudentProfileMPOV/>}/>
                         <Route path="mentors" element={<MentorListing/>}/>
                         <Route path="register" element={<Register/>}/>
-                        <Route path="mentor/login/form" element={<MentorReg/>}/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>

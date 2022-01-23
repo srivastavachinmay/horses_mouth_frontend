@@ -67,7 +67,7 @@ const StudentProfileSPOV = () => {
                             "Current Institute": mentorData?.institute || " ",
                             "Campus Preference": mentorData?.campusPreference! || " ",
                             "Degree Preference": mentorMeta?.degree! || " ",
-                            "Language Preference": mentorMeta?.languages[ 0 ]! || " ",
+                            "Language Preference": mentorMeta?.languages.join(', ')! || " ",
                             "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || " "
                         });
             
