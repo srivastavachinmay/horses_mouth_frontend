@@ -1,11 +1,10 @@
-import React,{useState, useEffect} from 'react';
-import SidebarFab from "./Components/SidebarFab";
-import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
-import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged,GoogleAuthProvider,signInWithPopup,UserCredential, } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import axios from "axios";
+import { Instagram, LinkedIn, Twitter }                                             from "@mui/icons-material";
+import { Avatar, Box, Button, Card, CardHeader, Chip, Typography }                  from "@mui/material";
+import axios                                                                        from "axios";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, UserCredential, } from "firebase/auth";
+import React, { useEffect, useState }                                               from 'react';
+import { useNavigate }                                                              from "react-router-dom";
+import { auth }                                                                     from "../utils/firebase";
 
 const LandingPage = () => {
     const url =
@@ -15,32 +14,32 @@ const LandingPage = () => {
     const [data, setData] = useState<UserCredential>();
     const navigate = useNavigate();
     useEffect(() => {
-        (async () => {
+        ( async () => {
             const token = await data?.user?.getIdToken(true);
-            let idtoken:string = token!;
-            localStorage.setItem("idtoken",idtoken)
+            let idtoken: string = token!;
+            localStorage.setItem("idtoken", idtoken);
             
             const res = await axios
                 .get(`${url}/user`, {
                     headers: { Authorization: `Bearer ${idtoken}` },
                 })
-                .catch((err: any) => {
+                .catch(( err: any ) => {
                     console.log(err);
                     setLoading(false);
                 });
             
-            if (res?.data?.users?.length !== 0 && res!==undefined) {
+            if(res?.data?.users?.length !== 0 && res !== undefined) {
                 alert("Inside the function");
-                console.log(res?.data?.users[0]?.type);
-                (res?.data?.users[0]?.type==="user")?
-                navigate("/studentProfile"):
-                navigate("/mentorProfile")
+                console.log(res?.data?.users[ 0 ]?.type);
+                ( res?.data?.users[ 0 ]?.type === "user" ) ?
+                navigate("/studentProfile") :
+                navigate("/mentorProfile");
                 
             } else {
                 alert("response not received");
             }
             setLoading(false);
-        })();
+        } )();
     }, [authenticate]);
     
     onAuthStateChanged(auth, ( user ) => {
@@ -49,30 +48,30 @@ const LandingPage = () => {
             return null;
         } else {
             // localStorage.setItem("token", user.accessToken);
-            user.getIdToken(true).then(function(idToken) {
-                console.log("Got token"+idToken)
-                localStorage.setItem("idtoken",idToken)
-            }).catch(function(error) {
-                console.log("Got error")
-                console.log(error)
+            user.getIdToken(true).then(function( idToken ) {
+                console.log("Got token" + idToken);
+                localStorage.setItem("idtoken", idToken);
+            }).catch(function( error ) {
+                console.log("Got error");
+                console.log(error);
                 
             });
             console.log(user);
         }
-    })
+    });
     const googleAuthentication = async () => {
         let googleProvider = new GoogleAuthProvider();
         
         const res = await signInWithPopup(auth, googleProvider).catch(
-            (err: any) => {
+            ( err: any ) => {
                 console.log(err);
             }
         );
-        if (!res) {
-            console.log("No response received")
+        if(!res) {
+            console.log("No response received");
         } else {
             setData(res);
-            (authenticate)?setAuthenticate(false):setAuthenticate(true);
+            ( authenticate ) ? setAuthenticate(false) : setAuthenticate(true);
             setLoading(true);
         }
     };
@@ -86,8 +85,7 @@ const LandingPage = () => {
         color: '#6E3CBC',
         fontWeight: "bolder",
         borderRadius: 2
-    }
-    
+    };
     
     const ProfileCard = () => {
         return (
@@ -119,8 +117,8 @@ const LandingPage = () => {
                     </Typography>
                 </Box>
             </Box>
-        )
-    }
+        );
+    };
     
     const CustomCard = () => {
         return <div>
@@ -151,8 +149,8 @@ const LandingPage = () => {
                 <Chip sx={chipCSS} label={'student'}/>
             </Card>
         
-        </div>
-    }
+        </div>;
+    };
     return (
         <div>
             <Box sx={{
@@ -193,11 +191,13 @@ const LandingPage = () => {
                     right: 20,
                     position: 'absolute',
                 }}>
-                    <Button variant={'outlined'} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }} onClick={googleAuthentication}>
+                    <Button variant={'outlined'} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}
+                            onClick={googleAuthentication}>
                         Login
                     </Button>
                     <Button variant={'contained'}
-                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }} onClick={()=>{navigate("/register")}}>
+                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}
+                            onClick={() => {navigate("/register");}}>
                         Sign up
                     </Button>
                 </div>

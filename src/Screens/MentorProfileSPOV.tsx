@@ -315,10 +315,9 @@ const MentorProfileSPOV = () => {
                         </Grid>
                     </Grid>
                     <Stack spacing={3} sx={{ mt: 4 }}>
-                        <Typography color={'#6E3CBC'} fontWeight={700} fontSize={13}>John Doe’s available
-                            slots</Typography>
+                        <Typography color={'#6E3CBC'} fontWeight={700} fontSize={13}>{`${mentorData?.name} available
+                            slots`}</Typography>
                         <FormControl variant={"standard"} sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
-                            
                             <Select
                                 labelId="demo-simple-select-filled-label"
                                 id="demo-simple-select-filled"

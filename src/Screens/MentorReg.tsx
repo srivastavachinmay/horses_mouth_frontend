@@ -6,7 +6,6 @@ import cred                                               from '../utils/creds.j
 import { auth }                                           from "../utils/firebase";
 import styling                                            from './MentorRegStyles';
 
-
 const Register = () => {
     const url = cred.api_url;
     const usertoken = localStorage.getItem("token");

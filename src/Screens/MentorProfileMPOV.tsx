@@ -195,7 +195,7 @@ const MentorProfileMPOV = () => {
                                         fontSize={40}
                                         color={"#6E3CBC"}
                                     >
-                                        John Doe
+                                        {`${mentorData?.name}`}
                                     </Typography>
                                     <Verified
                                         sx={{
@@ -279,7 +279,7 @@ const MentorProfileMPOV = () => {
                                 }}
                             >
                                 <Typography fontWeight={"bold"} fontSize={30}>
-                                    About me
+                                    About me &#128075;
                                 </Typography>
                                 
                                 <Typography
