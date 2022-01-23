@@ -30,7 +30,8 @@ const useStyles = makeStyles(( theme ) => ( {
         width: "90%",
         margin: "9px 0px",
         borderRadius: "4px",
-        padding: "6px 3px"
+        padding: "6px 3px",
+        
     },
     biggertext: {
         width: "45vw",
@@ -39,6 +40,7 @@ const useStyles = makeStyles(( theme ) => ( {
         padding: "30px 30px",
         border: "1px solid #6E3CBC",
         margin: "9px 0px",
+        color:"#6E3CBC"
     },
     button: {
         width: "14vw",
