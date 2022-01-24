@@ -2,16 +2,17 @@ import "@fontsource/poppins";
 import { createTheme, ThemeProvider }   from "@mui/material";
 import React                            from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css';
-import Calender                         from "./Screens/Calender";
-import LandingPage                      from "./Screens/Landing Page";
-import MentorListing                    from "./Screens/MentorListing";
-import MentorProfileMPOV                from "./Screens/MentorProfileMPOV";
-import MentorProfileSPOV                from "./Screens/MentorProfileSPOV";
-import Register                         from "./Screens/Register";
-import StudentProfileMPOV               from "./Screens/StudentProfileMPOV";
-import StudentProfileSPOV               from "./Screens/StudentProfileSPOV";
-import Wallet                           from "./Screens/Wallet";
+import Calender from "./Screens/Calender";
+import Wallet from "./Screens/Wallet";
+import MentorProfileSPOV from "./Screens/MentorProfileSPOV";
+import StudentProfileMPOV from "./Screens/StudentProfileMPOV";
+import MentorListing from "./Screens/MentorListing";
+import Register from "./Screens/Register";
+import LandingPage from "./Screens/Landing Page";
+import StudentProfileSPOV from "./Screens/StudentProfileSPOV";
+import MentorProfileMPOV from "./Screens/MentorProfileMPOV";
+
+
 
 const theme = createTheme({
     palette: {
@@ -49,6 +50,7 @@ function App() {
                         <Route path="mentorProfile" element={<MentorProfileMPOV/>}/>
                         <Route path="studentProfile/:id" element={<StudentProfileMPOV/>}/>
                         <Route path="mentors" element={<MentorListing/>}/>
+                        <Route path="register" element={<Register/>}/>
                         <Route path="register" element={<Register/>}/>
                     </Routes>
                 </BrowserRouter>
