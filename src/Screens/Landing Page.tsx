@@ -34,7 +34,7 @@ const LandingPage = () => {
       if (res?.data?.users?.length !== 0) {
         navigate("/");
       } else {
-        alert("response not received");
+        // alert("response not received");
       }
       setLoading(false);
     })();
@@ -83,18 +83,7 @@ const LandingPage = () => {
         color: '#6E3CBC',
         fontWeight: "bolder",
         borderRadius: 2
-    }
-
-    const savetoken = async() =>{
-        console.log("called function")
-        //@ts-ignore
-        let idToken=""
-        // let idToken= await auth.currentUser.getIdToken(true);
-        // localStorage.setItem("idtoken",idToken)
-        console.log(idToken)
-    }
-
-      
+    }  
     const ProfileCard = () => {
         return (
             <Box display={"flex"}>
@@ -127,8 +116,6 @@ const LandingPage = () => {
             </Box>
         )
     }
-
-    savetoken()
     const CustomCard = () => {
         return <div>
 
