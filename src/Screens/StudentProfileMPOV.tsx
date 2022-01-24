@@ -7,6 +7,7 @@ import Grid                           from "@mui/material/Grid";
 import List                           from "@mui/material/List";
 import Typography                     from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
+import { useNavigate }                from "react-router-dom";
 import { getUser }                    from "../axios/User";
 import { useHover }                   from "../Hooks/useHover";
 import { User }                       from "../models/IUser";
@@ -26,7 +27,7 @@ const StudentProfileMPOV = () => {
     
     const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering];
     const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps];
-    
+    const navigate = useNavigate();
     const [mentorData, setMentorData] = useState<User>();
     const [chipData, setChipData] = useState({
                                                  "1st Preference Course": "",
@@ -148,7 +149,7 @@ const StudentProfileMPOV = () => {
                                         fontSize={40}
                                         color={"#6E3CBC"}
                                     >
-                                        John Doe{" "}
+                                        {`${mentorData?.name}`}
                                     </Typography>
                                     <Verified
                                         sx={{
@@ -166,6 +167,9 @@ const StudentProfileMPOV = () => {
                                         Connect with me on
                                     </Typography>
                                     <Box
+                                        onClick={() => {
+                                            window.open(mentorData?.linkedIn);
+                                        }}
                                         sx={{
                                             display: "flex",
                                             width: 280,
@@ -252,7 +256,7 @@ const StudentProfileMPOV = () => {
                                 fontWeight={700}
                                 padding={1}
                             >
-                                John Doe’s interest / Academic qualifications
+                                {`${mentorData?.name} interest / Academic qualifications`}
                             </Typography>
                             <Stack>
                                 {Object.keys(chipData).map(( key, index ) => {
