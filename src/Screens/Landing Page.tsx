@@ -45,7 +45,7 @@ const LandingPage = () => {
 
     onAuthStateChanged(auth, ( user ) => {
         if(!user) {
-            navigate("/register");
+            // navigate("/register");
             return null;
         } else {
             // localStorage.setItem("token", user.accessToken);

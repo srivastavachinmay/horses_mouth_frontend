@@ -142,32 +142,27 @@ const Register = () => {
     }
   };
 
-  return
-  (
-    <>
-        {(mainpage) ?
-          null
-          :
+  return (
+        (mainpage) ?
           <div style={{ backgroundColor: "#6E3CBC" }}>
             <div className={classes.regtitle}>
               <b>Sign up as</b>
             </div>
             <div className={classes.options}>
-              <div className={classes.option} //@ts-ignore
+              <div className={classes.option} 
                 onClick={googleAuthentication} id="student">
                 <img src={studentimg} alt="" className={classes.image} />
                 <h1 style={{ color: "#000000", fontSize: "22px" }}>Student</h1>
               </div>
-              <div className={classes.option}//@ts-ignore
+              <div className={classes.option}
                 onClick={googleAuthentication} id="mentor">
                 <img src={businessmanimg} alt="" className={classes.image} />
                 <h1 style={{ color: "#000000", fontSize: "22px" }}>Mentor</h1>
               </div>
             </div>
           </div>
-        }
+          : 
     (mentorpage1)?
-    {
       <div style={{ overflowY: "auto" }} className={classes.box}>
         <Typography variant="h4" style={{ color: "#6E3CBC", fontWeight: "700", margin: "10px 0px" }}
         >Mentor sign up</Typography>
@@ -274,8 +269,6 @@ const Register = () => {
       :
       // @ts-ignore
       null
-    }
-    </>
   )
 };
 
