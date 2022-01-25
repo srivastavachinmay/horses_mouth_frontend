@@ -8,8 +8,11 @@ import { auth } from "../utils/firebase";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import styling from './MentorRegStyles'
+import studentimg from '../images/student.png'
+import businessmanimg from '../images/businessman.png'
 
-const LoginUser = () => {
+const Register = () => {
   const url =
     "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
   const [authenticate, setAuthenticate] = useState(false);
@@ -19,6 +22,7 @@ const LoginUser = () => {
   const [error, seterror] = useState(false);
   const [data, setData] = useState<UserCredential>();
   const navigate = useNavigate();
+  const classes=styling();
 
   useEffect(() => {
       (async () => {
@@ -106,29 +110,24 @@ const LoginUser = () => {
   };
 
   return (
-    <>
-      <Button
-        variant="contained"
-        color="primary"
-        //@ts-ignore
-        onClick={googleAuthentication}
-        id="student"
-      >
-        Sign Up as a student
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        //@ts-ignore
-        onClick={googleAuthentication}
-        id="mentor"
-      >
-        Sign Up as a mentor
-      </Button>
-      {loading && <> Please wait</>}
-      {(error)?alert("account already exists"):null}
-    </>
+    <div style={{backgroundColor:"#6E3CBC"}}>
+    <div className={classes.regtitle}>
+        <b>Sign up as</b>
+    </div> 
+    <div className={classes.options}>
+      <div className={classes.option} //@ts-ignore
+        onClick={googleAuthentication} id="student">
+        <img src={studentimg} alt="" className={classes.image}/>
+        <h1 style={{color:"#000000",fontSize:"22px"}}>Student</h1>
+      </div>
+      <div className={classes.option}//@ts-ignore
+        onClick={googleAuthentication} id="mentor">
+        <img src={businessmanimg} alt="" className={classes.image}/>
+        <h1 style={{color:"#000000",fontSize:"22px"}}>Mentor</h1>
+      </div>
+      </div> 
+    </div>
   );
 };
 
-export default LoginUser;
+export default Register;

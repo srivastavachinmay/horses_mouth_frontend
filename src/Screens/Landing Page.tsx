@@ -30,11 +30,14 @@ const LandingPage = () => {
         });
 
       console.log(res);
+    //   console.log(res?.data?.users?.length);
 
-      if (res?.data?.users?.length !== 0) {
-        navigate("/");
+      if (res?.data?.users?.length !== 0 && res!==undefined) {
+        (res?.data?.users[0]?.type==="user")?
+        navigate("/mentorProfileM"):
+        navigate("/studentProfileS")
       } else {
-        // alert("response not received");
+        alert("response not received");
       }
       setLoading(false);
     })();
@@ -83,7 +86,9 @@ const LandingPage = () => {
         color: '#6E3CBC',
         fontWeight: "bolder",
         borderRadius: 2
-    }  
+    }
+
+      
     const ProfileCard = () => {
         return (
             <Box display={"flex"}>
@@ -116,6 +121,7 @@ const LandingPage = () => {
             </Box>
         )
     }
+
     const CustomCard = () => {
         return <div>
 
