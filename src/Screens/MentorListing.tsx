@@ -9,7 +9,7 @@ import Paper                                                                    
 import Typography                                                                      from '@mui/material/Typography';
 import * as React                                                                      from "react";
 import { useEffect, useState }                                                         from "react";
-import { useNavigate }                                                                 from "react-router-dom";
+import { Link, useNavigate }                                                           from "react-router-dom";
 import { getMentorSearch }                                                             from "../axios/Mentor";
 import { getUser }                                                                     from "../axios/User";
 import { IMentor }                                                                     from "../models/IMentor";
@@ -29,8 +29,8 @@ export default function MentorListing() {
         fontWeight: "bolder",
         borderRadius: 2
     };
+    const navigate = useNavigate();
     const [page, setPage] = React.useState(1);
-    const navigate = useNavigate('');
     const count = 9;
     const [mentorList, setMentorList] = useState<IMentor>();
     const [uniName, setUniName] = useState<string>();
@@ -44,35 +44,38 @@ export default function MentorListing() {
     const handleChange = ( event: React.ChangeEvent<unknown>, value: number ) => {
         setPage(value);
     };
-    
+    const getMentorsList = async () => {
+        const mentorD = await getUser();
+        setMentorData(mentorD!);
+        setMentorList(await getMentorSearch({
+                                                count: count,
+                                                includeTotal: "false",
+                                                page: page,
+                                                uniName: uniName,
+                                                name: name,
+                                                countryOfStudy: countryOfStudy,
+                                                countryOfOrigin: countryOfOrigin,
+                                                /** can contain multiple comma seperated values */
+                                                major: major,
+                                                /** can contain multiple comma seperated values */
+                                                status: status,
+                                                /** can contain multiple comma seperated values */
+                                                degree: degree,
+                                            }
+        ));
+    };
+    useEffect(()=>{
+        (async ()=>{
+            await getMentorsList()
+        })()
+        
+    },[])
     useEffect(() => {
         console.log("useEffect called");
-        ( async () => {
-            const mentorD = await getUser();
-            
-            if(!mentorD) {
-                // TODO: SHOW ERROR
-                return;
-            }
-            setMentorData(mentorD!);
-            setMentorList(await getMentorSearch({
-                                                    count: count,
-                                                    includeTotal: "false",
-                                                    page: page,
-                                                    uniName: uniName,
-                                                    name: name,
-                                                    countryOfStudy: countryOfStudy,
-                                                    countryOfOrigin: countryOfOrigin,
-                                                    /** can contain multiple comma seperated values */
-                                                    major: major,
-                                                    /** can contain multiple comma seperated values */
-                                                    status: status,
-                                                    /** can contain multiple comma seperated values */
-                                                    degree: degree,
-                                                }));
-            
-        } )();
-    }, []);
+        (async ()=>{
+            await getMentorsList()
+        })()
+    }, [countryOfOrigin, countryOfStudy, degree, major, name, page, status, uniName]);
     
     return (
         <Box sx={{ display: 'flex' }}>
@@ -191,68 +194,71 @@ export default function MentorListing() {
                             mentorList?.mentors.map(( mentor, index ) => {
                                 
                                 return (
-                                    <Grid item xs={12} md={6} lg={4} display={"flex"} alignItems={"center"}
-                                          flexDirection={"row"} key={mentor.id}
-                                          onClick={() => {navigate(`mentorProfile/:${mentor.id}`);}}
-                                    >
-                                        <Avatar sx={{ width: 75, height: 75, zIndex: 2 }} src={mentor.profilePic}/>
-                                        <Paper
-                                            sx={{
-                                                zIndex: 1,
-                                                ml: -5,
-                                                position: "relative",
-                                                p: 2,
-                                                pl: 5,
-                                                width: 270,
-                                                borderRadius: 3,
-                                                display: 'inline-flex',
-                                                flexDirection: 'row',
-                                                height: 200,
-                                                flexWrap: 'wrap'
-                                            }}
+                                    <Link to={`mentorProfile/:${mentor.id}`}>
+                                        <Grid item xs={12} md={6} lg={4} display={"flex"} alignItems={"center"}
+                                              flexDirection={"row"} key={mentor.id}
+                                            // onClick={() => {navigate(`mentorProfile/:${mentor.id}`);}}
                                         >
-                                            <Typography alignSelf={"center"} fontWeight={"bold"} justifySelf={"center"}>
-                                                {`${mentorData?.name}`}
-                                            </Typography>
-                                            <VerifiedRounded
+                                            <Avatar sx={{ width: 75, height: 75, zIndex: 2 }} src={mentor.profilePic}/>
+                                            <Paper
                                                 sx={{
-                                                    m: 1,
-                                                    width: 18,
-                                                    height: 18,
-                                                    color: "#0FA958",
+                                                    zIndex: 1,
+                                                    ml: -5,
+                                                    position: "relative",
+                                                    p: 2,
+                                                    pl: 5,
+                                                    width: 270,
+                                                    borderRadius: 3,
+                                                    display: 'inline-flex',
+                                                    flexDirection: 'row',
+                                                    height: 200,
+                                                    flexWrap: 'wrap'
                                                 }}
-                                            />
-                                            <Chip sx={{
-                                                bgcolor: '#D4CFFF',
-                                                margin: 0.5,
-                                                border: 1,
-                                                borderColor: "#6E3CBC",
-                                                fontSize: 11,
-                                                color: '#6E3CBC',
-                                                fontWeight: "bolder",
-                                                borderRadius: 2,
-                                                width: '100%'
-                                                
-                                            }} label={`${mentor.campusInfo.uniName}`}/>
-                                            <Chip sx={chipCSS} label={`${mentor.degree}`}/>
-                                            <Chip sx={chipCSS} label={`${mentor.major}`}/>
-                                            
-                                            <Button variant={'contained'}
-                                                    onClick={() => {navigate(`mentorProfile/:${mentor.id}`);}}
+                                            >
+                                                <Typography alignSelf={"center"} fontWeight={"bold"}
+                                                            justifySelf={"center"}>
+                                                    {`${mentorData?.name}`}
+                                                </Typography>
+                                                <VerifiedRounded
                                                     sx={{
-                                                        bgcolor: '#7267CB',
-                                                        fontWeight: 'bold',
-                                                        fontSize: 11,
-                                                        mt: 0.5,
-                                                        height: 30
-                                                    }}>
-                                                Book a session
-                                            </Button>
-                                            <Chip sx={chipCSS} label={`${mentor.status}`}/>
-                                        </Paper>
-                                    
-                                    
-                                    </Grid> );
+                                                        m: 1,
+                                                        width: 18,
+                                                        height: 18,
+                                                        color: "#0FA958",
+                                                    }}
+                                                />
+                                                <Chip sx={{
+                                                    bgcolor: '#D4CFFF',
+                                                    margin: 0.5,
+                                                    border: 1,
+                                                    borderColor: "#6E3CBC",
+                                                    fontSize: 11,
+                                                    color: '#6E3CBC',
+                                                    fontWeight: "bolder",
+                                                    borderRadius: 2,
+                                                    width: '100%'
+                                                    
+                                                }} label={`${mentor.campusInfo.uniName}`}/>
+                                                <Chip sx={chipCSS} label={`${mentor.degree}`}/>
+                                                <Chip sx={chipCSS} label={`${mentor.major}`}/>
+                                                
+                                                <Button variant={'contained'}
+                                                        onClick={() => {navigate(`../mentorProfile/:${mentor.id}`);}}
+                                                        sx={{
+                                                            bgcolor: '#7267CB',
+                                                            fontWeight: 'bold',
+                                                            fontSize: 11,
+                                                            mt: 0.5,
+                                                            height: 30
+                                                        }}>
+                                                    Book a session
+                                                </Button>
+                                                <Chip sx={chipCSS} label={`${mentor.status}`}/>
+                                            </Paper>
+                                        
+                                        
+                                        </Grid>
+                                    </Link> );
                             })
                         }
                     

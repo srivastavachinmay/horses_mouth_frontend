@@ -1,97 +1,97 @@
-import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
-import React,{useState, useEffect} from 'react';
-import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup,UserCredential, } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import axios from "axios";
+import { Instagram, LinkedIn, Twitter }             from "@mui/icons-material";
+import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
+import React, { useState }                          from 'react';
+import { useNavigate }                              from "react-router-dom";
+import appointment                                  from "../assets/appointment.png";
+import chat                                         from "../assets/chat.png";
+import signup                                       from "../assets/signup.png";
+import MentorCard                                   from "./Components/MentorCard";
 
 const LandingPage = () => {
-    const url =
-              "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
-    const [authenticate, setAuthenticate] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState<UserCredential>();
-    const navigate = useNavigate();
-    useEffect(() => {
-        ( async () => {
-            const token = await data?.user?.getIdToken(true);
-            let idtoken: string = token!;
-            localStorage.setItem("idtoken", idtoken);
-            
-            const res = await axios
-                .get(`${url}/user`, {
-                    headers: { Authorization: `Bearer ${idtoken}` },
-                })
-                .catch(( err: any ) => {
-                    console.log(err);
-                    setLoading(false);
-                });
-            
-            if(res?.data?.users?.length !== 0 && res !== undefined) {
-                alert("Inside the function");
-                console.log(res?.data?.users[ 0 ]?.type);
-                ( res?.data?.users[ 0 ]?.type === "user" ) ?
-                navigate("/studentProfile") :
-                navigate("/mentorProfile");
-                
-            } else {
-                alert("response not received");
-            }
-            setLoading(false);
-        } )();
-    }, [authenticate]);
-
-    onAuthStateChanged(auth, ( user ) => {
-        if(!user) {
-            navigate("/register");
-            return null;
-        } else {
-            // localStorage.setItem("token", user.accessToken);
-            user.getIdToken(true).then(function( idToken ) {
-                console.log("Got token" + idToken);
-                localStorage.setItem("idtoken", idToken);
-            }).catch(function( error ) {
-                console.log("Got error");
-                console.log(error);
-                
-            });
-            console.log(user);
-        }
-    });
-    const googleAuthentication = async () => {
-        let googleProvider = new GoogleAuthProvider();
     
-        const res = await signInWithPopup(auth, googleProvider).catch(
-          (err: any) => {
-            console.log(err);
-          }
-        );
-        if (!res) {
-          console.log("No response received")
-        } else {
-          setData(res);
-          (authenticate)?setAuthenticate(false):setAuthenticate(true);
-          setLoading(true);
-        }
-      };
-    const chipCSS = {
-        bgcolor: '#D4CFFF',
-        margin: 0.5,
-        border: 1,
-        borderColor: "#6E3CBC",
-        fontSize: 11,
-        color: '#6E3CBC',
-        fontWeight: "bolder",
-        borderRadius: 2
-    }
+    const [selectedTab, setSelectedTab] = useState(0);
+    const handleTabChange = ( event: React.SyntheticEvent, value: React.SetStateAction<number> ) => {
+        setSelectedTab(value);
+    };
+    // const url =
+    //           "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
+    // const [authenticate, setAuthenticate] = useState(false);
+    // const [loading, setLoading] = useState(false);
+    // const [data, setData] = useState<UserCredential>();
+    const navigate = useNavigate();
+    // useEffect(() => {
+    //     ( async () => {
+    //         const token = await data?.user?.getIdToken(true);
+    //         let idtoken: string = token!;
+    //         localStorage.setItem("idtoken", idtoken);
+    //
+    //         const res = await axios
+    //             .get(`${url}/user`, {
+    //                 headers: { Authorization: `Bearer ${idtoken}` },
+    //             })
+    //             .catch(( err: any ) => {
+    //                 console.log(err);
+    //                 setLoading(false);
+    //             });
+    //
+    //         if(res?.data?.users?.length !== 0 && res !== undefined) {
+    //             alert("Inside the function");
+    //             console.log(res?.data?.users[ 0 ]?.type);
+    //             ( res?.data?.users[ 0 ]?.type === "user" ) ?
+    //             navigate("/studentProfile") :
+    //             navigate("/mentorProfile");
+    //
+    //         } else {
+    //             alert("response not received");
+    //         }
+    //         setLoading(false);
+    //     } )();
+    // }, [authenticate]);
+    //
+    // onAuthStateChanged(auth, ( user ) => {
+    //     if(!user) {
+    //         navigate("/register");
+    //         return null;
+    //     } else {
+    //         // localStorage.setItem("token", user.accessToken);
+    //         user.getIdToken(true).then(function( idToken ) {
+    //             console.log("Got token" + idToken);
+    //             localStorage.setItem("idtoken", idToken);
+    //         }).catch(function( error ) {
+    //             console.log("Got error");
+    //             console.log(error);
+    //
+    //         });
+    //         console.log(user);
+    //     }
+    // });
+    // const googleAuthentication = async () => {
+    //     let googleProvider = new GoogleAuthProvider();
+    //
+    //     const res = await signInWithPopup(auth, googleProvider).catch(
+    //         ( err: any ) => {
+    //             console.log(err);
+    //         }
+    //     );
+    //     if(!res) {
+    //         console.log("No response received");
+    //     } else {
+    //         setData(res);
+    //         ( authenticate ) ? setAuthenticate(false) : setAuthenticate(true);
+    //         setLoading(true);
+    //     }
+    // };
+    
     const ProfileCard = () => {
         return (
-            <Box display={"flex"}>
+            <Box display={"flex"} flexWrap={"wrap"}>
                 <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
                      justifyContent={"space-evenly"} alignItems={"center"}>
-                    <Avatar sx={{ width: 147, height: 147 }}>
-                    </Avatar>
+                    <Box
+                        component="img"
+                        sx={{ height: 147, width: 147, }}
+                        src={signup}
+                    />
                     <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20} textAlign={"center"}>
                         Step 1 : REGISTER AS A STUDENT ON HORSE’S MOUTH<br/><br/>
                     </Typography>
@@ -99,8 +99,11 @@ const LandingPage = () => {
                 <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
                      justifyContent={"space-evenly"}
                      alignItems={"center"}>
-                    <Avatar sx={{ width: 147, height: 147 }}>
-                    </Avatar>
+                    <Box
+                        component="img"
+                        sx={{ height: 147, width: 147, }}
+                        src={appointment}
+                    />
                     <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20} textAlign={"center"}>
                         Step 2 : SCHEDEULE A CALL WITH THE BEST MENTORS AROUND THE WORLD
                     </Typography>
@@ -108,8 +111,11 @@ const LandingPage = () => {
                 <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
                      justifyContent={"space-evenly"}
                      alignItems={"center"}>
-                    <Avatar sx={{ width: 147, height: 147 }}>
-                    </Avatar>
+                    <Box
+                        component="img"
+                        sx={{ height: 147, width: 147, }}
+                        src={chat}
+                    />
                     <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20} textAlign={"center"}>
                         Step 3 : LEARN FROM YOUR MENTOR AND MAKE BETTER COLLEGE DECISIONS
                     </Typography>
@@ -117,37 +123,37 @@ const LandingPage = () => {
             </Box>
         );
     };
-    const CustomCard = () => {
-        return <div>
-            
-            <Card variant={"outlined"} sx={{
-                margin: 5,
-                width: 255,
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                borderRadius: 3,
-                border: 5,
-                borderColor: '#D4CFFF'
-            }}>
-                <Avatar sx={{ width: 147, height: 147 }}
-                        src={"https://www.google.com/url?sa=i&url=https%3A%2F%2Fdragonballuniverse.fandom.com%2Fwiki%2FUltra_Instinct&psig=AOvVaw156j5RHdB00_uqfdptVEm6&ust=1640591076506000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJif3Jb8gPUCFQAAAAAdAAAAABAP"}>
-                </Avatar>
-                <CardHeader sx={{ color: '#6E3CBC', fontWeight: "bold", fontSize: 60 }} title={'John Doe'}/>
-                
-                <Chip sx={chipCSS} label={'University of waterloo'}/>
-                <Chip sx={chipCSS} label={'bachelor’s'}/>
-                <Chip sx={chipCSS} label={'Mech. engg.'}/>
-                <Button variant={'contained'}
-                        sx={{ bgcolor: '#7267CB', fontWeight: 'bold', fontSize: 11, marginRight: 2 }}>
-                    Book a session
-                </Button>
-                <Chip sx={chipCSS} label={'student'}/>
-            </Card>
-        
-        </div>;
-    };
+    // const CustomCard = () => {
+    //     return <div>
+    //
+    //         <Card variant={"outlined"} sx={{
+    //             margin: 5,
+    //             width: 255,
+    //             display: "flex",
+    //             flexWrap: "wrap",
+    //             justifyContent: "space-evenly",
+    //             alignItems: "center",
+    //             borderRadius: 3,
+    //             border: 5,
+    //             borderColor: '#D4CFFF'
+    //         }}>
+    //             <Avatar sx={{ width: 147, height: 147 }}
+    //                     src={"https://www.google.com/url?sa=i&url=https%3A%2F%2Fdragonballuniverse.fandom.com%2Fwiki%2FUltra_Instinct&psig=AOvVaw156j5RHdB00_uqfdptVEm6&ust=1640591076506000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJif3Jb8gPUCFQAAAAAdAAAAABAP"}>
+    //             </Avatar>
+    //             <CardHeader sx={{ color: '#6E3CBC', fontWeight: "bold", fontSize: 60 }} title={'John Doe'}/>
+    //
+    //             <Chip sx={chipCSS} label={'University of waterloo'}/>
+    //             <Chip sx={chipCSS} label={'bachelor’s'}/>
+    //             <Chip sx={chipCSS} label={'Mech. engg.'}/>
+    //             <Button variant={'contained'}
+    //                     sx={{ bgcolor: '#7267CB', fontWeight: 'bold', fontSize: 11, marginRight: 2 }}>
+    //                 Book a session
+    //             </Button>
+    //             <Chip sx={chipCSS} label={'student'}/>
+    //         </Card>
+    //
+    //     </div>;
+    // };
     return (
         <div>
             <Box sx={{
@@ -159,7 +165,7 @@ const LandingPage = () => {
                 width: "10rem",
                 height: "10rem"
             }}/>
-            <div style={{ height: '100vh', display: "inline-flex" }}>
+            <div style={{ minHeight: '100vh', maxHeight: "max-content", display: "inline-flex" }}>
                 <Box sx={{ marginLeft: 30, marginTop: 30 }}>
                     <Typography sx={{ fontSize: 42, fontWeight: "bolder", color: '#6E3CBC' }}>
                         Understand the on ground<br/>
@@ -189,50 +195,67 @@ const LandingPage = () => {
                     position: 'absolute',
                 }}>
                     <Button variant={'outlined'} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}
-                            onClick={googleAuthentication}>
+                        // onClick={googleAuthentication}
+                    >
                         Login
                     </Button>
                     <Button variant={'contained'}
-                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }} onClick={()=>{navigate("/register")}}>
+                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}
+                            onClick={() => {navigate("/register");}}>
                         Sign up
                     </Button>
                 </div>
             </div>
-            <Box height={'80vh'} bgcolor={'#D4CFFF'} display={"flex"} flexDirection={"column"} justifyContent={"center"}
+            <Box minHeight={'80vh'} maxHeight={"max-content"} bgcolor={'#D4CFFF'} display={"flex"}
+                 flexDirection={"column"} justifyContent={"center"}
                  alignItems={"center"}>
-                <Box display={"flex"}>
-                    <Typography fontWeight={700} fontSize={18} color={'#6E3CBC'}>
-                        For students |&nbsp;
-                    </Typography>
-                    <Typography fontWeight={700} fontSize={18} color={'#7972fd'}>
-                        For mentors
-                    </Typography>
-                </Box>
-                <ProfileCard/>
+                <Tabs value={selectedTab} indicatorColor={"primary"} color={'#6E3CBC'}
+                      textColor={"primary"} onChange={handleTabChange}>
+                    <Tab label={'For students & PARENTS'}/>
+                    <Tab label={'For COLLEGE STUDENTS & ALUMNI'}/>
+                </Tabs>
+                {/*<Box display={"flex"}>*/}
+                {/*    <Typography fontWeight={700} fontSize={18} color={'#6E3CBC'}>*/}
+                {/*        For students |&nbsp;*/}
+                {/*    </Typography>*/}
+                {/*    <Typography fontWeight={700} fontSize={18} color={'#7972fd'}>*/}
+                {/*        For mentors*/}
+                {/*    </Typography>*/}
+                {/*</Box>*/}
+                {selectedTab === 0 && <ProfileCard/>}
+                {selectedTab === 1 && <ProfileCard/>}
             </Box>
-            <Box sx={{
-                height: '80vh',
-                backgroundColor: '#7267CB',
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
-                <Typography color={"white"} fontSize={20} fontWeight={700} right={500} bottom={200}
-                            position={"relative"}>
+            <Box
+                flexWrap={"wrap"}
+                sx={{
+                    minHeight: '80vh',
+                    padding: 4,
+                    maxHeight: "max-content",
+                    backgroundColor: '#7267CB',
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                <Typography color={"white"} sx={{ flexGrow: 1 }} fontSize={20} fontWeight={700}>
                     G . O . A . T Mentors
                 </Typography>
-                <Box display={"flex"} justifyContent={"center"} alignItems={"center"} margin={5} position={"absolute"}>
-                    <CustomCard/>
-                    <CustomCard/>
-                    <CustomCard/>
-                </Box>
-                <Typography color={"white"} position={"relative"} fontWeight={700} textAlign={"center"} fontSize={20}
-                            top={150} right={70}>
-                    see more &gt;
-                </Typography>
+                <Grid container width={'100%'} sx={{ flexGrow: 8 }} spacing={2} wrap={"wrap"}>
+                    <MentorCard profilePic={"/"} name={"John Doe"} status={"Student"} major={"STEM"}
+                                degree={"batchelor"} uniName={"University of Waterloo"}/>
+                    <MentorCard profilePic={"/"} name={"Katrina Kaif"} status={"Student"} major={"Social Sciences"}
+                                degree={"master"} uniName={"University of Toronto"}/>
+                    <MentorCard profilePic={"/"} name={"Sonam Kapoor"} status={"Alumni"} major={"Humanities"}
+                                degree={"Phd"} uniName={"Oxford University"}/>
+                </Grid>
+                {/*<Typography color={"white"} fontWeight={700} textAlign={"center"} fontSize={20}>*/}
+                {/*    see more &gt;*/}
+                {/*</Typography>*/}
             </Box>
             <Box sx={{
-                height: '80vh',
+                minHeight: '80vh',
+                maxHeight: "max-content",
                 backgroundColor: '#111111',
                 display: "flex",
                 justifyContent: "center",
@@ -243,13 +266,15 @@ const LandingPage = () => {
             </Box>
             
             <Box sx={{
-                height: '40vh',
+                minHeight: '40vh',
+                maxHeight: "max-content",
                 paddingLeft: 15,
+                flexWrap:"wrap",
                 paddingRight: 15,
                 paddingTop: 5,
                 backgroundColor: '#D4CFFF'
             }}>
-                <Box display={"flex"} justifyContent={"space-between"} alignItems={"start"}>
+                <Box display={"flex"} flexWrap={"wrap"} justifyContent={"space-between"} alignItems={"start"}>
                     <Box>
                         <Typography color={'#6E3CBC'} fontWeight={700} fontSize={20}>
                             Home<br/>
@@ -265,7 +290,7 @@ const LandingPage = () => {
                     </Box>
                     <Box display={"flex"} flexDirection={"column"} justifyContent={"space-between"}
                          alignItems={"flex-end"}>
-                        <Box display={"flex"} flexDirection={"column"} alignItems={"end"} paddingBottom={5}
+                        <Box display={{xs:"none",md:"flex"}}  flexDirection={"column"} alignItems={"end"} paddingBottom={5}
                              justifyContent={"center"}>
                             <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={36}>
                                 UNDERSTAND THE NEXT 2-4 YEARS,
@@ -274,7 +299,7 @@ const LandingPage = () => {
                                 IN THE NEXT 20 MINUTES.
                             </Typography>
                         </Box>
-                        <Box display={"flex"} flexDirection={"column"} alignItems={"end"} justifyContent={"center"}>
+                        <Box display={"flex"} flexDirection={"column"} alignItems={{md:"end",xs:"start"}} justifyContent={"center"}>
                             <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20}>
                                 Email us at
                             </Typography>
