@@ -21,8 +21,8 @@ import Container                      from "@mui/material/Container";
 import CssBaseline                    from "@mui/material/CssBaseline";
 import Grid                           from "@mui/material/Grid";
 import React, { useEffect, useState } from "react";
-import { useNavigate }                from "react-router-dom";
-import { getUser }                    from "../axios/User";
+import { useParams }                  from "react-router-dom";
+import { getMentorById }              from "../axios/User";
 import { useHover }                   from "../Hooks/useHover";
 import { Schedule, User }             from "../models/IUser";
 import { Drawer }                     from "./Components/Drawer";
@@ -46,10 +46,10 @@ const MentorProfileSPOV = () => {
     const [buttonMIsHovering, buttonMHoverProps] = useHover();
     const [buttonNIsHovering, buttonNHoverProps] = useHover();
     const [buttonOIsHovering, buttonOHoverProps] = useHover();
-    const navigate = useNavigate();
     const buttonIsHovering = [buttonAIsHovering, buttonBIsHovering, buttonCIsHovering, buttonDIsHovering, buttonEIsHovering, buttonFIsHovering, buttonGIsHovering, buttonHIsHovering, buttonIIsHovering, buttonJIsHovering, buttonKIsHovering, buttonLIsHovering, buttonMIsHovering, buttonNIsHovering, buttonOIsHovering];
     const buttonHoverProps = [buttonAHoverProps, buttonBHoverProps, buttonCHoverProps, buttonDHoverProps, buttonEHoverProps, buttonFHoverProps, buttonGHoverProps, buttonHHoverProps, buttonIHoverProps, buttonJHoverProps, buttonKHoverProps, buttonLHoverProps, buttonMHoverProps, buttonNHoverProps, buttonOHoverProps];
     const [slots, setSlots] = useState<Schedule>();
+    const { id } = useParams<{ id: any }>();
     const [mentorData, setMentorData] = useState<User>();
     const [chipData, setChipData] = useState({
                                                  "Country of study": "",
@@ -79,7 +79,9 @@ const MentorProfileSPOV = () => {
     
     useEffect(() => {
         ( async () => {
-            const mentorD = await getUser();
+            
+            console.log(id);
+            const mentorD = await getMentorById(id);
             
             if(!mentorD) {
                 // TODO: SHOW ERROR
@@ -88,6 +90,7 @@ const MentorProfileSPOV = () => {
             setMentorData(mentorD!);
             const mentorMeta = mentorD[ "mentorMeta" ];
             setSlots(mentorMeta.schedule);
+            console.log(id);
             setChipData({
                             "Country of study": mentorMeta.countryOfStudy || "N/A",
                             "Area of study": mentorMeta.major || "N/A",
