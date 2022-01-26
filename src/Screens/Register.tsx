@@ -8,9 +8,9 @@ import { auth } from "../utils/firebase";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import styling from './MentorRegStyles'
-import studentimg from '../images/student.png'
-import businessmanimg from '../images/businessman.png'
+import styling from './MentorRegStyles';
+import studentimg from '../images/student.png';
+import businessmanimg from '../images/businessman.png';
 import MentorReg from "./MentorReg";
 
 const Register = () => {
