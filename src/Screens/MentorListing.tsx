@@ -30,7 +30,7 @@ export default function MentorListing() {
         borderRadius: 2
     };
     const [page, setPage] = React.useState(1);
-    const navigate = useNavigate('');
+    const navigate = useNavigate();
     const count = 9;
     const [mentorList, setMentorList] = useState<IMentor>();
     const [uniName, setUniName] = useState<string>();
