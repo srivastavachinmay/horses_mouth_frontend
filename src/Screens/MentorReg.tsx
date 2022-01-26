@@ -2,6 +2,7 @@ import { Button, Checkbox, FormControlLabel, Typography } from "@mui/material";
 import {useState } from "react";
 import styling from './MentorRegStyles'
 import MentorComForm from "./MentorComForm";
+import { countries } from "../data/data";
 
 const MentorReg = (props:any) => {
 
@@ -89,9 +90,15 @@ const MentorReg = (props:any) => {
       }} value={grad} required={true} />
       <br />
       <label htmlFor="curredu" className={classes.title}> COUNTRY OF STUDY</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <select name="curredu" className={classes.sminput} onChange={(event) => {
         setcountry(event.target.value)
-      }} value={country} required={true} />
+      }} value={country} id="country">
+        {
+          countries().filter( (ele:any) =>ele.includes("")).map((v:any)=>(
+            <option value={v}></option>
+          ))
+        }
+      </select>
       <br />
       <label htmlFor="curredu" className={classes.title}> PREVIOUS EDUCATIONAL INSTITUTE</label>
       <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
