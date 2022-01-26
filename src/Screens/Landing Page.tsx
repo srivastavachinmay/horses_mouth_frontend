@@ -8,43 +8,43 @@ import axios from "axios";
 
 const LandingPage = () => {
     const url =
-              "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
-    const [authenticate, setAuthenticate] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState<UserCredential>();
-    const navigate = useNavigate();
-    useEffect(() => {
-        ( async () => {
-            const token = await data?.user?.getIdToken(true);
-            let idtoken: string = token!;
-            localStorage.setItem("idtoken", idtoken);
-            
-            const res = await axios
-                .get(`${url}/user`, {
-                    headers: { Authorization: `Bearer ${idtoken}` },
-                })
-                .catch(( err: any ) => {
-                    console.log(err);
-                    setLoading(false);
-                });
-            
-            if(res?.data?.users?.length !== 0 && res !== undefined) {
-                alert("Inside the function");
-                console.log(res?.data?.users[ 0 ]?.type);
-                ( res?.data?.users[ 0 ]?.type === "user" ) ?
-                navigate("/studentProfile") :
-                navigate("/mentorProfile");
-                
-            } else {
-                alert("response not received");
-            }
-            setLoading(false);
-        } )();
-    }, [authenticate]);
+    "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
+  const [authenticate, setAuthenticate] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<UserCredential>();
+  const navigate = useNavigate();
+  useEffect(() => {
+    (async () => {
+      const token = await data?.user?.getIdToken(true);
+      let idtoken:string = token!;
+      localStorage.setItem("idtoken",idtoken)
+
+      const res = await axios
+        .get(`${url}/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .catch((err: any) => {
+          console.log(err);
+          setLoading(false);
+        });
+
+      console.log(res);
+    //   console.log(res?.data?.users?.length);
+
+      if (res?.data?.users?.length !== 0 && res!==undefined) {
+        (res?.data?.users[0]?.type==="user")?
+        navigate("/mentorProfileM"):
+        navigate("/studentProfileS")
+      } else {
+        alert("response not received");
+      }
+      setLoading(false);
+    })();
+}, [authenticate]);
 
     onAuthStateChanged(auth, ( user ) => {
         if(!user) {
-            navigate("/register");
+            // navigate("/register");
             return null;
         } else {
             // localStorage.setItem("token", user.accessToken);
@@ -85,6 +85,8 @@ const LandingPage = () => {
         fontWeight: "bolder",
         borderRadius: 2
     }
+
+      
     const ProfileCard = () => {
         return (
             <Box display={"flex"}>
