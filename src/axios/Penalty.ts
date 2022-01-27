@@ -6,9 +6,10 @@ const baseUrl = "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/product
 
 export const getPenalty = async () => {
     try {
-        const response = await axios.get(baseUrl + '/penalty', { headers: { 'Authorization': `bearer ${AUTH_TOKEN}`, } })
-        return response.data as IPenalty
+        const response = await axios.get(
+            baseUrl + '/penalty', { headers: { 'Authorization': `bearer ${AUTH_TOKEN}`, } });
+        return response.data as IPenalty;
     } catch (e) {
-        console.log(e)
+        console.log(e);
     }
-}
+};

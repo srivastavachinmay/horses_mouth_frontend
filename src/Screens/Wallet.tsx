@@ -15,22 +15,22 @@ import {
 }                                                                                          from "./Components/listItems";
 
 const tabTheme = createTheme({
-    palette: {
-        primary: {
-            main: '#6E3CBC',
-        },
-    },
-    typography: {
-        fontFamily: 'Poppins',
-    },
-})
+                                 palette: {
+                                     primary: {
+                                         main: '#6E3CBC',
+                                     },
+                                 },
+                                 typography: {
+                                     fontFamily: 'Poppins',
+                                 },
+                             });
 
 const Wallet = () => {
-    const [selectedTab, setSelectedTab] = useState(0)
+    const [selectedTab, setSelectedTab] = useState(0);
     const handleTabChange = ( event: React.SyntheticEvent, value: React.SetStateAction<number> ) => {
-        setSelectedTab(value)
-    }
-
+        setSelectedTab(value);
+    };
+    
     return (
         <ThemeProvider theme={tabTheme}>
             <Box sx={{ display: "flex" }}>
@@ -43,11 +43,11 @@ const Wallet = () => {
                     </Typography>
                     <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{MentorSidebarList}</List>
                 </Drawer>
-
+                
                 <Box
                     component="main"
                     sx={{
-
+                        
                         backgroundColor: "#EFEDFF",
                         flexGrow: 1,
                         height: "100vh",
@@ -76,7 +76,7 @@ const Wallet = () => {
                                 alignItems: "center",
                                 justifyContent: "space-evenly",
                                 borderRadius: 4
-
+                                
                             }}>
                                 <Typography color={'#6E3CBC'} fontSize={16} fontWeight={700}>your wallet</Typography>
                                 <Typography color={'#6E3CBC'} fontSize={27} fontWeight={700}>Rs. 10000</Typography>
@@ -90,85 +90,109 @@ const Wallet = () => {
                                     <Tab label={'Debit History'}/>
                                 </Tabs>
                                 {selectedTab === 0 &&
-                                <List sx={{ overflowY: "auto", height: 300, width: 300 }}>
+                                    <List sx={{ overflowY: "auto", height: 300, width: 300 }}>
 
-                                    <ListItem
-                                        sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-                                        <Box>
-                                            <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
-                                                Doe</Typography>
-                                            <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
-                                                20th November</Typography>
-                                        </Box>
-                                        <Typography color={'#1B8700'}
-                                                    sx={{ fontWeight: 700, fontSize: 21 }}>+500</Typography>
-                                    </ListItem>
-                                    <Divider/>
-                                    <ListItem
-                                        sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-                                        <Box>
-                                            <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
-                                                Doe</Typography>
-                                            <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
-                                                20th November</Typography>
-                                        </Box>
-                                        <Typography color={'#1B8700'}
-                                                    sx={{ fontWeight: 700, fontSize: 21 }}>+500</Typography>
-                                    </ListItem>
-                                    <Divider/>
-                                    <ListItem
-                                        sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-                                        <Box>
-                                            <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
-                                                Doe</Typography>
-                                            <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
-                                                20th November</Typography>
-                                        </Box>
-                                        <Typography color={'#1B8700'}
-                                                    sx={{ fontWeight: 700, fontSize: 21 }}>+500</Typography>
-                                    </ListItem>
+                                        <ListItem
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-evenly"
+                                            }}>
+                                            <Box>
+                                                <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
+                                                    Doe</Typography>
+                                                <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
+                                                    20th November</Typography>
+                                            </Box>
+                                            <Typography color={'#1B8700'}
+                                                        sx={{ fontWeight: 700, fontSize: 21 }}>+500</Typography>
+                                        </ListItem>
+                                        <Divider/>
+                                        <ListItem
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-evenly"
+                                            }}>
+                                            <Box>
+                                                <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
+                                                    Doe</Typography>
+                                                <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
+                                                    20th November</Typography>
+                                            </Box>
+                                            <Typography color={'#1B8700'}
+                                                        sx={{ fontWeight: 700, fontSize: 21 }}>+500</Typography>
+                                        </ListItem>
+                                        <Divider/>
+                                        <ListItem
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-evenly"
+                                            }}>
+                                            <Box>
+                                                <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
+                                                    Doe</Typography>
+                                                <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
+                                                    20th November</Typography>
+                                            </Box>
+                                            <Typography color={'#1B8700'}
+                                                        sx={{ fontWeight: 700, fontSize: 21 }}>+500</Typography>
+                                        </ListItem>
 
-                                </List>}
+                                    </List>}
                                 {selectedTab === 1 &&
-                                <List sx={{ overflowY: "auto", height: 300, width: 300 }}>
+                                    <List sx={{ overflowY: "auto", height: 300, width: 300 }}>
 
-                                    <ListItem
-                                        sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-                                        <Box>
-                                            <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
-                                                Doe</Typography>
-                                            <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
-                                                20th November</Typography>
-                                        </Box>
-                                        <Typography color={'#FF0303'}
-                                                    sx={{ fontWeight: 700, fontSize: 21 }}>-500</Typography>
-                                    </ListItem>
-                                    <Divider/>
-                                    <ListItem
-                                        sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-                                        <Box>
-                                            <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
-                                                Doe</Typography>
-                                            <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
-                                                20th November</Typography>
-                                        </Box>
-                                        <Typography color={'#FF0303'}
-                                                    sx={{ fontWeight: 700, fontSize: 21 }}>-500</Typography>
-                                    </ListItem>
-                                    <Divider/>
-                                    <ListItem
-                                        sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-                                        <Box>
-                                            <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
-                                                Doe</Typography>
-                                            <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
-                                                20th November</Typography>
-                                        </Box>
-                                        <Typography color={'#FF0303'}
-                                                    sx={{ fontWeight: 700, fontSize: 21 }}>-500</Typography>
-                                    </ListItem>
+                                        <ListItem
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-evenly"
+                                            }}>
+                                            <Box>
+                                                <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
+                                                    Doe</Typography>
+                                                <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
+                                                    20th November</Typography>
+                                            </Box>
+                                            <Typography color={'#FF0303'}
+                                                        sx={{ fontWeight: 700, fontSize: 21 }}>-500</Typography>
+                                        </ListItem>
+                                        <Divider/>
+                                        <ListItem
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-evenly"
+                                            }}>
+                                            <Box>
+                                                <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
+                                                    Doe</Typography>
+                                                <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
+                                                    20th November</Typography>
+                                            </Box>
+                                            <Typography color={'#FF0303'}
+                                                        sx={{ fontWeight: 700, fontSize: 21 }}>-500</Typography>
+                                        </ListItem>
+                                        <Divider/>
+                                        <ListItem
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-evenly"
+                                            }}>
+                                            <Box>
+                                                <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Session with John
+                                                    Doe</Typography>
+                                                <Typography sx={{ color: '#00000080', fontWeight: 700, fontSize: 15 }}>
+                                                    20th November</Typography>
+                                            </Box>
+                                            <Typography color={'#FF0303'}
+                                                        sx={{ fontWeight: 700, fontSize: 21 }}>-500</Typography>
+                                        </ListItem>
 
-                                </List>}
+                                    </List>}
                                 <Button sx={{
                                     display: "flex",
                                     width: 290,
@@ -206,7 +230,7 @@ const Wallet = () => {
                                         </Box>
                                         <Typography color={'#6E3CBC'} fontSize={16} fontWeight={700}>your life time
                                             earnings</Typography></Box>
-
+                                    
                                     <Box width={'100%'} display={"flex"} flexDirection={"column"} alignItems={"center"}>
                                         <Box sx={{
                                             display: "flex",
@@ -224,7 +248,7 @@ const Wallet = () => {
                                         <Typography fontSize={16} fontWeight={700} color={'#6E3CBC'}>amount withdrawn
                                             till now </Typography></Box>
                                 </Box>
-
+                                
                                 <Paper sx={{
                                     width: 278,
                                     height: '90%',
@@ -238,7 +262,7 @@ const Wallet = () => {
                                         Penalties Recieved
                                     </Typography>
                                     <List sx={{ overflowY: "auto", height: '75%', mt: 1, width: '100%' }}>
-
+                                        
                                         <ListItem
                                             sx={{
                                                 display: "flex",
@@ -254,7 +278,7 @@ const Wallet = () => {
                                             <Typography color={'#FF0303'}
                                                         sx={{ fontWeight: 700, fontSize: 21 }}>-500</Typography>
                                         </ListItem>
-
+                                        
                                         <ListItem
                                             sx={{
                                                 display: "flex",
@@ -300,7 +324,7 @@ const Wallet = () => {
                                             <Typography color={'#FF0303'}
                                                         sx={{ fontWeight: 700, fontSize: 21 }}>-500</Typography>
                                         </ListItem>
-
+                                    
                                     </List>
                                 </Paper>
                             </Box>
@@ -322,7 +346,7 @@ const Wallet = () => {
                                 <Typography fontSize={16} color={'#6E3CBC'}>4. Receiving penalties on the basis of rude
                                     behaviour, showing up late, not showing up and/or giving false information, will
                                     cause a deduction from your wallet, after an internal inquiry.</Typography>
-
+                            
                             </Paper>
                         </Box>
                     </Container>

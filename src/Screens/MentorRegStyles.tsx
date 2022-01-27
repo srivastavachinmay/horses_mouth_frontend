@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 
-export const useStyles = makeStyles(( theme ) => (
+ const useStyles = makeStyles(( theme ) => (
     {
         box: {
             backgroundColor: '#fffff',
@@ -94,3 +94,5 @@ export const useStyles = makeStyles(( theme ) => (
         }
     }
 ));
+ 
+ export default useStyles

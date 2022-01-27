@@ -1,47 +1,47 @@
-import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
-import React,{useState, useEffect} from 'react';
-import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup,UserCredential, } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import axios from "axios";
+import { Instagram, LinkedIn, Twitter }                                             from "@mui/icons-material";
+import { Avatar, Box, Button, Card, CardHeader, Chip, Typography }                  from "@mui/material";
+import axios                                                                        from "axios";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, UserCredential, } from "firebase/auth";
+import React, { useEffect, useState }                                               from 'react';
+import { useNavigate }                                                              from "react-router-dom";
+import { auth }                                                                     from "../utils/firebase";
 
 const LandingPage = () => {
     const url =
-    "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
-  const [authenticate, setAuthenticate] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<UserCredential>();
-  const navigate = useNavigate();
-  useEffect(() => {
-    (async () => {
-      const token = await data?.user?.getIdToken(true);
-      let idtoken:string = token!;
-      localStorage.setItem("idtoken",idtoken)
-
-      const res = await axios
-        .get(`${url}/user`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .catch((err: any) => {
-          console.log(err);
-          setLoading(false);
-        });
-
-      console.log(res);
-    //   console.log(res?.data?.users?.length);
-
-      if (res?.data?.users?.length !== 0 && res!==undefined) {
-        (res?.data?.users[0]?.type==="user")?
-        navigate("/mentorProfileM"):
-        navigate("/studentProfileS")
-      } else {
-        alert("response not received");
-      }
-      setLoading(false);
-    })();
-}, [authenticate]);
-
+              "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
+    const [authenticate, setAuthenticate] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<UserCredential>();
+    const navigate = useNavigate();
+    useEffect(() => {
+        ( async () => {
+            const token = await data?.user?.getIdToken(true);
+            let idtoken: string = token!;
+            localStorage.setItem("idtoken", idtoken);
+            
+            const res = await axios
+                .get(`${url}/user`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                .catch(( err: any ) => {
+                    console.log(err);
+                    setLoading(false);
+                });
+            
+            console.log(res);
+            //   console.log(res?.data?.users?.length);
+            
+            if(res?.data?.users?.length !== 0 && res !== undefined) {
+                ( res?.data?.users[ 0 ]?.type === "user" ) ?
+                navigate("/mentorProfileM") :
+                navigate("/studentProfileS");
+            } else {
+                alert("response not received");
+            }
+            setLoading(false);
+        } )();
+    }, [authenticate]);
+    
     onAuthStateChanged(auth, ( user ) => {
         if(!user) {
             navigate("/register");
@@ -61,20 +61,20 @@ const LandingPage = () => {
     });
     const googleAuthentication = async () => {
         let googleProvider = new GoogleAuthProvider();
-    
+        
         const res = await signInWithPopup(auth, googleProvider).catch(
-          (err: any) => {
-            console.log(err);
-          }
+            ( err: any ) => {
+                console.log(err);
+            }
         );
-        if (!res) {
-          console.log("No response received")
+        if(!res) {
+            console.log("No response received");
         } else {
-          setData(res);
-          (authenticate)?setAuthenticate(false):setAuthenticate(true);
-          setLoading(true);
+            setData(res);
+            ( authenticate ) ? setAuthenticate(false) : setAuthenticate(true);
+            setLoading(true);
         }
-      };
+    };
     const chipCSS = {
         bgcolor: '#D4CFFF',
         margin: 0.5,
@@ -84,9 +84,8 @@ const LandingPage = () => {
         color: '#6E3CBC',
         fontWeight: "bolder",
         borderRadius: 2
-    }
-
-      
+    };
+    
     const ProfileCard = () => {
         return (
             <Box display={"flex"}>
@@ -195,7 +194,8 @@ const LandingPage = () => {
                         Login
                     </Button>
                     <Button variant={'contained'}
-                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }} onClick={()=>{navigate("/register")}}>
+                            sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}
+                            onClick={() => {navigate("/register");}}>
                         Sign up
                     </Button>
                 </div>

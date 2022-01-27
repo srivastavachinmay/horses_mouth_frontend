@@ -2,39 +2,35 @@ import "@fontsource/poppins";
 import { createTheme, ThemeProvider }   from "@mui/material";
 import React                            from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Calender from "./Screens/Calender";
-import Wallet from "./Screens/Wallet";
-import MentorProfileSPOV from "./Screens/MentorProfileSPOV";
-import StudentProfileMPOV from "./Screens/StudentProfileMPOV";
-import MentorListing from "./Screens/MentorListing";
-import Register from "./Screens/Register";
-import LandingPage from "./Screens/Landing Page";
-import StudentProfileSPOV from "./Screens/StudentProfileSPOV";
-import MentorProfileMPOV from "./Screens/MentorProfileMPOV";
-
-
+import Calender                         from "./Screens/Calender";
+import LandingPage                      from "./Screens/Landing Page";
+import MentorListing                    from "./Screens/MentorListing";
+import MentorProfileMPOV                from "./Screens/MentorProfileMPOV";
+import MentorProfileSPOV                from "./Screens/MentorProfileSPOV";
+import Register                         from "./Screens/Register";
+import StudentProfileMPOV               from "./Screens/StudentProfileMPOV";
+import StudentProfileSPOV               from "./Screens/StudentProfileSPOV";
+import Wallet                           from "./Screens/Wallet";
 
 const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#6E3CBC',
-            light: "#FFFFFF"
-        },
-        secondary: {
-            main: '#fff',
-        },
-        text: {
-            primary: '#6E3CBC',
-        }
-    },
-    typography: {
-        fontFamily: 'Poppins',
-
-    },
-
-
-});
-
+                              palette: {
+                                  primary: {
+                                      main: '#6E3CBC',
+                                      light: "#FFFFFF"
+                                  },
+                                  secondary: {
+                                      main: '#fff',
+                                  },
+                                  text: {
+                                      primary: '#6E3CBC',
+                                  }
+                              },
+                              typography: {
+                                  fontFamily: 'Poppins',
+        
+                              },
+    
+                          });
 
 function App() {
     return (
@@ -55,7 +51,7 @@ function App() {
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>
-
+        
         </>
     );
 }

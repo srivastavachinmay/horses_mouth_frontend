@@ -12,7 +12,7 @@ import {
 import React from "react";
 
 export default function AppointmentDialog( props: any ) {
-
+    
     return (
         <Dialog
             open={props.open}
@@ -36,7 +36,7 @@ export default function AppointmentDialog( props: any ) {
                 <List style={{
                     height: 500, width: 330,
                     scrollbarColor: '#6E3CBC',
-
+                    
                 }}>
                     <ListItem>
                         <Card sx={{ borderRadius: 5, m: 0.5 }}>
@@ -131,7 +131,7 @@ export default function AppointmentDialog( props: any ) {
                         </Card>
                     </ListItem>
                 </List>
-
+            
             </DialogContent>
             {/*<DialogActions>*/}
             {/*    <Button onClick={props.handleClose} sx={{*/}
@@ -141,5 +141,5 @@ export default function AppointmentDialog( props: any ) {
             {/*    }}>Close</Button>*/}
             {/*</DialogActions>*/}
         </Dialog>
-    )
+    );
 }

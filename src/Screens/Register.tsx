@@ -8,7 +8,7 @@ import { auth }                                                 from "../utils/f
 import MentorReg                                                from "./MentorReg";
 import { useStyles }                                            from './MentorRegStyles';
 
-export const Register = () => {
+const Register = () => {
     const url =
               "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
     const [authenticate, setAuthenticate] = useState(false);
@@ -134,3 +134,5 @@ export const Register = () => {
         </>
     );
 };
+
+export default Register;

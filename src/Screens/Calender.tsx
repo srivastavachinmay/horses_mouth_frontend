@@ -18,10 +18,10 @@ import { Drawer }            from "./Components/Drawer";
 import { MentorSidebarList } from "./Components/listItems";
 
 const Calender = () => {
-
+    
     const [day, setDay] = React.useState('');
     const [formats, setFormats] = React.useState(() => ['Sunday']);
-
+    
     const handleFormat = (
         event: React.MouseEvent<HTMLElement>,
         newFormats: string[] ) => {
@@ -35,7 +35,7 @@ const Calender = () => {
         justifyContent: "center",
         color: '#6E3CBC',
         fontWeight: "bold"
-    }
+    };
     const chipCSS = {
         bgcolor: "white",
         width: 340,
@@ -62,11 +62,11 @@ const Calender = () => {
                 </Typography>
                 <List sx={{ justifyContent: "center", m: 2, ml: 4 }}>{MentorSidebarList}</List>
             </Drawer>
-
+            
             <Box
                 component="main"
                 sx={{
-
+                    
                     flexGrow: 1,
                     height: "100vh",
                     overflow: "auto",
@@ -76,7 +76,7 @@ const Calender = () => {
                     maxWidth="xl"
                     sx={{
                         p: 5,
-
+                        
                         height: "100%",
                         display: "flex",
                         justifyContent: "center"
@@ -110,7 +110,7 @@ const Calender = () => {
                                     zones: most no. of
                                     sessions scheduled </Typography>
                             </Box>
-
+                            
                             <Box display={"flex"}>
                                 <Box display={"flex"} justifyContent={'space-around'}
                                      sx={{
@@ -122,7 +122,7 @@ const Calender = () => {
                                 <Typography color={'#6E3CBC'} fontSize={12} fontWeight={700} lineHeight={1}>yellow
                                     zones: moderate no. of sessions scheduled </Typography>
                             </Box>
-
+                            
                             <Box display={"flex"}>
                                 <Box display={"flex"} justifyContent={'space-around'}
                                      sx={{
@@ -158,7 +158,7 @@ const Calender = () => {
                                 </Typography>
                                 <FormControl variant={"standard"}
                                              sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
-
+                                    
                                     <Select
                                         value={day}
                                         defaultValue={"Day"}
@@ -189,10 +189,10 @@ const Calender = () => {
                                         <MenuItem sx={selectCSS} value={"Thursday"}>Thursday</MenuItem>
                                         <MenuItem sx={selectCSS} value={"Friday"}>Friday</MenuItem>
                                         <MenuItem sx={selectCSS} value={"Saturday"}>Saturday</MenuItem>
-
+                                    
                                     </Select>
                                 </FormControl>
-
+                                
                                 <ToggleButtonGroup
                                     value={formats}
                                     onChange={handleFormat}
@@ -221,8 +221,8 @@ const Calender = () => {
                                     <ToggleButton value="Saturday">
                                         S
                                     </ToggleButton>
-
-
+                                
+                                
                                 </ToggleButtonGroup>
                             </Stack>
                             <Stack width={'50%'} padding={2}>
@@ -237,7 +237,7 @@ const Calender = () => {
                                 </Typography>
                                 <FormControl variant={"standard"}
                                              sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
-
+                                    
                                     <Select
                                         value={day}
                                         defaultValue={"Day"}
@@ -268,13 +268,13 @@ const Calender = () => {
                                         <MenuItem sx={selectCSS} value={"Thursday"}>Thursday</MenuItem>
                                         <MenuItem sx={selectCSS} value={"Friday"}>Friday</MenuItem>
                                         <MenuItem sx={selectCSS} value={"Saturday"}>Saturday</MenuItem>
-
+                                    
                                     </Select>
                                 </FormControl>
                             </Stack>
                         </Box>
-
-
+                    
+                    
                     </Stack>
                 </Container>
             </Box>
