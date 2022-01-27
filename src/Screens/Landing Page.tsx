@@ -3,8 +3,12 @@ import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
 import React, { useState }                          from 'react';
 import { useNavigate }                              from "react-router-dom";
 import appointment                                  from "../assets/appointment.png";
+import bennett                                      from "../assets/bennettLogo.png";
 import chat                                         from "../assets/chat.png";
+import group83                                      from "../assets/group83.png";
+import piggyBank                                    from '../assets/piggy-bank.png';
 import signup                                       from "../assets/signup.png";
+import startUp                                      from "../assets/startUp.png";
 import MentorCard                                   from "./Components/MentorCard";
 
 const LandingPage = () => {
@@ -84,16 +88,19 @@ const LandingPage = () => {
     
     const ProfileCard = () => {
         return (
-            <Box display={"flex"} flexWrap={"wrap"}>
-                <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
+            <Box display={"flex"} alignItems={"center"} justifyContent={"center"} flexWrap={"wrap"}>
+                <Box margin={5} width={300} height={300} display={"inline-flex"} flexDirection={"column"}
                      justifyContent={"space-evenly"} alignItems={"center"}>
                     <Box
                         component="img"
                         sx={{ height: 147, width: 147, }}
                         src={signup}
                     />
-                    <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20} textAlign={"center"}>
-                        Step 1 : REGISTER AS A STUDENT ON HORSE’S MOUTH<br/><br/>
+                    <Typography color={'#6E3CBC'} fontWeight={"800"} textTransform={"uppercase"} fontSize={20}
+                                textAlign={"center"}>
+                        {selectedTab === 0 ?
+                         `Step 1 : REGISTER AS A STUDENT ON HORSE’S MOUTH` :
+                         `Step 1 : REGISTER AS A MENTOR on Horse’s Mouth`}<br/><br/>
                     </Typography>
                 </Box>
                 <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
@@ -104,8 +111,11 @@ const LandingPage = () => {
                         sx={{ height: 147, width: 147, }}
                         src={appointment}
                     />
-                    <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20} textAlign={"center"}>
-                        Step 2 : SCHEDEULE A CALL WITH THE BEST MENTORS AROUND THE WORLD
+                    <Typography color={'#6E3CBC'} fontWeight={"800"} textTransform={"uppercase"} fontSize={20}
+                                textAlign={"center"}>
+                        {selectedTab === 0 ?
+                         `Step 2 : SCHEDULE A CALL WITH THE BEST MENTORS AROUND THE WORLD` :
+                         `Step 2 :  Upload your schdeule with 24 hr flexible slot timings`}
                     </Typography>
                 </Box>
                 <Box margin={5} width={300} height={300} display={"flex"} flexDirection={"column"}
@@ -114,46 +124,19 @@ const LandingPage = () => {
                     <Box
                         component="img"
                         sx={{ height: 147, width: 147, }}
-                        src={chat}
+                        src={selectedTab === 0 ? chat : piggyBank}
                     />
-                    <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20} textAlign={"center"}>
-                        Step 3 : LEARN FROM YOUR MENTOR AND MAKE BETTER COLLEGE DECISIONS
+                    <Typography color={'#6E3CBC'} textTransform={"uppercase"} fontWeight={"800"} fontSize={20}
+                                textAlign={"center"}>
+                        {selectedTab === 0 ?
+                         `Step 3 : LEARN FROM YOUR MENTOR AND MAKE BETTER COLLEGE DECISIONS` :
+                         `Step 3 : Talk to students and earn money !`}
                     </Typography>
                 </Box>
             </Box>
         );
     };
-    // const CustomCard = () => {
-    //     return <div>
-    //
-    //         <Card variant={"outlined"} sx={{
-    //             margin: 5,
-    //             width: 255,
-    //             display: "flex",
-    //             flexWrap: "wrap",
-    //             justifyContent: "space-evenly",
-    //             alignItems: "center",
-    //             borderRadius: 3,
-    //             border: 5,
-    //             borderColor: '#D4CFFF'
-    //         }}>
-    //             <Avatar sx={{ width: 147, height: 147 }}
-    //                     src={"https://www.google.com/url?sa=i&url=https%3A%2F%2Fdragonballuniverse.fandom.com%2Fwiki%2FUltra_Instinct&psig=AOvVaw156j5RHdB00_uqfdptVEm6&ust=1640591076506000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJif3Jb8gPUCFQAAAAAdAAAAABAP"}>
-    //             </Avatar>
-    //             <CardHeader sx={{ color: '#6E3CBC', fontWeight: "bold", fontSize: 60 }} title={'John Doe'}/>
-    //
-    //             <Chip sx={chipCSS} label={'University of waterloo'}/>
-    //             <Chip sx={chipCSS} label={'bachelor’s'}/>
-    //             <Chip sx={chipCSS} label={'Mech. engg.'}/>
-    //             <Button variant={'contained'}
-    //                     sx={{ bgcolor: '#7267CB', fontWeight: 'bold', fontSize: 11, marginRight: 2 }}>
-    //                 Book a session
-    //             </Button>
-    //             <Chip sx={chipCSS} label={'student'}/>
-    //         </Card>
-    //
-    //     </div>;
-    // };
+    
     return (
         <div>
             <Box sx={{
@@ -254,27 +237,50 @@ const LandingPage = () => {
                 {/*</Typography>*/}
             </Box>
             <Box sx={{
-                minHeight: '80vh',
+                minHeight: '100vh',
                 maxHeight: "max-content",
-                backgroundColor: '#111111',
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center"
                 
             }}>
-            
+                <Box
+                    component="img"
+                    sx={{ width: '60%',m:3 }}
+                    src={group83}
+                />
+                <Typography color={'#6E3CBC'} fontWeight={"bold"} fontSize={20} margin={2}>Incubated by</Typography>
+                <Box sx={{
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center"
+                }}>
+                    <Box
+                        component="img"
+                        
+                        sx={{ width: '30%' }}
+                        src={startUp}
+                    />
+                    <Box
+                        component="img"
+                        
+                        sx={{ width: '30%' }}
+                        src={bennett}
+                    />
+                </Box>
             </Box>
             
             <Box sx={{
                 minHeight: '40vh',
                 maxHeight: "max-content",
                 paddingLeft: 15,
-                flexWrap:"wrap",
+                flexWrap: "wrap",
                 paddingRight: 15,
                 paddingTop: 5,
                 backgroundColor: '#D4CFFF'
             }}>
-                <Box display={"flex"} flexWrap={"wrap"} justifyContent={"space-between"} alignItems={"start"}>
+                <Box display={"flex"} flexWrap={"wrap"} justifyContent={"space-between"} alignItems={{ md: "start", xs: "center" }}>
                     <Box>
                         <Typography color={'#6E3CBC'} fontWeight={700} fontSize={20}>
                             Home<br/>
@@ -290,7 +296,8 @@ const LandingPage = () => {
                     </Box>
                     <Box display={"flex"} flexDirection={"column"} justifyContent={"space-between"}
                          alignItems={"flex-end"}>
-                        <Box display={{xs:"none",md:"flex"}}  flexDirection={"column"} alignItems={"end"} paddingBottom={5}
+                        <Box display={{ xs: "none", md: "flex" }} flexDirection={"column"} alignItems={"end"}
+                             paddingBottom={5}
                              justifyContent={"center"}>
                             <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={36}>
                                 UNDERSTAND THE NEXT 2-4 YEARS,
@@ -299,7 +306,8 @@ const LandingPage = () => {
                                 IN THE NEXT 20 MINUTES.
                             </Typography>
                         </Box>
-                        <Box display={"flex"} flexDirection={"column"} alignItems={{md:"end",xs:"start"}} justifyContent={"center"}>
+                        <Box display={"flex"} flexDirection={"column"} alignItems={{ md: "end", xs: "start" }}
+                             justifyContent={"center"}>
                             <Typography color={'#6E3CBC'} fontWeight={"800"} fontSize={20}>
                                 Email us at
                             </Typography>
