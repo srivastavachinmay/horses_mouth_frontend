@@ -56,58 +56,44 @@ const useStyles = makeStyles(( theme ) => ( {
             backgroundColor: "#6E3CBC"
         },
     },
-    interface:{
-        display:"flex",
+    regtitle:{
         width:"100vw",
-        height:"60vh",
-        justifyContent:"space-evenly",
-        alignItems:"center"
-    },
-    student:{
-        width:"25%",
-        height:"80%",
-        display:"flex",
-        flexDirection:"column",
-        boxShadow: "0px 0px 14px 0px #000000",
-        alignItems:"center",
-        justifyContent:"flex-end",
-        padding:"30px 30px",
-        // border:"2px solid black",
-        borderRadius:"18px",
-        backgroundColor:"#f1f1f1",
-        cursor: "pointer",
-        '&:hover':{
-            transform:"scale(1.1)",
-            transition:"transform 2s",
-            transitionTimingFunction: "ease-in-out"
-        }
-    },
-    mentors:{
-        width:"25%",
-        height:"80%",
-        display:"flex",
-        flexDirection:"column",
-        alignItems:"center",
-        justifyContent:"flex-end",
-        boxShadow: "0px 0px 14px 0px #000000",
-        padding:"30px 30px",
-        // border:"2px solid black",
-        borderRadius:"18px",
-        backgroundColor:"#f1f1f1",
-        cursor: "pointer",
-        '&:hover':{
-            transform:"scale(1.1)",
-            transition:"transform 2s",
-            transitionTimingFunction: "ease-in-out"
-        }
-    },
-    maintitle:{
-        color:"#FFFFFF",
-        fontSize:"45px",
-        width:"100vw",
-        height:"25vh",
-        padding:"3rem 0rem",
+        height:"30vh",
         textAlign:"center",
+        color:"#ffffff",
+        padding:"66px 0px",
+        fontSize:"30px"
+    },
+    options:{
+        display:"flex",
+        justifyContent:"space-evenly",
+        alignItems:"center",
+        height:"70vh",
+        width:"100vw",
+    },
+    option:{
+        borderRadius:"20px",
+        border:"2px solid black",
+        boxShadow:"0px 0px 15px 3px #000000",
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+        width:"30%",
+        height:"70%",
+        '&:hover':{
+            transform:"scale(1.2)",
+            transition:"all 1.5s ease-in-out"
+        },
+        backgroundColor:"#f1f1f1",
+    },
+    image:{
+        width:"200px",
+        height:"200px",
+        backgroundColor:"#6E3CBC",
+        margin:"30px 0px",
+        padding:"10px 0px",
+        borderRadius:"133px",
     }
 } ))
 

@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react';
-import SidebarFab from "./Components/SidebarFab";
 import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
 import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +10,13 @@ const LandingPage = () => {
     const url =
     "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
   const [authenticate, setAuthenticate] = useState(false);
+  const [loggingin, setloggingin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<UserCredential>();
   const navigate = useNavigate();
   useEffect(() => {
+    if(loggingin)
+    {
     (async () => {
       const token = await data?.user?.getIdToken(true);
       let idtoken:string = token!;
@@ -41,6 +43,7 @@ const LandingPage = () => {
       }
       setLoading(false);
     })();
+    }
 }, [authenticate]);
 
     onAuthStateChanged(auth, ( user ) => {
@@ -74,6 +77,7 @@ const LandingPage = () => {
           setData(res);
           (authenticate)?setAuthenticate(false):setAuthenticate(true);
           setLoading(true);
+          setloggingin(true)
         }
       };
 
@@ -142,7 +146,7 @@ const LandingPage = () => {
                 <CardHeader sx={{ color: '#6E3CBC', fontWeight: "bold", fontSize: 60 }} title={'John Doe'}/>
 
                 <Chip sx={chipCSS} label={'University of waterloo'}/>
-                <Chip sx={chipCSS} label={'bachelor’s'}/>
+                <Chip sx={chipCSS} label={'bachelors'}/>
                 <Chip sx={chipCSS} label={'Mech. engg.'}/>
                 <Button variant={'contained'}
                         sx={{ bgcolor: '#7267CB', fontWeight: 'bold', fontSize: 11, marginRight: 2 }}>
