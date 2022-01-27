@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react';
-import SidebarFab from "./Components/SidebarFab";
 import { Avatar, Box, Button, Card, CardHeader, Chip, Typography } from "@mui/material";
 import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +10,13 @@ const LandingPage = () => {
     const url =
     "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
   const [authenticate, setAuthenticate] = useState(false);
+  const [loggingin, setloggingin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<UserCredential>();
   const navigate = useNavigate();
   useEffect(() => {
+    if(loggingin)
+    {
     (async () => {
       const token = await data?.user?.getIdToken(true);
       let idtoken:string = token!;
@@ -37,15 +39,16 @@ const LandingPage = () => {
         navigate("/mentorProfileM"):
         navigate("/studentProfileS")
       } else {
-        alert("response not received");
+        // alert("response not received");
       }
       setLoading(false);
     })();
+    }
 }, [authenticate]);
 
     onAuthStateChanged(auth, ( user ) => {
         if(!user) {
-            // navigate("/register");
+            navigate("/register");
             return null;
         } else {
             // localStorage.setItem("token", user.accessToken);
@@ -74,6 +77,7 @@ const LandingPage = () => {
           setData(res);
           (authenticate)?setAuthenticate(false):setAuthenticate(true);
           setLoading(true);
+          setloggingin(true)
         }
       };
 
