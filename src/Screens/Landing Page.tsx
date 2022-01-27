@@ -6,6 +6,7 @@ import appointment                                  from "../assets/appointment.
 import bennett                                      from "../assets/bennettLogo.png";
 import chat                                         from "../assets/chat.png";
 import group83                                      from "../assets/group83.png";
+import group84                                      from "../assets/group84.png";
 import piggyBank                                    from '../assets/piggy-bank.png';
 import signup                                       from "../assets/signup.png";
 import startUp                                      from "../assets/startUp.png";
@@ -148,7 +149,7 @@ const LandingPage = () => {
                 width: "10rem",
                 height: "10rem"
             }}/>
-            <div style={{ minHeight: '100vh', maxHeight: "max-content", display: "inline-flex" }}>
+            <div style={{ minHeight: '100vh', maxHeight: "max-content", display: "flex" }}>
                 <Box sx={{ marginLeft: 30, marginTop: 30 }}>
                     <Typography sx={{ fontSize: 42, fontWeight: "bolder", color: '#6E3CBC' }}>
                         Understand the on ground<br/>
@@ -188,6 +189,23 @@ const LandingPage = () => {
                         Sign up
                     </Button>
                 </div>
+                <Box
+                    display={{xs:'none',lg:'block'}}
+                    alignSelf={"flex-end"}
+                    justifySelf={"flex-end"}
+                    component="img"
+                    sx={{
+                        width: '40%',
+                        height: '40%',
+                        
+                        // bottom: 0,
+                        // right: 0,
+                        // top: 'auto',
+                        // left: 'auto',
+                      
+                    }}
+                    src={group84}
+                />
             </div>
             <Box minHeight={'80vh'} maxHeight={"max-content"} bgcolor={'#D4CFFF'} display={"flex"}
                  flexDirection={"column"} justifyContent={"center"}
@@ -247,7 +265,7 @@ const LandingPage = () => {
             }}>
                 <Box
                     component="img"
-                    sx={{ width: '60%',m:3 }}
+                    sx={{ width: '60%', m: 3 }}
                     src={group83}
                 />
                 <Typography color={'#6E3CBC'} fontWeight={"bold"} fontSize={20} margin={2}>Incubated by</Typography>
@@ -280,7 +298,8 @@ const LandingPage = () => {
                 paddingTop: 5,
                 backgroundColor: '#D4CFFF'
             }}>
-                <Box display={"flex"} flexWrap={"wrap"} justifyContent={"space-between"} alignItems={{ md: "start", xs: "center" }}>
+                <Box display={"flex"} flexWrap={"wrap"} justifyContent={"space-between"}
+                     alignItems={{ md: "start", xs: "center" }}>
                     <Box>
                         <Typography color={'#6E3CBC'} fontWeight={700} fontSize={20}>
                             Home<br/>
