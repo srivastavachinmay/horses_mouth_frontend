@@ -146,7 +146,7 @@ const LandingPage = () => {
                 <CardHeader sx={{ color: '#6E3CBC', fontWeight: "bold", fontSize: 60 }} title={'John Doe'}/>
 
                 <Chip sx={chipCSS} label={'University of waterloo'}/>
-                <Chip sx={chipCSS} label={'bachelor’s'}/>
+                <Chip sx={chipCSS} label={'bachelors'}/>
                 <Chip sx={chipCSS} label={'Mech. engg.'}/>
                 <Button variant={'contained'}
                         sx={{ bgcolor: '#7267CB', fontWeight: 'bold', fontSize: 11, marginRight: 2 }}>
