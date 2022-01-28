@@ -35,7 +35,7 @@ export const countries = () => {
   return arr;
 };
 
-export const degree = () => {
+export const degreearr = () => {
   let arr = [
     "bachelors",
     "masters",
@@ -51,13 +51,15 @@ export const area = () => {
     "Social-Sciences",
     "Humanities"
   ]
+  return arr;
 }
 
-export const relation = () => {
+export const relationarr = () => {
   let arr = [
     "current",
     "alumni"
   ]
+  return arr;
 }
 
 export const citizenship = () => {

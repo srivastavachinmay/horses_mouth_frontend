@@ -1,8 +1,10 @@
-import { Button, Checkbox, FormControlLabel, Typography } from "@mui/material";
+import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import {useState } from "react";
 import styling from './MentorRegStyles'
 import MentorComForm from "./MentorComForm";
-import { countries } from "../data/data";
+import { countries,degreearr,area,relationarr,citizenship } from "../data/data";
+import { DatePicker, LocalizationProvider } from "@mui/lab";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 const MentorReg = (props:any) => {
 
@@ -15,7 +17,9 @@ const MentorReg = (props:any) => {
   const [study, setstudy] = useState("");
   const [relation, setrelation] = useState("");
   const [uniemail, setuniemail] = useState("");
-  const [grad, setgrad] = useState("");
+  let checkdate=new Date().getFullYear();
+  let currdate=new Date();
+  const [grad, setgrad] = useState(currdate);
   const [country, setcountry] = useState("");
   const [previous, setprevious] = useState("");
   const [specialization, setspecialization] = useState("");
@@ -29,6 +33,8 @@ const MentorReg = (props:any) => {
   const [sat, setsat] = useState("");
 
   const classes=styling()
+  console.log(checkdate)
+  console.log(currdate)
 
   console.log(props?.username);
   console.log(props?.data);
@@ -54,61 +60,112 @@ const MentorReg = (props:any) => {
     <Typography variant="h6" style={{ marginBottom: "16px" }}>please enter
       your details below to sign up as a mentor</Typography>
     <div className={classes.innerbox}>
-      <label htmlFor="curredu" className={classes.title}> UNIVERSITY</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <TextField id="outlined-basic" label="UNIVERSITY" variant="outlined" onChange={(event) => {
         setuni(event.target.value)
-      }} value={uni} required={true} />
+      }} value={uni} required={true}/>
       <br />
-      <label htmlFor="curredu" className={classes.title}> COURSE NAME</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <TextField id="outlined-basic" label="COURSE NAME" variant="outlined" onChange={(event) => {
         setcourse(event.target.value)
-      }} value={course} required={true} />
+      }} value={course} required={true}/>
       <br />
-      <label htmlFor="curredu" className={classes.title}> DEGREE NAME</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
-        setdegree(event.target.value)
-      }} value={degree} required={true} />
-      <br />
-      <label htmlFor="curredu" className={classes.title}> AREA OF STUDY</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
-        setstudy(event.target.value)
-      }} value={study} required={true} />
-      <br />
-      <label htmlFor="curredu" className={classes.title}> UNIVERSITY RELATION</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
-        setrelation(event.target.value)
-      }} value={relation} required={true} />
-      <br />
-      <label htmlFor="curredu" className={classes.title}> UNIVERSITY EMAIL ID (if current student)</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
-        setuniemail(event.target.value)
-      }} value={uniemail} required={true} />
-      <br />
-      <label htmlFor="curredu" className={classes.title}> YEAR OF GRADUATION</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
-        setgrad(event.target.value)
-      }} value={grad} required={true} />
-      <br />
-      <label htmlFor="curredu" className={classes.title}> COUNTRY OF STUDY</label>
-      <select name="curredu" className={classes.sminput} onChange={(event) => {
-        setcountry(event.target.value)
-      }} value={country} id="country">
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+        <InputLabel id="demo-simple-select-filled-label">DEGREE NAME *</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-filled"
+          onChange={(event) => {
+            setdegree(event.target.value)
+          }} value={degree} required={true}>
         {
-          countries().filter( (ele:any) =>ele.includes("")).map((v:any)=>(
-            <option value={v}></option>
+          degreearr().map((v:any)=>(
+            <MenuItem value={v}>{v}</MenuItem>
           ))
         }
-      </select>
+        </Select>
+      </FormControl>
       <br />
-      <label htmlFor="curredu" className={classes.title}> PREVIOUS EDUCATIONAL INSTITUTE</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+        <InputLabel id="demo-simple-select-filled-label">AREA OF STUDY *</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-filled"
+          onChange={(event) => {
+            setstudy(event.target.value)
+          }} value={study} required={true}>
+         {
+          area().map((v:any)=>(
+            <MenuItem value={v}>{v}</MenuItem>
+          ))
+        }
+        </Select>
+      </FormControl>
+      <br />
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+        <InputLabel id="demo-simple-select-filled-label">UNIVERSITY RELATION</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-filled"
+          onChange={(event) => {
+            setrelation(event.target.value)
+          }} value={relation}
+          required={true}
+        >
+          {
+          relationarr().map((v:any)=>(
+            <MenuItem value={v}>{v}</MenuItem>
+          ))
+        }
+        </Select>
+      </FormControl>
+      <br />
+      <TextField id="outlined-basic" label="UNIVERSITY EMAIL ID (if current student)" variant="outlined" onChange={(event) => {
+        setuniemail(event.target.value)
+      }} value={uniemail} required={true}/>
+      <br />
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker
+          views={['year']}
+          label="Year of graduation"
+          minDate={new Date(`${checkdate-11}`)}
+          maxDate={new Date(`${checkdate+11}`)}
+          value={grad}
+          onChange={(newValue) => {
+            if(newValue)
+            {
+            setgrad(newValue);
+            }
+          }}
+          renderInput={(params) => <TextField {...params} helperText={null} 
+          required={true}/>}
+        />
+        </LocalizationProvider>
+      <br />
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+        <InputLabel id="demo-simple-select-filled-label">COUNTRY OF STUDY *</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-filled"
+          value={country}
+          onChange={(event) => {
+            setcountry(event.target.value)
+          }}
+          required={true}
+        >
+          {
+          countries().filter((ele:any)=> ele.includes("")).map((v:any)=>(
+            <MenuItem value={v}>{v}</MenuItem>
+          ))
+        }
+        </Select>
+      </FormControl>
+      <br />
+      <TextField id="outlined-basic" label="PREVIOUS EDUCATIONAL INSTITUTE" variant="outlined" onChange={(event) => {
         setprevious(event.target.value)
-      }} value={previous} required={true} />
+      }} value={previous} required={true}/>
       <br />
-      <label htmlFor="curredu" className={classes.title}> SPECIALIZATION</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <TextField id="outlined-basic" label="SPECIALIZATION" variant="outlined" onChange={(event) => {
         setspecialization(event.target.value)
-      }} value={specialization} required={true} />
+      }} value={specialization} required={true}/>
       <br />
       <FormControlLabel
         control={<Checkbox checked={campusjob} onChange={handlecampus} name="checkedA"
@@ -120,41 +177,41 @@ const MentorReg = (props:any) => {
           style={{ color: "#6E3CBC" }} />}
         label="Do you hold a scholarship ?"
       />
-      <label htmlFor="curredu" className={classes.title}> PLACE OF STAY</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <br />
+      <TextField id="outlined-basic" label="PLACE OF STAY" variant="outlined" onChange={(event) => {
         setplace(event.target.value)
-      }} value={place} required={true} />
+      }} value={place} required={true}/>
       <br />
-      <label htmlFor="curredu" className={classes.title}> PRIMARY AND SECONDARY LANGUAGES</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <TextField id="outlined-basic" label="PRIMARY AND SECONDARY LANGUAGES" variant="outlined" onChange={(event) => {
         setlanguages((event: any) => { const language = (event.target.value).split(","); return language })
-      }} value={languages} required={true} />
+      }} required={true}/>
       <br />
-      <label htmlFor="curredu" className={classes.title}> BIO</label>
-      <textarea name="curredu" id="" cols={30} rows={10} className={classes.biggertext}
-        onChange={(event) => {
-          setbio(event.target.value)
-        }} value={bio} required={true} />
+        <TextField
+          id="outlined-multiline-static"
+          label="BIO"
+          multiline
+          rows={7}
+          defaultValue="Default Value"
+          onChange={(event) => {
+            setbio(event.target.value)
+          }} value={bio} required={true}
+        />
       <br />
-      <label htmlFor="curredu" className={classes.title}> CURRENT GPA</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
-        // @ts-ignore
+      <TextField id="outlined-basic" label="CURRENT GPA" variant="outlined" onChange={(event) => {
         setgpa(event.target.value)
-      }} value={gpa} />
+      }} value={gpa}/>
       <br />
-      <label htmlFor="curredu" className={classes.title}> GMAT SCORE (FOR MASTER’S DEGREES)</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <TextField id="outlined-basic" label="GMAT SCORE (FOR MASTER'S DEGREES)" variant="outlined" onChange={(event) => {
         setgmat(event.target.value)
-      }} value={gmat} required={true} />
+      }} value={gmat}/>
       <br />
-      <label htmlFor="curredu" className={classes.title}> SAT SCORE (FOR BACHELOR’S DEGREES)</label>
-      <input type="text" name="curredu" className={classes.sminput} onChange={(event) => {
+      <TextField id="outlined-basic" label="SAT SCORE (FOR BACHELOR'S DEGREES)" variant="outlined" onChange={(event) => {
         setsat(event.target.value)
-      }} value={sat} required={true} />
+      }} value={sat}/>
       <br />
-      <Button variant="contained" className={classes.button} onClick={() => {
+      <Button variant="contained" style={{padding:"15px 0px"}}onClick={() => {
         setmentorpage1(false)
-      }}>Submit</Button>
+      }}>Proceed</Button>
     </div>
   </div>:
   <MentorComForm details={{

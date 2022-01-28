@@ -17,7 +17,7 @@ const useStyles = makeStyles(( theme ) => ( {
         flexDirection: "column",
         overflowY: "auto",
         // overflowY: "scroll",
-        width: "55vw",
+        width: "75vw",
         padding: "30px 30px",
         height: "250vh",
         borderRadius: "7px"
