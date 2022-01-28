@@ -90,6 +90,7 @@ export const currenciesarr = () => {
     "israeli new shekel (ils)", "thai baht (thb)",
     "japanese yen (jpy)", "uk pounds sterling (gbp)",
     "malaysian ringgit (myr)", "us dollar (usd)",
+    "mexican peso (mxn)"
   ]
   return arr;
 }
