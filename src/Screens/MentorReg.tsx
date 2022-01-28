@@ -1,8 +1,8 @@
-import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Autocomplete, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import {useState } from "react";
 import styling from './MentorRegStyles'
 import MentorComForm from "./MentorComForm";
-import { countries,degreearr,area,relationarr,citizenship } from "../data/data";
+import { countries,degreearr,area,relationarr } from "../data/data";
 import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
@@ -32,6 +32,10 @@ const MentorReg = (props:any) => {
   const [gmat, setgmat] = useState("");
   const [sat, setsat] = useState("");
   const [lang, setlang] = useState("");
+
+  //component states
+  const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const classes=styling()
   console.log(checkdate)
@@ -141,24 +145,29 @@ const MentorReg = (props:any) => {
         />
         </LocalizationProvider>
       <br />
-      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
-        <InputLabel id="demo-simple-select-filled-label">COUNTRY OF STUDY *</InputLabel>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-filled"
-          value={country}
-          onChange={(event) => {
-            setcountry(event.target.value)
+      <Autocomplete
+          open={open}
+          onOpen={() => {
+            // only open when in focus and inputValue is not empty
+            if (inputValue) {
+              setOpen(true);
+            }
           }}
-          required={true}
-        >
-          {
-          countries().filter((ele:any)=> ele.includes("")).map((v:any)=>(
-            <MenuItem value={v}>{v}</MenuItem>
-          ))
-        }
-        </Select>
-      </FormControl>
+          onClose={() => setOpen(false)}
+          inputValue={inputValue}
+          onInputChange={(e, value, reason) => {
+            setInputValue(value?.toLowerCase());
+
+            // only open when inputValue is not empty after the user typed something
+            if (!value) {
+              setOpen(false);
+            }
+          }}
+          options={countries()}
+          renderInput={(params) => (
+            <TextField {...params} label="COUNTRY OF STUDY *" variant="outlined" />
+          )}
+        />
       <br />
       <TextField id="outlined-basic" label="PREVIOUS EDUCATIONAL INSTITUTE" variant="outlined" onChange={(event) => {
         setprevious(event.target.value)
@@ -210,7 +219,7 @@ const MentorReg = (props:any) => {
         setsat(event.target.value)
       }} value={sat}/>
       <br />
-      <Button variant="contained" style={{padding:"15px 0px"}}onClick={() => {
+      <Button variant="contained" style={{padding:"15px 0px"}} onClick={() => {
         setmentorpage1(false)
       }}>Proceed</Button>
     </div>

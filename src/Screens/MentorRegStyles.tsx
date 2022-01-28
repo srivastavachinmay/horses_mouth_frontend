@@ -91,6 +91,9 @@ const useStyles = makeStyles(( theme ) => ( {
         margin:"30px 0px",
         padding:"10px 0px",
         borderRadius:"133px",
+    },
+    uploading:{
+        display:"flex !important",
     }
 } ))
 

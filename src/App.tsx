@@ -14,6 +14,7 @@ import MentorReg from "./Screens/MentorReg";
 import LoginUser from "./Screens/LoginUser";
 import Register from "./Screens/Register";
 import LandingPage from "./Screens/Landing Page";
+import MentorComForm from './Screens/MentorComForm';
 
 
 const theme = createTheme({
@@ -55,7 +56,8 @@ function App() {
                         <Route path="studentProfileM" element={<StudentProfileMPOV/>}/>
                         <Route path="mentors" element={<MentorListing/>}/>
                         <Route path="login" element={<LoginUser/>}/>
-                        <Route path="register" element={<Register/>}/>
+                        {/* <Route path="register" element={<Register/>}/> */}
+                        <Route path="register" element={<MentorComForm/>}/>
                         <Route path="mentor/login/form" element={<MentorReg/>}/>
                     </Routes>
                 </BrowserRouter>
