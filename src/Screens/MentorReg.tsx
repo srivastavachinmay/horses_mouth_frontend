@@ -23,6 +23,7 @@ const MentorReg = (props:any) => {
   let checkdate=new Date().getFullYear();
   let currdate=new Date();
   const [grad, setgrad] = useState(currdate);
+  const [joining, setjoining] = useState(currdate);
   const [country, setcountry] = useState("");
   const [previous, setprevious] = useState("");
   const [prevcourse, setprevcourse] = useState("");
@@ -39,7 +40,6 @@ const MentorReg = (props:any) => {
 
   //component states
   const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
 
   const classes=styling()
   const ITEM_HEIGHT = 48;
@@ -162,11 +162,11 @@ const MentorReg = (props:any) => {
           label="Year of graduation"
           minDate={new Date(`${checkdate-11}`)}
           maxDate={new Date(`${checkdate+11}`)}
-          value={grad}
+          value={joining}
           onChange={(newValue) => {
             if(newValue)
             {
-            setgrad(newValue);
+            setjoining(newValue);
             }
           }}
           renderInput={(params) => <TextField {...params} helperText={null} 
@@ -196,14 +196,14 @@ const MentorReg = (props:any) => {
           open={open}
           onOpen={() => {
             // only open when in focus and inputValue is not empty
-            if (inputValue) {
+            if (country) {
               setOpen(true);
             }
           }}
           onClose={() => setOpen(false)}
-          inputValue={inputValue}
+          inputValue={country}
           onInputChange={(e, value, reason) => {
-            setInputValue(value?.toLowerCase());
+            setcountry(value?.toLowerCase());
 
             // only open when inputValue is not empty after the user typed something
             if (!value) {
