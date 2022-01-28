@@ -19,7 +19,7 @@ const useStyles = makeStyles(( theme ) => ( {
         // overflowY: "scroll",
         width: "75vw",
         padding: "30px 30px",
-        height: "250vh",
+        height: "270vh",
         borderRadius: "7px"
     },
     title: {},

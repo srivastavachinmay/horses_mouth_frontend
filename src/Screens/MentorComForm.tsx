@@ -1,7 +1,6 @@
-import { country } from "../data/data";
 import { useState } from "react";
 import styling from "./MentorRegStyles";
-import { countries, degreearr, area, relationarr } from "../data/data";
+import { countries, degreearr, area, relationarr,currenciesarr } from "../data/data";
 import {
   Autocomplete,
   Button,
@@ -18,17 +17,20 @@ import {
 import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
-const MentorComForm = (props) => {
+const MentorComForm = (props:any) => {
   const classes = styling();
 
   //form states
   const [agree, setagree] = useState(false);
+  const [currency, setcurrency] = useState("");
 
   //component states
   const [submitting, setsubmitting] = useState(true);
-  const [uploaded, setuploaded] = useState(false);
 
-  const handlefileupload = (event) => {
+  const handlefileupload = (event:any) => {
+    console.log(event.target);
+  };
+  const handleimageupload = (event:any) => {
     console.log(event.target);
   };
 
@@ -62,6 +64,7 @@ const MentorComForm = (props) => {
           </div>
           <label htmlFor="contained-button-file" style={{ width: "30%" }}>
             <Input
+            //@ts-ignore
               accept="image/*"
               id="contained-button-file"
               type="file"
@@ -76,6 +79,7 @@ const MentorComForm = (props) => {
             </Button>
           </label>
         </div>
+        <br />
         <div className={classes.uploading}>
           <div
             style={{ display: "flex", flexDirection: "column", width: "70%" }}
@@ -86,12 +90,13 @@ const MentorComForm = (props) => {
               the profile picture.
             </p>
           </div>
-          <label htmlFor="contained-button-file" style={{ width: "30%" }}>
+          <label htmlFor="university-upload" style={{ width: "30%" }}>
             <Input
+            //@ts-ignore
               accept="image/*"
-              id="contained-button-file"
+              id="university-upload"
               type="file"
-              onChange={handlefileupload}
+              onChange={handleimageupload}
             />
             <Button
               variant="contained"
@@ -108,21 +113,38 @@ const MentorComForm = (props) => {
           id="outlined-basic"
           label="LINKEDIN PROFILE LINK"
           variant="outlined"
+          required={true}
         />
         <br />
         <hr />
         <br />
-        <TextField
-          id="outlined-basic"
-          label="PAYMENT PREFERENCE"
-          variant="outlined"
-        />
-        <br />
+        <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+        <InputLabel id="demo-simple-select-filled-label">CURRENCY PREFERENCE</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-filled"
+          onChange={(event) => {
+            setcurrency(event.target.value)
+          }} value={currency}
+          required={true}
+        >
+          {
+          currenciesarr().map((v:any)=>(
+            <MenuItem value={v}>{v}</MenuItem>
+          ))
+        }
+        </Select>
+      </FormControl>
+      <br />
+      <br />
+      {
+        (currency==="indian rupee (inr)")?
         <TextField
           id="outlined-basic"
           label="UPI ID (if payment preference is INR)"
           variant="outlined"
-        />
+        />:<div/>
+      }
         <br />
         <br />
         <br />

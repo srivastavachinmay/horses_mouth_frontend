@@ -54,10 +54,57 @@ export const area = () => {
   return arr;
 }
 
+
+
+export const languagearr = () => {
+  let arr = [
+    "english",
+    "mandarin chinese",
+    "hindi",
+    "spanish",
+    "french",
+    "arabic",
+    "bengali",
+    "russian",
+    "portuguese",
+    "indonesian",
+    "urdu",
+    "german",
+  ]
+  return arr;
+}
+
+
+export const currenciesarr = () => {
+  let arr = [
+    "australian dollar (aud)",
+    "new taiwan dollar (twd)",
+    "brazilian real (brl)", "new zealand dollar (nzd)",
+    "canadian dollar (cad)", "norwegian krone (nok)",
+    "czech koruna (czk)", "philippine peso (php)",
+    "danish krone (dkk)", "polish zloty (pln)",
+    "euro (eur)", "russian ruble (rub)",
+    "hong kong dollar (hkd)", "singapore dollar (sgd)",
+    "hungarian forint (huf)", "swedish krona (sek)",
+    "indian rupee (inr)", "swiss franc (chf)",
+    "israeli new shekel (ils)", "thai baht (thb)",
+    "japanese yen (jpy)", "uk pounds sterling (gbp)",
+    "malaysian ringgit (myr)", "us dollar (usd)",
+  ]
+  return arr;
+}
+
 export const relationarr = () => {
   let arr = [
     "current",
     "alumni"
+  ]
+  return arr;
+}
+export const placeofstay = () => {
+  let arr = [
+    "oncampus",
+    "offcampus"
   ]
   return arr;
 }

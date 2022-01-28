@@ -1,14 +1,17 @@
-import { Autocomplete, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Autocomplete, Button, Checkbox, Chip, FormControl, FormControlLabel, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
 import {useState } from "react";
 import styling from './MentorRegStyles'
 import MentorComForm from "./MentorComForm";
-import { countries,degreearr,area,relationarr } from "../data/data";
+import { countries,degreearr,area,relationarr,placeofstay, languagearr } from "../data/data";
 import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { Box } from "@mui/system";
+import { useTheme } from "@emotion/react";
 
 const MentorReg = (props:any) => {
 
   const [mentorpage1,setmentorpage1]= useState(true)
+  const theme = useTheme();
 
   //forms states
   const [uni, setuni] = useState("");
@@ -22,12 +25,13 @@ const MentorReg = (props:any) => {
   const [grad, setgrad] = useState(currdate);
   const [country, setcountry] = useState("");
   const [previous, setprevious] = useState("");
+  const [prevcourse, setprevcourse] = useState("");
   const [specialization, setspecialization] = useState("");
   const [campusjob, setcampusjob] = useState(false);
   const [scholarship, setscholarship] = useState(false);
   const [place, setplace] = useState("");
   const [languages, setlanguages] = useState([]);
-  const [bio, setbio] = useState("");
+  const [bio, setbio] = useState("eg. Hello I'm Ayush, a third year student at the University of Waterloo. I am an avid debater and a good communicator. I live on-campus as a hosteller and believe I can give you a well-rounded review about the aerospace engineering department of the university. I am currently involved in many research projects as well and my dream job is to work as an engineer for Boeing.");
   const [gpa, setgpa] = useState("");
   const [gmat, setgmat] = useState("");
   const [sat, setsat] = useState("");
@@ -38,8 +42,24 @@ const MentorReg = (props:any) => {
   const [inputValue, setInputValue] = useState("");
 
   const classes=styling()
-  console.log(checkdate)
-  console.log(currdate)
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+  function getStyles(name:any, languages:any, theme:any) {
+    return {
+      fontWeight:
+        languages.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
 
   console.log(props?.username);
   console.log(props?.data);
@@ -57,6 +77,15 @@ const MentorReg = (props:any) => {
       setscholarship(true)
   }
 
+  const handleChange = (event:any) => {
+    const {
+      target: { value },
+    } = event;
+    setlanguages(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
   return (
     (mentorpage1)?
     <div style={{ overflowY: "auto" }} className={classes.box}>
@@ -89,7 +118,7 @@ const MentorReg = (props:any) => {
         </Select>
       </FormControl>
       <br />
-      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px",width:"100%"}}>
         <InputLabel id="demo-simple-select-filled-label">AREA OF STUDY *</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -106,7 +135,7 @@ const MentorReg = (props:any) => {
       </FormControl>
       <br />
       <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
-        <InputLabel id="demo-simple-select-filled-label">UNIVERSITY RELATION</InputLabel>
+        <InputLabel id="demo-simple-select-filled-label">TYPE OF STUDENT</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-filled"
@@ -133,6 +162,24 @@ const MentorReg = (props:any) => {
           label="Year of graduation"
           minDate={new Date(`${checkdate-11}`)}
           maxDate={new Date(`${checkdate+11}`)}
+          value={grad}
+          onChange={(newValue) => {
+            if(newValue)
+            {
+            setgrad(newValue);
+            }
+          }}
+          renderInput={(params) => <TextField {...params} helperText={null} 
+          required={true}/>}
+        />
+        </LocalizationProvider>
+      <br />
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker
+          views={['year']}
+          label="Year of Joining University"
+          minDate={new Date(`${checkdate-10}`)}
+          maxDate={new Date(`${checkdate}`)}
           value={grad}
           onChange={(newValue) => {
             if(newValue)
@@ -177,6 +224,10 @@ const MentorReg = (props:any) => {
         setspecialization(event.target.value)
       }} value={specialization} required={true}/>
       <br />
+      <TextField id="outlined-basic" label="PREVIOUS PURSUED COURSE/S" variant="outlined" onChange={(event) => {
+        setprevcourse(event.target.value)
+      }} value={prevcourse} required={true}/>
+      <br />
       <FormControlLabel
         control={<Checkbox checked={campusjob} onChange={handlecampus} name="checkedA"
           style={{ color: "#6E3CBC" }} />}
@@ -188,13 +239,54 @@ const MentorReg = (props:any) => {
         label="Do you hold a scholarship ?"
       />
       <br />
-      <TextField id="outlined-basic" label="PLACE OF STAY" variant="outlined" onChange={(event) => {
-        setplace(event.target.value)
-      }} value={place} required={true}/>
       <br />
-      <TextField id="outlined-basic" label="PRIMARY AND SECONDARY LANGUAGES" variant="outlined" onChange={(event) => {
-        setlang(event.target.value)
-      }} value={lang} required={true}/>
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+        <InputLabel id="demo-simple-select-filled-label">PLACE OF STAY</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-filled"
+          onChange={(event) => {
+            setplace(event.target.value)
+          }} value={place}
+          required={true}
+        >
+          {
+          placeofstay().map((v:any)=>(
+            <MenuItem value={v}>{v}</MenuItem>
+          ))
+        }
+        </Select>
+      </FormControl>
+      <br />
+      <FormControl sx={{ m: 1, width: 300 }} style={{margin:"0px",width:"100%"}}>
+        <InputLabel id="demo-multiple-chip-label">PRIMARY AND SECONDARY LANGUAGES</InputLabel>
+        <Select
+          labelId="demo-multiple-chip-label"
+          id="demo-multiple-chip"
+          multiple
+          value={languages}
+          onChange={handleChange}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          renderValue={(selected) => (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
+              ))}
+            </Box>
+          )}
+          MenuProps={MenuProps}
+        >
+          {languagearr().map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, languages, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <br />
         <TextField
           id="outlined-multiline-static"
