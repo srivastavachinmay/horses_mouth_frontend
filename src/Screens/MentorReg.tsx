@@ -31,6 +31,7 @@ const MentorReg = (props:any) => {
   const [gpa, setgpa] = useState("");
   const [gmat, setgmat] = useState("");
   const [sat, setsat] = useState("");
+  const [lang, setlang] = useState("");
 
   const classes=styling()
   console.log(checkdate)
@@ -183,8 +184,8 @@ const MentorReg = (props:any) => {
       }} value={place} required={true}/>
       <br />
       <TextField id="outlined-basic" label="PRIMARY AND SECONDARY LANGUAGES" variant="outlined" onChange={(event) => {
-        setlanguages((event: any) => { const language = (event.target.value).split(","); return language })
-      }} required={true}/>
+        setlang(event.target.value)
+      }} value={lang} required={true}/>
       <br />
         <TextField
           id="outlined-multiline-static"
@@ -228,7 +229,7 @@ const MentorReg = (props:any) => {
     campusjob,
     scholarship,
     place,
-    languages,
+    lang,
     bio,
     gpa,
     gmat,
