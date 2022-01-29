@@ -1,11 +1,10 @@
-import { Button, Checkbox, FormControlLabel, Typography } from "@mui/material";
 import {
   GoogleAuthProvider,
   signInWithPopup,
   UserCredential,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styling from './MentorRegStyles'

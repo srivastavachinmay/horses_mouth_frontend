@@ -36,7 +36,6 @@ const MentorReg = (props:any) => {
   const [gpa, setgpa] = useState("");
   const [gmat, setgmat] = useState("");
   const [sat, setsat] = useState("");
-  const [lang, setlang] = useState("");
 
   //component states
   const [open, setOpen] = useState(false);
@@ -317,6 +316,8 @@ const MentorReg = (props:any) => {
     </div>
   </div>:
   <MentorComForm details={{
+    data:props.data,
+    username:props.username,
     uni,
     course,
     degree,
@@ -324,13 +325,15 @@ const MentorReg = (props:any) => {
     relation,
     uniemail,
     grad,
+    joining,
     country,
     previous,
+    prevcourse,
     specialization,
     campusjob,
     scholarship,
     place,
-    lang,
+    languages,
     bio,
     gpa,
     gmat,

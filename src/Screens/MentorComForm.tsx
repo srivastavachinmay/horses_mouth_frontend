@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import styling from "./MentorRegStyles";
-import { countries, degreearr, area, relationarr,currenciesarr } from "../data/data";
+import { currenciesarr } from "../data/data";
 import {
-  Autocomplete,
   Button,
   Checkbox,
   FormControl,
@@ -14,24 +13,80 @@ import {
   Typography,
   Input,
 } from "@mui/material";
-import { DatePicker, LocalizationProvider } from "@mui/lab";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import axios from "axios";
 
 const MentorComForm = (props:any) => {
-  const classes = styling();
+  const [authenticate, setauthenticate] = useState(false);
+  const [sendimages, setsendimages] = useState(false);
+  const [Loading, setLoading] = useState(false);
+  const [error, seterror] = useState(false);
+  const [type1, settype1] = useState("png");
 
-  //form states
-  const [agree, setagree] = useState(false);
-  const [currency, setcurrency] = useState("");
+  const url =
+  "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
+
+
+    //form states
+    const [agree, setagree] = useState(false);
+    const [currency, setcurrency] = useState("");
+    const [universityid, setuniversityid] = useState(null);
+    const [uploadimg, setuploadimg] = useState(null);
+
+
+  useEffect(() => {
+    (async () => {
+      let res;
+      let token=await props?.details?.data?.user?.getIdToken();
+      console.log(props?.details?.data)
+      if (sendimages) {
+        res = await axios
+          .get(`${url}/upload-url/?mimeType=${type1}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .catch((err: any) => {
+            console.log(err);
+            setLoading(false);
+            seterror(true)
+          });
+
+        if(res?.status===200)
+        {
+          const body=new FormData();
+          if(universityid)
+          {
+          body.append('file',universityid)
+          body.append("key",res?.data?.fields?.key)
+          }
+          res = await axios
+          .post(`${res?.data?.url}`,body)
+          .catch((err: any) => {
+            console.log(err);
+            setLoading(false);
+            seterror(true)
+          });
+        }
+      }
+      console.log(res);
+      // if (res?.status === 200) {
+      //   navigate("/")
+      // }
+      setLoading(false);
+    })();
+  }, [authenticate]);
+  
+  const classes = styling();
 
   //component states
   const [submitting, setsubmitting] = useState(true);
 
   const handlefileupload = (event:any) => {
-    console.log(event.target);
+    console.log(event.target.files[0]);
+    setuniversityid(event.target.files[0])
   };
   const handleimageupload = (event:any) => {
-    console.log(event.target);
+    console.log(event.target.files[0]);
+    setuploadimg(event.target.files[0])
   };
 
   const handleagree = () => {
@@ -40,6 +95,8 @@ const MentorComForm = (props:any) => {
       :
       setagree(true)
   }
+
+  console.log(props)
 
   return submitting ? (
     <div style={{ overflowY: "auto" }} className={classes.box}>
@@ -64,8 +121,6 @@ const MentorComForm = (props:any) => {
           </div>
           <label htmlFor="contained-button-file" style={{ width: "30%" }}>
             <Input
-            //@ts-ignore
-              accept="image/*"
               id="contained-button-file"
               type="file"
               onChange={handlefileupload}
@@ -92,8 +147,6 @@ const MentorComForm = (props:any) => {
           </div>
           <label htmlFor="university-upload" style={{ width: "30%" }}>
             <Input
-            //@ts-ignore
-              accept="image/*"
               id="university-upload"
               type="file"
               onChange={handleimageupload}
@@ -168,6 +221,8 @@ const MentorComForm = (props:any) => {
           style={{ padding: "15px 0px",marginTop:"40px" }}
           onClick={() => {
             setsubmitting(false);
+            (authenticate)?setauthenticate(false):setauthenticate(true)
+            setsendimages(true)
           }}
         >
           Submit for verification
@@ -175,7 +230,7 @@ const MentorComForm = (props:any) => {
       </div>
     </div>
   ) : (
-    <div> Submit </div>
+    <div> Submiting... </div>
   );
 };
 
