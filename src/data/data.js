@@ -104,8 +104,8 @@ export const relationarr = () => {
 }
 export const placeofstay = () => {
   let arr = [
-    "oncampus",
-    "offcampus"
+    "onCampus",
+    "offCampus"
   ]
   return arr;
 }

@@ -1,6 +1,7 @@
 import React,{ useState,useEffect } from "react";
 import styling from "./MentorRegStyles";
 import { currenciesarr } from "../data/data";
+import Spinner from '../images/Spinnerform.gif'
 import {
   Button,
   Checkbox,
@@ -13,8 +14,15 @@ import {
   Typography,
   Input,
   Alert,
+  Slide,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const MentorComForm = (props:any) => {
   const [authenticate, setauthenticate] = useState(false);
@@ -22,6 +30,7 @@ const MentorComForm = (props:any) => {
   const [Loading, setLoading] = useState(false);
   const [error, seterror] = useState(false);
   const [type1, settype1] = useState("png");
+  const navigate = useNavigate()
 
   const url =
   "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
@@ -43,6 +52,9 @@ const MentorComForm = (props:any) => {
     const [universityiderr, setuniversityiderr] = useState(false);
     const [profilepicerr, setprofilepicerr] = useState(false);
     const [upiiderr, setupiiderr] = useState(false);
+
+    //normal states
+    const [already, setalready] = useState(false);
 
 
   useEffect(() => {
@@ -76,9 +88,80 @@ const MentorComForm = (props:any) => {
           body.append('file',universityid)
           }
           res = await axios
-          .post(`${res?.data?.url}`,body)
+          // .post(`${res?.data?.url}`,body)
+          // .catch((err: any) => {
+          //   console.log(err);
+          //   setLoading(false);
+          //   seterror(true)
+          // });
+          let campusjob="no";
+          let scholarship="no";
+          let graduation=Number(props?.details?.grad.getFullYear())
+          let joining=Number(props?.details?.joining.getFullYear())
+          if(props?.details?.campusjob)
+          {
+            campusjob="yes"
+          }
+          if(props?.details?.scholarship)
+          {
+            scholarship="yes"
+          }
+          res = await axios
+          .post(`${url}/user`,
+          {
+              "institute": "string",
+              "campusPreference": "urban",
+              "profilePic": "string",
+              "name": props?.details?.username,
+              "about": props?.details?.bio,
+              "facebook": "string",
+              "linkedIn": linkedin,
+              "type": "mentor",
+              "interests": [
+                "string"
+              ],
+              "mentorMeta": {
+                "yearOfJoining": 0,
+                "status": props?.details?.typeofstud,
+                "degree": props?.details?.degree,
+                "major": props?.details?.study,
+                "countryOfOrigin": "India",
+                "languages": props?.details?.languages,
+                "campusInfo": {
+                  "verificationDocUrl": "string",
+                  "uniEmail": {
+                    "email": props?.details?.uniemail,
+                    "verified": true
+                  },
+                  "uniName": props?.details?.uni,
+                  "scores": {
+                    "gpa": props?.details?.gpa,
+                    "gmat": props?.details?.gmat,
+                    "sat": props?.details?.sat
+                  },
+                  "specialisation": props?.details?.specialization,
+                  "campusExperience": "string",
+                  "scholarship": scholarship,
+                  "placeOfStay": props?.details?.place,
+                  "previousInstitute": props?.details?.previous,
+                  "courseName": props?.details?.course,
+                  "yearOfGrad": graduation,
+                  "campusJob": campusjob
+                },
+                "preferredCurrency": currency,
+                "countryOfStudy": props?.details?.country
+              }
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          })
           .catch((err: any) => {
             console.log(err);
+            if(err?.response?.status===400)
+            {
+              setalready(true)
+              setsubmitting(false)
+            }
             setLoading(false);
             seterror(true)
           });
@@ -106,6 +189,11 @@ const MentorComForm = (props:any) => {
     setuploadimg(event.target.files[0])
   };
 
+  const handleClose  = () => {
+    setalready(false);
+    navigate("/")
+  };
+
   const handleagree = () => {
     (agree) ?
       setagree(false)
@@ -119,7 +207,7 @@ const MentorComForm = (props:any) => {
     setprofilepicerr(false);
     setlinkedinerr(false);
     setcurrencyerr(false)
-    setupiiderr(false)
+    setupiiderr(true)
 
 
     if(universityid===null)
@@ -306,7 +394,28 @@ const MentorComForm = (props:any) => {
       </div>
     </div>
   ) : (
-    <div> Submiting... </div>
+    <>
+    <div style={{backgroundImage:`url(${Spinner})`,backgroundPosition: "center",position: "fixed",zIndex: 1,backgroundRepeat: "no-repeat",width: "100%",height: "100vh"}}></div>
+    {(already)?
+    <Dialog
+        open={already}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Already have an account with us?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+           The account already exists please login to your account 
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Take me there</Button>
+        </DialogActions>
+      </Dialog>
+      :
+      null}
+    </>
   );
 };
 
