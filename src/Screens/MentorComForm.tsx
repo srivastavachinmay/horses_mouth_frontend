@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import React,{ useState,useEffect } from "react";
 import styling from "./MentorRegStyles";
 import { currenciesarr } from "../data/data";
 import {
@@ -12,6 +12,7 @@ import {
   TextField,
   Typography,
   Input,
+  Alert,
 } from "@mui/material";
 import axios from "axios";
 
@@ -29,8 +30,19 @@ const MentorComForm = (props:any) => {
     //form states
     const [agree, setagree] = useState(false);
     const [currency, setcurrency] = useState("");
-    const [universityid, setuniversityid] = useState(null);
     const [uploadimg, setuploadimg] = useState(null);
+    const [universityid, setuniversityid] = useState(null);
+    const [linkedin, setlinkedin] = useState("");
+    const [upiid, setupiid] = useState("");
+    const ref = React.createRef();
+
+    //form errors
+    const [erroralert, seterroralert] = useState(false);
+    const [linkedinerr, setlinkedinerr] = useState(false);
+    const [currencyerr, setcurrencyerr] = useState(false);
+    const [universityiderr, setuniversityiderr] = useState(false);
+    const [profilepicerr, setprofilepicerr] = useState(false);
+    const [upiiderr, setupiiderr] = useState(false);
 
 
   useEffect(() => {
@@ -53,10 +65,15 @@ const MentorComForm = (props:any) => {
         if(res?.status===200)
         {
           const body=new FormData();
+          const results=res?.data;
+          for(const field in results.fields){
+            body.append(field,results.fields[field])
+          }
+          console.log("inside it..."+universityid)
+          console.log(ref.current)
           if(universityid)
           {
           body.append('file',universityid)
-          body.append("key",res?.data?.fields?.key)
           }
           res = await axios
           .post(`${res?.data?.url}`,body)
@@ -81,8 +98,8 @@ const MentorComForm = (props:any) => {
   const [submitting, setsubmitting] = useState(true);
 
   const handlefileupload = (event:any) => {
-    console.log(event.target.files[0]);
-    setuniversityid(event.target.files[0])
+    setuniversityid(event.target.files[0]);
+    console.log(event.target.files[0])
   };
   const handleimageupload = (event:any) => {
     console.log(event.target.files[0]);
@@ -94,6 +111,54 @@ const MentorComForm = (props:any) => {
       setagree(false)
       :
       setagree(true)
+  }
+
+  const handlesubmitting = () =>{
+    seterroralert(false)
+    setuniversityiderr(false)
+    setprofilepicerr(false);
+    setlinkedinerr(false);
+    setcurrencyerr(false)
+    setupiiderr(false)
+
+
+    if(universityid===null)
+    {
+      seterroralert(true)
+      setuniversityiderr(true);
+    }
+    else if(uploadimg===null)
+    {
+      seterroralert(true)
+      setprofilepicerr(true);
+    }
+    else if(linkedin==="")
+    {
+      seterroralert(true)
+      setlinkedinerr(true);
+    }
+    else if(currency==="")
+    {
+      seterroralert(true)
+      setcurrencyerr(true)
+    }
+    else if(currency==="indian rupee (inr)" && upiid==="")
+    {
+      seterroralert(true)
+      setupiiderr(true)
+      
+    }
+    else if(agree===false)
+    {
+      seterroralert(true)
+    }
+    else
+    {
+      seterroralert(false)
+      setsubmitting(false);
+      (authenticate)?setauthenticate(false):setauthenticate(true)
+      setsendimages(true)
+    }
   }
 
   console.log(props)
@@ -124,6 +189,8 @@ const MentorComForm = (props:any) => {
               id="contained-button-file"
               type="file"
               onChange={handlefileupload}
+              ref={ref}
+              error={universityiderr}
             />
             <Button
               variant="contained"
@@ -147,9 +214,11 @@ const MentorComForm = (props:any) => {
           </div>
           <label htmlFor="university-upload" style={{ width: "30%" }}>
             <Input
+              inputProps={{ accept: 'image/*' }}
               id="university-upload"
               type="file"
               onChange={handleimageupload}
+              error={profilepicerr}
             />
             <Button
               variant="contained"
@@ -167,11 +236,14 @@ const MentorComForm = (props:any) => {
           label="LINKEDIN PROFILE LINK"
           variant="outlined"
           required={true}
+          value={linkedin}
+          onChange={(event)=>{setlinkedin(event?.target?.value)}}
+          error={linkedinerr}
         />
         <br />
         <hr />
         <br />
-        <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+        <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}} error={currencyerr}>
         <InputLabel id="demo-simple-select-filled-label">CURRENCY PREFERENCE</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -196,6 +268,9 @@ const MentorComForm = (props:any) => {
           id="outlined-basic"
           label="UPI ID (if payment preference is INR)"
           variant="outlined"
+          value={upiid}
+          onChange={(event)=>{setupiid(event?.target?.value)}}
+          error={upiiderr}
         />:<div/>
       }
         <br />
@@ -214,19 +289,20 @@ const MentorComForm = (props:any) => {
         <FormControlLabel
         control={<Checkbox checked={agree} onChange={handleagree} name="checkedA"
           style={{ color: "#6E3CBC" }} />}
-        label="I agree to the Horse's Mouth terms and conditions."
+        label="I agree to the Horse's Mouth terms and conditions." 
       />
         <Button
           variant="contained"
           style={{ padding: "15px 0px",marginTop:"40px" }}
-          onClick={() => {
-            setsubmitting(false);
-            (authenticate)?setauthenticate(false):setauthenticate(true)
-            setsendimages(true)
-          }}
+          onClick={handlesubmitting}
         >
           Submit for verification
         </Button>
+        <br />
+        <br />
+        {(erroralert)?
+        <Alert severity="error">Please fill all the required fields and accept terms and conditions</Alert>:
+        null}
       </div>
     </div>
   ) : (

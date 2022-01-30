@@ -1,4 +1,4 @@
-import { Autocomplete, Button, Checkbox, Chip, FormControl, FormControlLabel, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
+import { Alert, Autocomplete, Button, Checkbox, Chip, FormControl, FormControlLabel, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
 import {useState } from "react";
 import styling from './MentorRegStyles'
 import MentorComForm from "./MentorComForm";
@@ -18,13 +18,13 @@ const MentorReg = (props:any) => {
   const [course, setcourse] = useState("");
   const [degree, setdegree] = useState("");
   const [study, setstudy] = useState("");
-  const [relation, setrelation] = useState("");
   const [uniemail, setuniemail] = useState("");
   let checkdate=new Date().getFullYear();
   let currdate=new Date();
   const [grad, setgrad] = useState(currdate);
   const [joining, setjoining] = useState(currdate);
   const [country, setcountry] = useState("");
+  const [typeofstud, settypeofstud] = useState("");
   const [previous, setprevious] = useState("");
   const [prevcourse, setprevcourse] = useState("");
   const [specialization, setspecialization] = useState("");
@@ -36,6 +36,23 @@ const MentorReg = (props:any) => {
   const [gpa, setgpa] = useState("");
   const [gmat, setgmat] = useState("");
   const [sat, setsat] = useState("");
+
+
+  //form error states
+  const [unierr, setunierr] = useState(false);
+  const [courseerr, setcourseerr] = useState(false);
+  const [degreeerr, setdegreeerr] = useState(false);
+  const [studyerr, setstudyerr] = useState(false);
+  const [typeerr, settypeerr] = useState(false);
+  const [countryerr, setcountryerr] = useState(false);
+  const [previouserr, setpreviouserr] = useState(false);
+  const [specializationerr, setspecializationerr] = useState(false);
+  const [prevcourseerr, setprevcourseerr] = useState(false);
+  const [placeerr, setplaceerr] = useState(false);
+  const [langugeserr, setlangugeserr] = useState(false);
+  const [bioerr, setbioerr] = useState(false);
+  const [showalert, setshowalert] = useState(false);
+
 
   //component states
   const [open, setOpen] = useState(false);
@@ -85,6 +102,90 @@ const MentorReg = (props:any) => {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+
+  const handleproceed = () =>{
+    setunierr(false)
+    setcourseerr(false)
+    setdegreeerr(false)
+    setstudyerr(false)
+    settypeerr(false)
+    setcountryerr(false)
+    setprevcourseerr(false)
+    setspecializationerr(false)
+    setprevcourseerr(false)
+    setpreviouserr(false)
+    setplaceerr(false)
+    setlangugeserr(false)
+    setbioerr(false)
+    setshowalert(false)
+
+
+    if(uni==="")
+    {
+      setunierr(true)
+      setshowalert(true)
+    }
+    else if(course==="")
+    {
+      setcourseerr(true)
+      setshowalert(true)
+    }
+    else if(degree==="")
+    {
+      setdegreeerr(true)
+      setshowalert(true)
+    }
+    else if(study==="")
+    {
+      setstudyerr(true)
+      setshowalert(true)
+    }
+    else if(country==="")
+    {
+      setcountryerr(true)
+      setshowalert(true)
+    }
+    else if(typeofstud==="")
+    {
+      settypeerr(true)
+      setshowalert(true)
+    }
+    else if(previous==="")
+    {
+      setpreviouserr(true)
+      setshowalert(true)
+    }
+    else if(prevcourse==="")
+    {
+      setprevcourseerr(true)
+      setshowalert(true)
+    }
+    else if(specialization==="")
+    {
+      setspecializationerr(true)
+      setshowalert(true)
+    }
+    else if(place==="")
+    {
+      setplaceerr(true)
+      setshowalert(true)
+    }
+    else if(languages===[])
+    {
+      setlangugeserr(true)
+      setshowalert(true)
+    }
+    else if(bio==="")
+    {
+      setbioerr(true)
+      setshowalert(true)
+    }
+    else
+    {
+      setshowalert(false)
+      setmentorpage1(false)
+    }
+  }
   return (
     (mentorpage1)?
     <div style={{ overflowY: "auto" }} className={classes.box}>
@@ -95,13 +196,13 @@ const MentorReg = (props:any) => {
     <div className={classes.innerbox}>
       <TextField id="outlined-basic" label="UNIVERSITY" variant="outlined" onChange={(event) => {
         setuni(event.target.value)
-      }} value={uni} required={true}/>
+      }} value={uni} required={true} error={unierr}/>
       <br />
       <TextField id="outlined-basic" label="COURSE NAME" variant="outlined" onChange={(event) => {
         setcourse(event.target.value)
-      }} value={course} required={true}/>
+      }} value={course} required={true} error={courseerr}/>
       <br />
-      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}} error={degreeerr}>
         <InputLabel id="demo-simple-select-filled-label">DEGREE NAME *</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -117,7 +218,7 @@ const MentorReg = (props:any) => {
         </Select>
       </FormControl>
       <br />
-      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px",width:"100%"}}>
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px",width:"100%"}} error={studyerr}>
         <InputLabel id="demo-simple-select-filled-label">AREA OF STUDY *</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -133,14 +234,14 @@ const MentorReg = (props:any) => {
         </Select>
       </FormControl>
       <br />
-      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}} error={typeerr}>
         <InputLabel id="demo-simple-select-filled-label">TYPE OF STUDENT</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-filled"
           onChange={(event) => {
-            setrelation(event.target.value)
-          }} value={relation}
+            settypeofstud(event.target.value)
+          }} value={typeofstud}
           required={true}
         >
           {
@@ -211,21 +312,21 @@ const MentorReg = (props:any) => {
           }}
           options={countries()}
           renderInput={(params) => (
-            <TextField {...params} label="COUNTRY OF STUDY *" variant="outlined" />
+            <TextField {...params} label="COUNTRY OF STUDY *" variant="outlined" error={countryerr}/>
           )}
         />
       <br />
       <TextField id="outlined-basic" label="PREVIOUS EDUCATIONAL INSTITUTE" variant="outlined" onChange={(event) => {
         setprevious(event.target.value)
-      }} value={previous} required={true}/>
+      }} value={previous} required={true} error={previouserr}/>
       <br />
       <TextField id="outlined-basic" label="SPECIALIZATION" variant="outlined" onChange={(event) => {
         setspecialization(event.target.value)
-      }} value={specialization} required={true}/>
+      }} value={specialization} required={true} error={specializationerr}/>
       <br />
       <TextField id="outlined-basic" label="PREVIOUS PURSUED COURSE/S" variant="outlined" onChange={(event) => {
         setprevcourse(event.target.value)
-      }} value={prevcourse} required={true}/>
+      }} value={prevcourse} required={true} error={prevcourseerr}/>
       <br />
       <FormControlLabel
         control={<Checkbox checked={campusjob} onChange={handlecampus} name="checkedA"
@@ -239,7 +340,7 @@ const MentorReg = (props:any) => {
       />
       <br />
       <br />
-      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}}>
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }} style={{margin:"0px"}} error={placeerr}>
         <InputLabel id="demo-simple-select-filled-label">PLACE OF STAY</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -257,7 +358,7 @@ const MentorReg = (props:any) => {
         </Select>
       </FormControl>
       <br />
-      <FormControl sx={{ m: 1, width: 300 }} style={{margin:"0px",width:"100%"}}>
+      <FormControl sx={{ m: 1, width: 300 }} style={{margin:"0px",width:"100%"}} error={langugeserr}>
         <InputLabel id="demo-multiple-chip-label">PRIMARY AND SECONDARY LANGUAGES</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
@@ -296,6 +397,7 @@ const MentorReg = (props:any) => {
           onChange={(event) => {
             setbio(event.target.value)
           }} value={bio} required={true}
+          error={bioerr}
         />
       <br />
       <TextField id="outlined-basic" label="CURRENT GPA" variant="outlined" onChange={(event) => {
@@ -310,9 +412,12 @@ const MentorReg = (props:any) => {
         setsat(event.target.value)
       }} value={sat}/>
       <br />
-      <Button variant="contained" style={{padding:"15px 0px"}} onClick={() => {
-        setmentorpage1(false)
-      }}>Proceed</Button>
+      <Button variant="contained" style={{padding:"15px 0px"}} onClick={handleproceed}>Proceed</Button>
+      <br />
+      <br />
+      {(showalert)?
+        <Alert severity="error">Please fill all the required fields</Alert>:
+        null}
     </div>
   </div>:
   <MentorComForm details={{
@@ -322,7 +427,7 @@ const MentorReg = (props:any) => {
     course,
     degree,
     study,
-    relation,
+    typeofstud,
     uniemail,
     grad,
     joining,

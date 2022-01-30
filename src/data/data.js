@@ -209,6 +209,7 @@ export const citizenship = () => {
     "north korea",
     "south korea",
     "kosovo",
+    "india",
     "kuwait",
     "kyrgyzstan",
     "laos",
