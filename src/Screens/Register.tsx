@@ -7,7 +7,7 @@ import { auth } from "../utils/firebase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import styling from './MentorRegStyles'
+import styling from '../styles/MentorRegStyles'
 import studentimg from '../images/student.png'
 import businessmanimg from '../images/businessman.png'
 import MentorReg from "./MentorReg";

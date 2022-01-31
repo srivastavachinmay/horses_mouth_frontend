@@ -1,6 +1,6 @@
 import { Alert, Autocomplete, Button, Checkbox, Chip, FormControl, FormControlLabel, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
 import {useState } from "react";
-import styling from './MentorRegStyles'
+import styling from '../styles/MentorRegStyles'
 import MentorComForm from "./MentorComForm";
 import { countries,degreearr,area,relationarr,placeofstay, languagearr } from "../data/data";
 import { DatePicker, LocalizationProvider } from "@mui/lab";

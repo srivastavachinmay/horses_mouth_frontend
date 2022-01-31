@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from "react";
-import styling from "./MentorRegStyles";
+import styling from "../styles/MentorRegStyles";
 import { currenciesarr } from "../data/data";
 import Spinner from '../images/Spinnerform.gif'
 import {
@@ -64,7 +64,7 @@ const MentorComForm = (props:any) => {
       console.log(props?.details?.data)
       if (sendimages) {
         res = await axios
-          .get(`${url}/upload-url/?mimeType=${type1}`,
+          .get(`${url}/upload-url/?mimeType=image/${type1}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           })
@@ -78,22 +78,24 @@ const MentorComForm = (props:any) => {
         {
           const body=new FormData();
           const results=res?.data;
+          console.log(results)
           for(const field in results.fields){
             body.append(field,results.fields[field])
           }
           console.log("inside it..."+universityid)
+          console.log("URL"+res?.data?.url)
           console.log(ref.current)
           if(universityid)
           {
           body.append('file',universityid)
           }
           res = await axios
-          // .post(`${res?.data?.url}`,body)
-          // .catch((err: any) => {
-          //   console.log(err);
-          //   setLoading(false);
-          //   seterror(true)
-          // });
+          .post(`${res?.data?.url}`,body)
+          .catch((err: any) => {
+            console.log(err);
+            setLoading(false);
+            seterror(true)
+          });
           let campusjob="no";
           let scholarship="no";
           let graduation=Number(props?.details?.grad.getFullYear())
