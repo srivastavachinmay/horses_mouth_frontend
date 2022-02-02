@@ -31,6 +31,8 @@ const MentorComForm = (props:any) => {
   const [error, seterror] = useState(false);
   const [type1, settype1] = useState("png");
   const [type2, settype2] = useState("png");
+  const [documenturl, setdocumenturl] = useState("");
+  const [profileurl, setprofileurl] = useState("");
   const navigate = useNavigate()
 
   const url =
@@ -97,6 +99,10 @@ const MentorComForm = (props:any) => {
             setLoading(false);
             seterror(true)
           });
+          if(res?.status===205)
+          {
+          setdocumenturl(`${res?.data?.url}/${res?.data?.fields?.key}`)
+          }
         res = await axios
           .get(`${url}/upload-url/?mimeType=image/${type2}`,
           {
@@ -130,6 +136,10 @@ const MentorComForm = (props:any) => {
             setLoading(false);
             seterror(true)
           });
+          if(res?.status===205)
+          {
+          setprofileurl(`${res?.data?.url}/${res?.data?.fields?.key}`)
+          }
           let campusjob="no";
           let scholarship="no";
           let graduation=Number(props?.details?.grad.getFullYear())
@@ -147,7 +157,7 @@ const MentorComForm = (props:any) => {
           {
               "institute": "string",
               "campusPreference": "urban",
-              "profilePic": `${res?.data?.url}/${res?.data?.fields?.key}`,
+              "profilePic": profileurl,
               "name": props?.details?.username,
               "about": props?.details?.bio,
               "facebook": "string",
@@ -164,7 +174,7 @@ const MentorComForm = (props:any) => {
                 "countryOfOrigin": "India",
                 "languages": props?.details?.languages,
                 "campusInfo": {
-                  "verificationDocUrl": "string",
+                  "verificationDocUrl": documenturl,
                   "uniEmail": {
                     "email": props?.details?.uniemail,
                     "verified": true
