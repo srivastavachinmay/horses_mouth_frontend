@@ -4,25 +4,27 @@ import CssBaseline from "@mui/material/CssBaseline";
 import {
     Avatar,
     FormControl,
-    IconButton,
     MenuItem,
     Select,
     SelectChangeEvent,
     Stack,
-    ToggleButton,
-    ToggleButtonGroup
+    TextField,
 } from "@mui/material";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import { MentorSidebarList } from "./Components/listItems";
 import Container from "@mui/material/Container";
 import { Drawer } from "./Components/Drawer";
-import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import styling from '../styles/CalendarStyles'
+import TimePicker from '@mui/lab/TimePicker';
 
 const Calender = () => {
 
     const [day, setDay] = React.useState('Sunday');
+    const [fromtime, setfromtime] = React.useState<Date | null>(new Date('2014-08-18T21:15:54'),);
+    const [totime, settotime] = React.useState<Date | null>(new Date('2014-08-18T21:35:54'),);
     const [formats, setFormats] = React.useState(() => ['Sunday']);
 
     const handleFormat = (
@@ -33,6 +35,15 @@ const Calender = () => {
     const handleChange = (event: SelectChangeEvent) => {
         setDay(event.target.value);
     };
+    const handlefrom = (newValue: Date | null) => {
+        setfromtime(newValue);
+        //@ts-ignore
+        let secondtime=new Date(newValue?.getTime() + 20*60000)
+        settotime(secondtime)
+      };
+    const handleto = (newValue: Date | null) => {
+        settotime(newValue);
+      };
     const selectCSS = {
         alignSelf: "center",
         justifyContent: "center",
@@ -196,6 +207,41 @@ const Calender = () => {
 
                                     </Select>
                                 </FormControl>
+                                <Typography sx={{
+                                    fontSize: 23,
+                                    fontWeight: 700,
+                                    color: '#7267CB',
+                                    width: '100%',
+                                    padding:'10px 20px'
+                                }}>
+                                    24th December 2021
+                                </Typography>
+                                <Typography sx={{
+                                    fontSize: 15,
+                                    fontWeight: 700,
+                                    color: '#7267CB',
+                                    width: '100%',
+                                    padding:'3px 20px'
+                                }}>
+                                    Slot 1
+                                </Typography>
+                                <div className={classes.timepart}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <TimePicker
+                                    label="From"
+                                    value={fromtime}
+                                    onChange={handlefrom}
+                                    renderInput={(params) => <TextField {...params} style={{width:"40%"}}/>}
+                                    />
+                                <TimePicker
+                                    label="To"
+                                    value={totime}
+                                    onChange={handleto}
+                                    disabled
+                                    renderInput={(params) => <TextField {...params} style={{width:"40%"}}/>}
+                                    />
+                                </LocalizationProvider>
+                                </div>
                             </Stack>
                             <Stack width={'50%'} padding={2}>
                                 <Typography sx={{
@@ -207,9 +253,8 @@ const Calender = () => {
                                 }}>
                                     Indian timezone 24 hr format
                                 </Typography>
-                                <div className={classes.navigation}>
                                     <FormControl variant={"standard"}
-                                        sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }} style={{width:"80%"}}>
+                                        sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
 
                                         <Select
                                             value={day}
@@ -244,12 +289,41 @@ const Calender = () => {
 
                                         </Select>
                                     </FormControl>
-                                    <IconButton aria-label="up">
-                                        <ArrowCircleUpIcon className={classes.icons}/>
-                                    </IconButton>
-                                    <IconButton aria-label="down">
-                                        <ArrowCircleUpIcon className={classes.icons}/>
-                                    </IconButton>
+                                    <Typography sx={{
+                                    fontSize: 23,
+                                    fontWeight: 700,
+                                    color: '#7267CB',
+                                    width: '100%',
+                                    padding:'10px 20px'
+                                }}>
+                                    24th December 2021
+                                </Typography>
+                                    <Typography sx={{
+                                    fontSize: 15,
+                                    fontWeight: 900,
+                                    color: '#7267CB',
+                                    width: '100%',
+                                    padding:'3px 20px'
+                                }}>
+                                    Slot 1
+                                </Typography>
+                                <div className={classes.timepart}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <TimePicker
+                                    label="From"
+                                    value={fromtime}
+                                    onChange={handlefrom}
+                                    disabled
+                                    renderInput={(params) => <TextField {...params} style={{width:"40%"}}/>}
+                                    />
+                                <TimePicker
+                                    label="To"
+                                    value={totime}
+                                    onChange={handleto}
+                                    disabled
+                                    renderInput={(params) => <TextField {...params} style={{width:"40%"}}/>}
+                                    />
+                                </LocalizationProvider>
                                 </div>
                             </Stack>
                         </Box>

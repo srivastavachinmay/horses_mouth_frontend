@@ -8,6 +8,11 @@ const useStyles = makeStyles(( theme ) => ( {
     icons:{
         backgroundColor:"#7267CB",
         color:"#ffffff"
+    },
+    timepart:{
+        display:"flex",
+        justifyContent:"space-between",
+        padding:"13px 16px"
     }
     } ))
 

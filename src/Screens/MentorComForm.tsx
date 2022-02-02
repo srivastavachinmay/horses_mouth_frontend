@@ -30,6 +30,7 @@ const MentorComForm = (props:any) => {
   const [Loading, setLoading] = useState(false);
   const [error, seterror] = useState(false);
   const [type1, settype1] = useState("png");
+  const [type2, settype2] = useState("png");
   const navigate = useNavigate()
 
   const url =
@@ -96,6 +97,39 @@ const MentorComForm = (props:any) => {
             setLoading(false);
             seterror(true)
           });
+        res = await axios
+          .get(`${url}/upload-url/?mimeType=image/${type2}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .catch((err: any) => {
+            console.log(err);
+            setLoading(false);
+            seterror(true)
+          });
+
+        if(res?.status===200)
+        {
+          const body=new FormData();
+          const results=res?.data;
+          console.log(results)
+          for(const field in results.fields){
+            body.append(field,results.fields[field])
+          }
+          console.log("inside it..."+uploadimg)
+          console.log("URL"+res?.data?.url)
+          console.log(ref.current)
+          if(uploadimg)
+          {
+          body.append('file',uploadimg)
+          }
+          res = await axios
+          .post(`${res?.data?.url}`,body)
+          .catch((err: any) => {
+            console.log(err);
+            setLoading(false);
+            seterror(true)
+          });
           let campusjob="no";
           let scholarship="no";
           let graduation=Number(props?.details?.grad.getFullYear())
@@ -113,7 +147,7 @@ const MentorComForm = (props:any) => {
           {
               "institute": "string",
               "campusPreference": "urban",
-              "profilePic": "string",
+              "profilePic": `${res?.data?.url}/${res?.data?.fields?.key}`,
               "name": props?.details?.username,
               "about": props?.details?.bio,
               "facebook": "string",
@@ -174,6 +208,7 @@ const MentorComForm = (props:any) => {
       //   navigate("/")
       // }
       setLoading(false);
+      }
     })();
   }, [authenticate]);
   
