@@ -1,12 +1,16 @@
-import axios                                                    from "axios";
-import { GoogleAuthProvider, signInWithPopup, UserCredential, } from "firebase/auth";
-import React, { useEffect, useState }                           from "react";
-import { useNavigate }                                          from "react-router-dom";
-import businessmanimg                                           from '../images/businessman.png';
-import studentimg                                               from '../images/student.png';
-import { auth }                                                 from "../utils/firebase";
-import MentorReg                                                from "./MentorReg";
-import useStyles                                           from './MentorRegStyles';
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  UserCredential,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import styling from '../styles/MentorRegStyles'
+import studentimg from '../images/student.png'
+import businessmanimg from '../images/businessman.png'
+import MentorReg from "./MentorReg";
 
 const Register = () => {
     const url =
@@ -19,7 +23,7 @@ const Register = () => {
     const [mainpage, setmainpage] = useState(true);
     const [data, setData] = useState<UserCredential>();
     const navigate = useNavigate();
-    const classes = useStyles();
+    const classes = styling();
     
     useEffect(() => {
         ( async () => {

@@ -1,35 +1,49 @@
 import {
     Avatar,
+    Box,
+    CssBaseline,
     FormControl,
     MenuItem,
     Select,
     SelectChangeEvent,
     Stack,
-    ToggleButton,
-    ToggleButtonGroup
-}                            from "@mui/material";
-import Box                   from "@mui/material/Box";
-import Container             from "@mui/material/Container";
-import CssBaseline           from "@mui/material/CssBaseline";
-import List                  from "@mui/material/List";
-import Typography            from "@mui/material/Typography";
-import React                 from "react";
-import { Drawer }            from "./Components/Drawer";
+    TextField,
+} from "@mui/material";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
 import { MentorSidebarList } from "./Components/listItems";
+import Container from "@mui/material/Container";
+import { Drawer } from "./Components/Drawer";
+import styling from '../styles/CalendarStyles'
+import TimePicker from '@mui/lab/TimePicker';
+import React from "react";
 
 const Calender = () => {
-    
-    const [day, setDay] = React.useState('');
+
+    const [day, setDay] = React.useState('Sunday');
+    const [fromtime, setfromtime] = React.useState<Date | null>(new Date('2014-08-18T21:15:54'),);
+    const [totime, settotime] = React.useState<Date | null>(new Date('2014-08-18T21:35:54'),);
     const [formats, setFormats] = React.useState(() => ['Sunday']);
     
     const handleFormat = (
         event: React.MouseEvent<HTMLElement>,
-        newFormats: string[] ) => {
+        newFormats: string[]) => {
         setFormats(newFormats);
     };
-    const handleChange = ( event: SelectChangeEvent ) => {
+    const handleChange = (event: SelectChangeEvent) => {
         setDay(event.target.value);
     };
+    const handlefrom = (newValue: Date | null) => {
+        setfromtime(newValue);
+        //@ts-ignore
+        let secondtime=new Date(newValue?.getTime() + 20*60000)
+        settotime(secondtime)
+      };
+    const handleto = (newValue: Date | null) => {
+        settotime(newValue);
+      };
     const selectCSS = {
         alignSelf: "center",
         justifyContent: "center",
@@ -51,12 +65,13 @@ const Calender = () => {
             color: "white",
         },
     };
+    const classes = styling()
     return (
         <Box sx={{ display: "flex" }}>
-            <CssBaseline/>
+            <CssBaseline />
             {/*"Drawer"*/}
             <Drawer variant="permanent" open={true} sx={{ bgcolor: "#7267CB" }}>
-                <Avatar sx={{ alignSelf: "center", margin: 2 }}/>
+                <Avatar sx={{ alignSelf: "center", margin: 2 }} />
                 <Typography textAlign={"center"} sx={{ color: "white" }}>
                     John Doe
                 </Typography>
@@ -96,16 +111,16 @@ const Calender = () => {
                             pt: 2,
                             pb: 1,
                             background: 'linear-gradient(90deg, #E38686 0%, rgba(205, 62, 62, 0.536687) 35.06%, rgba(255, 168, 0, 0.316841) 59.66%, rgba(112, 255, 0, 0.165602) 96.43%)'
-                        }}/>
+                        }} />
                         <Box display={"flex"} width={'100%'} margin={2} justifyContent={"space-around"}>
                             <Box display={"flex"}>
                                 <Box display={"flex"} justifyContent={'space-around'}
-                                     sx={{
-                                         bgcolor: '#F57676',
-                                         width: 18,
-                                         mr: 1,
-                                         height: 18
-                                     }}/>
+                                    sx={{
+                                        bgcolor: '#F57676',
+                                        width: 18,
+                                        mr: 1,
+                                        height: 18
+                                    }} />
                                 <Typography color={'#6E3CBC'} fontSize={12} fontWeight={700} lineHeight={1}>Red
                                     zones: most no. of
                                     sessions scheduled </Typography>
@@ -113,24 +128,24 @@ const Calender = () => {
                             
                             <Box display={"flex"}>
                                 <Box display={"flex"} justifyContent={'space-around'}
-                                     sx={{
-                                         bgcolor: '#FAFF00',
-                                         width: 18,
-                                         mr: 1,
-                                         height: 18
-                                     }}/>
+                                    sx={{
+                                        bgcolor: '#FAFF00',
+                                        width: 18,
+                                        mr: 1,
+                                        height: 18
+                                    }} />
                                 <Typography color={'#6E3CBC'} fontSize={12} fontWeight={700} lineHeight={1}>yellow
                                     zones: moderate no. of sessions scheduled </Typography>
                             </Box>
                             
                             <Box display={"flex"}>
                                 <Box display={"flex"} justifyContent={'space-around'}
-                                     sx={{
-                                         bgcolor: '#52FF00',
-                                         width: 18,
-                                         mr: 1,
-                                         height: 18
-                                     }}/>
+                                    sx={{
+                                        bgcolor: '#52FF00',
+                                        width: 18,
+                                        mr: 1,
+                                        height: 18
+                                    }} />
                                 <Typography color={'#6E3CBC'} fontSize={12} fontWeight={700} lineHeight={1}>green
                                     zones: least no. of sessions scheduled </Typography>
                             </Box>
@@ -145,7 +160,7 @@ const Calender = () => {
                             Schedule your available slots
                         </Typography>
                         <Box display={"flex"} flexWrap={"wrap"} width={'100%'}
-                             justifyContent={"space-around"}>
+                            justifyContent={"space-around"}>
                             <Stack width={'50%'} padding={2}>
                                 <Typography sx={{
                                     fontSize: 18,
@@ -157,8 +172,8 @@ const Calender = () => {
                                     Your time zone 24 hr format
                                 </Typography>
                                 <FormControl variant={"standard"}
-                                             sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
-                                    
+                                    sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
+
                                     <Select
                                         value={day}
                                         defaultValue={"Day"}
@@ -192,38 +207,41 @@ const Calender = () => {
                                     
                                     </Select>
                                 </FormControl>
-                                
-                                <ToggleButtonGroup
-                                    value={formats}
-                                    onChange={handleFormat}
-                                    color={"primary"}
-                                >
-                                    <ToggleButton value="Sunday">
-                                        S
-                                    </ToggleButton>
-                                    <ToggleButton value="Monday" sx={{
-                                        borderRadius: '50%'
-                                    }}>
-                                        M
-                                    </ToggleButton>
-                                    <ToggleButton value="Tuesday">
-                                        T
-                                    </ToggleButton>
-                                    <ToggleButton value="Wednesday">
-                                        W
-                                    </ToggleButton>
-                                    <ToggleButton value="Thursday">
-                                        T
-                                    </ToggleButton>
-                                    <ToggleButton value="Friday">
-                                        F
-                                    </ToggleButton>
-                                    <ToggleButton value="Saturday">
-                                        S
-                                    </ToggleButton>
-                                
-                                
-                                </ToggleButtonGroup>
+                                <Typography sx={{
+                                    fontSize: 23,
+                                    fontWeight: 700,
+                                    color: '#7267CB',
+                                    width: '100%',
+                                    padding:'10px 20px'
+                                }}>
+                                    24th December 2021
+                                </Typography>
+                                <Typography sx={{
+                                    fontSize: 15,
+                                    fontWeight: 700,
+                                    color: '#7267CB',
+                                    width: '100%',
+                                    padding:'3px 20px'
+                                }}>
+                                    Slot 1
+                                </Typography>
+                                <div className={classes.timepart}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <TimePicker
+                                    label="From"
+                                    value={fromtime}
+                                    onChange={handlefrom}
+                                    renderInput={(params) => <TextField {...params} style={{width:"40%"}}/>}
+                                    />
+                                <TimePicker
+                                    label="To"
+                                    value={totime}
+                                    onChange={handleto}
+                                    disabled
+                                    renderInput={(params) => <TextField {...params} style={{width:"40%"}}/>}
+                                    />
+                                </LocalizationProvider>
+                                </div>
                             </Stack>
                             <Stack width={'50%'} padding={2}>
                                 <Typography sx={{
@@ -235,42 +253,78 @@ const Calender = () => {
                                 }}>
                                     Indian timezone 24 hr format
                                 </Typography>
-                                <FormControl variant={"standard"}
-                                             sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
-                                    
-                                    <Select
-                                        value={day}
-                                        defaultValue={"Day"}
-                                        inputProps={{
-                                            underline: {
-                                                "&&&:before": {
-                                                    borderBottom: "none"
+                                    <FormControl variant={"standard"}
+                                        sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
+
+                                        <Select
+                                            value={day}
+                                            defaultValue={"Day"}
+                                            inputProps={{
+                                                underline: {
+                                                    "&&&:before": {
+                                                        borderBottom: "none"
+                                                    },
+                                                    "&&:after": {
+                                                        borderBottom: "none"
+                                                    },
                                                 },
-                                                "&&:after": {
-                                                    borderBottom: "none"
-                                                },
-                                            },
-                                        }}
-                                        sx={{
-                                            textAlignLast: "center",
-                                            alignSelf: "center",
-                                            justifySelf: "center",
-                                            color: 'white',
-                                            width: "100%",
-                                            fontWeight: "bold"
-                                        }}
-                                        onChange={handleChange}
-                                    >
-                                        <MenuItem sx={selectCSS} value={"Sunday"}>Sunday</MenuItem>
-                                        <MenuItem sx={selectCSS} value={"Monday"}>Monday</MenuItem>
-                                        <MenuItem sx={selectCSS} value={"Tuesday"}>Tuesday</MenuItem>
-                                        <MenuItem sx={selectCSS} value={"Wednesday"}>Wednesday</MenuItem>
-                                        <MenuItem sx={selectCSS} value={"Thursday"}>Thursday</MenuItem>
-                                        <MenuItem sx={selectCSS} value={"Friday"}>Friday</MenuItem>
-                                        <MenuItem sx={selectCSS} value={"Saturday"}>Saturday</MenuItem>
-                                    
-                                    </Select>
-                                </FormControl>
+                                            }}
+                                            sx={{
+                                                textAlignLast: "center",
+                                                alignSelf: "center",
+                                                justifySelf: "center",
+                                                color: 'white',
+                                                width: "100%",
+                                                fontWeight: "bold"
+                                            }}
+                                            onChange={handleChange}
+                                        >
+                                            <MenuItem sx={selectCSS} value={"Sunday"}>Sunday</MenuItem>
+                                            <MenuItem sx={selectCSS} value={"Monday"}>Monday</MenuItem>
+                                            <MenuItem sx={selectCSS} value={"Tuesday"}>Tuesday</MenuItem>
+                                            <MenuItem sx={selectCSS} value={"Wednesday"}>Wednesday</MenuItem>
+                                            <MenuItem sx={selectCSS} value={"Thursday"}>Thursday</MenuItem>
+                                            <MenuItem sx={selectCSS} value={"Friday"}>Friday</MenuItem>
+                                            <MenuItem sx={selectCSS} value={"Saturday"}>Saturday</MenuItem>
+
+                                        </Select>
+                                    </FormControl>
+                                    <Typography sx={{
+                                    fontSize: 23,
+                                    fontWeight: 700,
+                                    color: '#7267CB',
+                                    width: '100%',
+                                    padding:'10px 20px'
+                                }}>
+                                    24th December 2021
+                                </Typography>
+                                    <Typography sx={{
+                                    fontSize: 15,
+                                    fontWeight: 900,
+                                    color: '#7267CB',
+                                    width: '100%',
+                                    padding:'3px 20px'
+                                }}>
+                                    Slot 1
+                                </Typography>
+                                <div className={classes.timepart}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <TimePicker
+                                    label="From"
+                                    value={fromtime}
+                                    onChange={handlefrom}
+                                    disabled
+                                    renderInput={(params) => <TextField {...params} style={{width:"40%"}}/>}
+                                    />
+                                <TimePicker
+                                    label="To"
+                                    value={totime}
+                                    onChange={handleto}
+                                    disabled
+                                    renderInput={(params) => <TextField {...params} style={{width:"40%"}}/>}
+                                    />
+                                </LocalizationProvider>
+                                </div>
                             </Stack>
                         </Box>
                     
