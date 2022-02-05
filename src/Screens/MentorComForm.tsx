@@ -35,6 +35,7 @@ const MentorComForm = (props: any) => {
   const [profileurl, setprofileurl] = useState("");
   const [documentsuccess, setdocumentsuccess] = useState(false);
   const [imagesuccess, setimagesuccess] = useState(false);
+  const [submit, setsubmit] = useState(false);
   const navigate = useNavigate()
 
   const url =
@@ -64,11 +65,21 @@ const MentorComForm = (props: any) => {
   useEffect(() => {
     (async () => {
       let res;
+
+      //setting states as false for success in uploading
       setdocumentsuccess(false);
-      setimagesuccess(false)
+      setimagesuccess(false);
+
+
+      //getting token
       let token = await props?.details?.data?.user?.getIdToken();
       console.log(props?.details?.data)
+
+
+      //sendimages would be false by default and in case of sending it would be set to true
       if (sendimages) {
+
+        //first get call with mimetype
         res = await axios
           .get(`${url}/upload-url/?mimeType=image/${type1}`,
             {
@@ -80,7 +91,12 @@ const MentorComForm = (props: any) => {
             seterror(true)
           });
 
+
+        //in case of success next set of calls would be initiated
         if (res?.status === 200) {
+
+
+          //s3 bucket uploading part of both documents
           let documents = `${res?.data?.url}/${res?.data?.fields?.key}`;
           let body = new FormData();
           let results = res?.data;
@@ -88,13 +104,13 @@ const MentorComForm = (props: any) => {
           for (const field in results.fields) {
             body.append(field, results.fields[field])
           }
-          console.log("inside it..." + universityid)
-          console.log("URL" + res?.data?.url)
           if (universityid) {
             body.append('file', universityid)
           }
           let uploadurl=res?.data?.url
           let s3fields=res?.data?.fields
+
+          //university id upload
           res = await axios
             .post(`${uploadurl}`, body)
             .catch((err: any) => {
@@ -103,22 +119,21 @@ const MentorComForm = (props: any) => {
               seterror(true)
             });
           if (res?.status === 204) {
-            console.log("Inside it" + documents)
             setdocumenturl(documents)
             setdocumentsuccess(true)
           }
-            let image = `${res?.data?.url}/${res?.data?.fields?.key}`
+            let image = `${uploadurl}/${s3fields?.key}`
             body = new FormData();
             results = res?.data;
             console.log(results)
             for (const field in s3fields) {
               body.append(field, s3fields[field])
             }
-            console.log("inside it..." + uploadimg)
-            console.log("URL" + res?.data?.url)
             if (uploadimg) {
               body.append('file', uploadimg)
             }
+
+            //profile pic upload
             res = await axios
               .post(`${uploadurl}`, body)
               .catch((err: any) => {
@@ -127,10 +142,22 @@ const MentorComForm = (props: any) => {
                 seterror(true)
               });
             if (res?.status === 204) {
-              console.log("Inside it" + image)
               setprofileurl(image)
               setimagesuccess(true);
             }
+        setLoading(false);
+          }
+      }
+      submit?setsubmit(false):setsubmit(true);
+    })();
+  }, [authenticate]);
+
+
+  useEffect(() => {
+            (async () => {
+            if(documentsuccess && imagesuccess)
+            {
+            let token = await props?.details?.data?.user?.getIdToken();
             let campusjob = "no";
             let scholarship = "no";
             let graduation = Number(props?.details?.grad.getFullYear())
@@ -141,7 +168,7 @@ const MentorComForm = (props: any) => {
             if (props?.details?.scholarship) {
               scholarship = "yes"
             }
-              res = await axios
+            const res = await axios
                 .post(`${url}/user`,
                   {
                     "institute": "string",
@@ -199,15 +226,10 @@ const MentorComForm = (props: any) => {
                   setLoading(false);
                   seterror(true)
                 });
-        }
-        console.log(res);
-        // if (res?.status === 200) {
-        //   navigate("/")
-        // }
-        setLoading(false);
-      }
-    })();
-  }, [authenticate]);
+              }
+            
+  })();}, [submit]);
+  
 
   const classes = styling();
 
