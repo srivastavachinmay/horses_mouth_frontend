@@ -199,7 +199,8 @@ const Wallet = () => {
                                             alignItems: "center",
                                         }}>
                                             <MonetizationOnOutlined sx={{ width: 46, height: 46 }}/> <Typography
-                                            fontSize={22} p={1}>Rs.200000</Typography>
+                                            fontSize={22}
+                                            p={1}>{`Rs. ${(paidWallet![ 0 ]!.mentor!.totalWithdrawn + paidWallet![ 0 ]!.mentor!.amountAvailable)}`}</Typography>
                                         </Box>
                                         <Typography color={'#6E3CBC'} fontSize={16} fontWeight={700}>
                                             your life time earnings
@@ -221,8 +222,8 @@ const Wallet = () => {
                                             fontSize={22}
                                             p={1}>{`Rs. ${paidWallet?.[ 0 ].mentor.totalWithdrawn}`}</Typography>
                                         </Box>
-                                        <Typography fontSize={16} fontWeight={700} color={'#6E3CBC'}>amount withdrawn
-                                            till now
+                                        <Typography fontSize={16} fontWeight={700} color={'#6E3CBC'}>
+                                            amount withdrawn till now
                                         </Typography>
                                     </Box>
                                 </Box>
