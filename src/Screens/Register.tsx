@@ -6,7 +6,7 @@ import businessmanimg                                           from '../images/
 import studentimg                                               from '../images/student.png';
 import { auth }                                                 from "../utils/firebase";
 import MentorReg                                                from "./MentorReg";
-import { useStyles }                                            from './MentorRegStyles';
+import useStyles                                           from './MentorRegStyles';
 
 const Register = () => {
     const url =

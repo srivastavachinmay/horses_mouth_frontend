@@ -16,6 +16,18 @@ export const getUser = async ( param?: object | undefined ) => {
         console.log(e);
     }
 };
+export const getMentorById = async ( id: number  ) => {
+    try {
+        const response = await axios.get(baseUrl + '/mentor', {
+            params: id,
+            headers: { 'Authorization': `bearer ${AUTH_TOKEN}`, }
+        });
+        console.log(response.data.users[ 0 ]);
+        return response.data.users[ 0 ] as User;
+    } catch (e) {
+        console.log(e);
+    }
+};
 
 export const createUser = async ( data: User ) => {
     try {

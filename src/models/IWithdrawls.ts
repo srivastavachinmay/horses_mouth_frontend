@@ -1,7 +1,7 @@
-export interface IWithdrawals {
-    nextPage: number;
-    total: number;
-    withdrawls: Withdrawl[];
+export interface IWithdrawls {
+    nextPage: number
+    total: number
+    withdrawls: Withdrawl[]
 }
 
 export interface Withdrawl {

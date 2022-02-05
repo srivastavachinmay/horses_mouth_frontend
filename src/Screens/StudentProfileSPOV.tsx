@@ -112,7 +112,7 @@ const StudentProfileSPOV = () => {
                 <CssBaseline/>
                 {/*"Drawer"*/}
                 <Drawer variant="permanent" open={true} sx={{ bgcolor: "#7267CB" }}>
-                    <Avatar sx={{ alignSelf: "center", margin: 2 }}/>
+                    <Avatar sx={{ alignSelf: "center", margin: 2 }} src={mentorData?.profilePic}/>
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
                         {`${mentorData?.name}`}
                     </Typography>
