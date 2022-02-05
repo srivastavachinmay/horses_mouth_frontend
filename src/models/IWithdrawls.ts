@@ -1,4 +1,4 @@
-export interface IWithdrawals {
+export interface IWithdrawls {
     nextPage: number
     total: number
     withdrawls: Withdrawl[]

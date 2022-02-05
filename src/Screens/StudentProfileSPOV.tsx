@@ -61,14 +61,14 @@ const StudentProfileSPOV = () => {
             const mentorMeta = mentorData?.[ "mentorMeta" ];
             setSlots(mentorMeta?.schedule);
             setChipData({
-                            "1st Preference Course": mentorData?.interests[ 0 ] || " ",
-                            "2nd Preference Course": mentorData?.interests[ 1 ] || " ",
-                            "3rd Preference Course": mentorData?.interests[ 2 ] || " ",
-                            "Current Institute": mentorData?.institute || " ",
-                            "Campus Preference": mentorData?.campusPreference! || " ",
-                            "Degree Preference": mentorMeta?.degree! || " ",
-                            "Language Preference": mentorMeta?.languages.join(', ')! || " ",
-                            "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || " "
+                            "1st Preference Course": mentorData?.interests[ 0 ] || "N/A",
+                            "2nd Preference Course": mentorData?.interests[ 1 ] || "N/A",
+                            "3rd Preference Course": mentorData?.interests[ 2 ] || "N/A",
+                            "Current Institute": mentorData?.institute || "N/A",
+                            "Campus Preference": mentorData?.campusPreference! || "N/A",
+                            "Degree Preference": mentorMeta?.degree! || "N/A",
+                            "Language Preference": mentorMeta?.languages.join(', ')! || "N/A",
+                            "Previous Institute": mentorMeta?.campusInfo.previousInstitute! || "N/A"
                         });
             
         } )();
@@ -112,7 +112,7 @@ const StudentProfileSPOV = () => {
                 <CssBaseline/>
                 {/*"Drawer"*/}
                 <Drawer variant="permanent" open={true} sx={{ bgcolor: "#7267CB" }}>
-                    <Avatar sx={{ alignSelf: "center", margin: 2 }}/>
+                    <Avatar sx={{ alignSelf: "center", margin: 2 }} src={mentorData?.profilePic}/>
                     <Typography textAlign={"center"} sx={{ color: "white" }}>
                         {`${mentorData?.name}`}
                     </Typography>

@@ -5,6 +5,7 @@ import Container                                                                
 import CssBaseline                                                                    from "@mui/material/CssBaseline";
 import Grid                                                                           from "@mui/material/Grid";
 import React, { useEffect, useState }                                                 from "react";
+import { useNavigate }                                                                from "react-router-dom";
 import { getUser }                                                                    from "../axios/User";
 import { useHover }                                                                   from "../Hooks/useHover";
 import { User }                                                                       from "../models/IUser";
@@ -233,6 +234,9 @@ const MentorProfileMPOV = () => {
                                         Connected Profiles
                                     </Typography>
                                     <Box
+                                        onClick={() => {
+                                            window.open(mentorData?.linkedIn);
+                                        }}
                                         sx={{
                                             display: "flex",
                                             width: 280,
