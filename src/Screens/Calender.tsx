@@ -292,28 +292,35 @@ const Calender = () => {
                                     Universal timezone 12 hr format
                                 </Typography>
                                     <FormControl variant={"standard"}
-                                        sx={{ m: 1, bgcolor: '#6E3CBC', borderRadius: 3 }}>
+                                        sx={{ m: 1, bgcolor: '#9867e5', borderRadius: 3 }}>
 
                                         <Select
                                             value={day}
                                             defaultValue={"Day"}
+                                            disabled
                                             inputProps={{
                                                 underline: {
                                                     "&&&:before": {
-                                                        borderBottom: "none"
+                                                        borderBottom: "none",
                                                     },
                                                     "&&:after": {
-                                                        borderBottom: "none"
+                                                        borderBottom: "none",
                                                     },
                                                 },
+                                                icon:{
+                                                    fill:"white"
+                                                }
                                             }}
                                             sx={{
                                                 textAlignLast: "center",
                                                 alignSelf: "center",
                                                 justifySelf: "center",
-                                                color: 'white',
+                                                color: '#ffffff !important',
                                                 width: "100%",
-                                                fontWeight: "bold"
+                                                fontWeight: "bold",
+                                                "& .MuiInputBase-input.MuiInput-input.Mui-disabled": {
+                                                    "-webkit-text-fill-color": "#ffffff",
+                                                    },
                                             }}
                                             onChange={handleChange}
                                         >
