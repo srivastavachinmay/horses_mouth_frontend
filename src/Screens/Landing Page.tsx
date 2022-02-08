@@ -53,7 +53,7 @@ const LandingPage = () => {
         navigate("/mentorProfile"):
         navigate("/studentProfile")
       } else {
-        // alert("response not received");
+        alert("response not received");
       }
       setLoading(false);
     })();
@@ -89,10 +89,11 @@ const LandingPage = () => {
         if(!res) {
             console.log("No response received");
         } else {
+            console.log(res)
             setData(res);
-            ( authenticate ) ? setAuthenticate(false) : setAuthenticate(true);
-            setLoading(true);
             setloggingin(true);
+            (authenticate) ? setAuthenticate(false) : setAuthenticate(true);
+            setLoading(true);
         }
     };
     const chipCSS = {

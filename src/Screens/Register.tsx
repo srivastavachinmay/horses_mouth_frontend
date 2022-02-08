@@ -126,7 +126,7 @@ const Register = () => {
                      <div className={classes.option}
                           onClick={googleAuthentication} id="student">
                          <img src={studentimg} alt="" className={classes.image} id="student"/>
-                         <h1 style={{ color: "#000000", fontSize: "22px" }}>Student</h1>
+                         <h1 style={{ color: "#000000", fontSize: "22px" }}>Student/Parents</h1>
                      </div>
                      <div className={classes.option}
                           onClick={googleAuthentication} id="mentor">
