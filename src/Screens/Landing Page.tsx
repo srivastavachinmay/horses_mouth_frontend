@@ -50,8 +50,8 @@ const LandingPage = () => {
 
       if (res?.data?.users?.length !== 0 && res!==undefined) {
         (res?.data?.users[0]?.type==="mentor")?
-        navigate("/mentorProfileM"):
-        navigate("/studentProfileS")
+        navigate("/mentorProfile"):
+        navigate("/studentProfile")
       } else {
         // alert("response not received");
       }
