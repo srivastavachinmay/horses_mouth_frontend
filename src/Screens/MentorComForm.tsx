@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styling from "../styles/MentorRegStyles";
 import { currenciesarr } from "../data/data";
-import Spinner from '../images/Spinnerform.gif'
+import Spinner from '../assets/Spinnerform.gif'
 import {
   Button,
   Checkbox,

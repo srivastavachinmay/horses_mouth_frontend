@@ -11,8 +11,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import styling from '../styles/MentorRegStyles'
-import studentimg from '../images/student.png'
-import businessmanimg from '../images/businessman.png'
+import studentimg from '../assets/student.png'
+import businessmanimg from '../assets/businessman.png'
 import MentorReg from "./MentorReg";
 
 const Register = () => {
