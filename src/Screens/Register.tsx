@@ -10,8 +10,7 @@ import cred from '../utils/creds.json'
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import styling from './MentorRegStyles'
+import styling from '../styles/MentorRegStyles'
 import studentimg from '../images/student.png'
 import businessmanimg from '../images/businessman.png'
 import MentorReg from "./MentorReg";
@@ -114,7 +113,6 @@ const Register = () => {
       setLoading(true);
     }
   };
-  const classes = styling();
   return (
         (mainpage)?
           <div style={{ backgroundColor: "#6E3CBC" }}>
