@@ -1,19 +1,19 @@
-import React,{useState, useEffect} from 'react';
-import { Avatar, Box, Button, Card, CardHeader,Grid,Tab, Tabs,Chip, Typography } from "@mui/material";
-import { Instagram, LinkedIn, Twitter } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged,GoogleAuthProvider,signInWithPopup,UserCredential, } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import MentorCard                                   from "./Components/MentorCard";
-import appointment                                  from "../assets/appointment.png";
-import bennett                                      from "../assets/bennettLogo.png";
-import chat                                         from "../assets/chat.png";
-import group83                                      from "../assets/group83.png";
-import group84                                      from "../assets/group84.png";
-import piggyBank                                    from '../assets/piggy-bank.png';
-import signup                                       from "../assets/signup.png";
-import startUp                                      from "../assets/startUp.png";
-import axios from 'axios';
+import { Instagram, LinkedIn, Twitter }                                             from "@mui/icons-material";
+import { Avatar, Box, Button, Card, CardHeader, Chip, Grid, Tab, Tabs, Typography } from "@mui/material";
+import axios                                                                        from 'axios';
+import { GoogleAuthProvider, signInWithPopup, UserCredential, }                     from "firebase/auth";
+import React, { useEffect, useState }                                               from 'react';
+import { useNavigate }                                                              from "react-router-dom";
+import appointment                                                                  from "../assets/appointment.png";
+import bennett                                                                      from "../assets/bennettLogo.png";
+import chat                                                                         from "../assets/chat.png";
+import group83                                                                      from "../assets/group83.png";
+import group84                                                                      from "../assets/group84.png";
+import piggyBank                                                                    from '../assets/piggy-bank.png';
+import signup                                                                       from "../assets/signup.png";
+import startUp                                                                      from "../assets/startUp.png";
+import { auth }                                                                     from "../utils/firebase";
+import MentorCard                                                                   from "./Components/MentorCard";
 
 const LandingPage = () => {
     
@@ -22,46 +22,44 @@ const LandingPage = () => {
         setSelectedTab(value);
     };
     const url =
-    "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
-  const [authenticate, setAuthenticate] = useState(false);
-  const [loggingin, setloggingin] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<UserCredential>();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if(loggingin)
-    {
-    (async () => {
-      const token = await data?.user?.getIdToken(true);
-      let idtoken:string = token!;
-      localStorage.setItem("idtoken",idtoken)
-
-      const res = await axios
-        .get(`${url}/user`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .catch((err: any) => {
-          console.log(err);
-          setLoading(false);
-        });
-
-      console.log(res);
-    //   console.log(res?.data?.users?.length);
-
-      if (res?.data?.users?.length !== 0 && res!==undefined) {
-        (res?.data?.users[0]?.type==="user")?
-        navigate("/mentorProfileM"):
-        navigate("/studentProfileS")
-      } else {
-        // alert("response not received");
-      }
-      setLoading(false);
-    })();
-    }
-}, [authenticate]);
-
-
-   /* This would be there on necessary routes where check is needed */
+              "https://97v4h1lqe8.execute-api.ap-south-1.amazonaws.com/production";
+    const [authenticate, setAuthenticate] = useState(false);
+    const [loggingin, setloggingin] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<UserCredential>();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(loggingin) {
+            ( async () => {
+                const token = await data?.user?.getIdToken(true);
+                let idtoken: string = token!;
+                localStorage.setItem("idtoken", idtoken);
+                
+                const res = await axios
+                    .get(`${url}/user`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    })
+                    .catch(( err: any ) => {
+                        console.log(err);
+                        setLoading(false);
+                    });
+                
+                console.log(res);
+                //   console.log(res?.data?.users?.length);
+                
+                if(res?.data?.users?.length !== 0 && res !== undefined) {
+                    ( res?.data?.users[ 0 ]?.type === "user" ) ?
+                    navigate("/mentorProfileM") :
+                    navigate("/studentProfileS");
+                } else {
+                    // alert("response not received");
+                }
+                setLoading(false);
+            } )();
+        }
+    }, [authenticate]);
+    
+    /* This would be there on necessary routes where check is needed */
     // onAuthStateChanged(auth, ( user ) => {
     //     if(!user) {
     //         navigate("/register");
@@ -74,7 +72,7 @@ const LandingPage = () => {
     //         }).catch(function( error ) {
     //             console.log("Got error");
     //             console.log(error);
-                
+    
     //         });
     //         console.log(user);
     //     }
@@ -90,10 +88,10 @@ const LandingPage = () => {
         if(!res) {
             console.log("No response received");
         } else {
-          setData(res);
-          (authenticate)?setAuthenticate(false):setAuthenticate(true);
-          setLoading(true);
-          setloggingin(true)
+            setData(res);
+            ( authenticate ) ? setAuthenticate(false) : setAuthenticate(true);
+            setLoading(true);
+            setloggingin(true);
         }
     };
     const chipCSS = {
@@ -106,7 +104,6 @@ const LandingPage = () => {
         fontWeight: "bolder",
         borderRadius: 2
     };
-
     
     const ProfileCard = () => {
         return (
@@ -156,40 +153,10 @@ const LandingPage = () => {
                     </Typography>
                 </Box>
             </Box>
-        )
-    }
-
-    const CustomCard = () => {
-        return <div>
-
-            <Card variant={"outlined"} sx={{
-                margin: 5,
-                width: 255,
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                borderRadius: 3,
-                border: 5,
-                borderColor: '#D4CFFF'
-            }}>
-                <Avatar sx={{ width: 147, height: 147 }}
-                        src={"https://www.google.com/url?sa=i&url=https%3A%2F%2Fdragonballuniverse.fandom.com%2Fwiki%2FUltra_Instinct&psig=AOvVaw156j5RHdB00_uqfdptVEm6&ust=1640591076506000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJif3Jb8gPUCFQAAAAAdAAAAABAP"}>
-                </Avatar>
-                <CardHeader sx={{ color: '#6E3CBC', fontWeight: "bold", fontSize: 60 }} title={'John Doe'}/>
-
-                <Chip sx={chipCSS} label={'University of waterloo'}/>
-                <Chip sx={chipCSS} label={'bachelors'}/>
-                <Chip sx={chipCSS} label={'Mech. engg.'}/>
-                <Button variant={'contained'}
-                        sx={{ bgcolor: '#7267CB', fontWeight: 'bold', fontSize: 11, marginRight: 2 }}>
-                    Book a session
-                </Button>
-                <Chip sx={chipCSS} label={'student'}/>
-            </Card>
-
-        </div>
-    }
+        );
+    };
+    
+    
     return (
         <div>
             <Box sx={{
@@ -231,7 +198,7 @@ const LandingPage = () => {
                     position: 'absolute',
                 }}>
                     <Button variant={'outlined'} sx={{ borderRadius: 3, fontWeight: 'bold', fontSize: 20, margin: 2 }}
-                        // onClick={googleAuthentication}
+                            onClick={googleAuthentication}
                     >
                         Login
                     </Button>
@@ -242,7 +209,7 @@ const LandingPage = () => {
                     </Button>
                 </div>
                 <Box
-                    display={{xs:'none',lg:'block'}}
+                    display={{ xs: 'none', lg: 'block' }}
                     alignSelf={"flex-end"}
                     justifySelf={"flex-end"}
                     component="img"
@@ -254,7 +221,7 @@ const LandingPage = () => {
                         // right: 0,
                         // top: 'auto',
                         // left: 'auto',
-                      
+                        
                     }}
                     src={group84}
                 />
