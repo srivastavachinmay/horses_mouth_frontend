@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -15,17 +14,6 @@ import styling from '../styles/MentorRegStyles'
 import studentimg from '../images/student.png'
 import businessmanimg from '../images/businessman.png'
 import MentorReg from "./MentorReg";
-=======
-import axios                                                    from 'axios';
-import { GoogleAuthProvider, signInWithPopup, UserCredential, } from "firebase/auth";
-import React, { useEffect, useState }                           from 'react';
-import { useNavigate }                                          from "react-router-dom";
-import businessmanimg                                           from '../images/businessman.png';
-import studentimg                                               from '../images/student.png';
-import { auth }                                                 from "../utils/firebase";
-import MentorReg                                                from "./MentorReg";
-import styling                                                  from './MentorRegStyles';
->>>>>>> Stashed changes
 
 const Register = () => {
   const url =
