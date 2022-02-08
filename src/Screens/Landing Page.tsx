@@ -49,7 +49,7 @@ const LandingPage = () => {
     //   console.log(res?.data?.users?.length);
 
       if (res?.data?.users?.length !== 0 && res!==undefined) {
-        (res?.data?.users[0]?.type==="user")?
+        (res?.data?.users[0]?.type==="mentor")?
         navigate("/mentorProfileM"):
         navigate("/studentProfileS")
       } else {
