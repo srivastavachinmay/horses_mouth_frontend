@@ -60,23 +60,25 @@ const LandingPage = () => {
     }
 }, [authenticate]);
 
-    onAuthStateChanged(auth, ( user ) => {
-        if(!user) {
-            navigate("/register");
-            return null;
-        } else {
-            // localStorage.setItem("token", user.accessToken);
-            user.getIdToken(true).then(function( idToken ) {
-                console.log("Got token" + idToken);
-                localStorage.setItem("idtoken", idToken);
-            }).catch(function( error ) {
-                console.log("Got error");
-                console.log(error);
+
+   /* This would be there on necessary routes where check is needed */
+    // onAuthStateChanged(auth, ( user ) => {
+    //     if(!user) {
+    //         navigate("/register");
+    //         return null;
+    //     } else {
+    //         // localStorage.setItem("token", user.accessToken);
+    //         user.getIdToken(true).then(function( idToken ) {
+    //             console.log("Got token" + idToken);
+    //             localStorage.setItem("idtoken", idToken);
+    //         }).catch(function( error ) {
+    //             console.log("Got error");
+    //             console.log(error);
                 
-            });
-            console.log(user);
-        }
-    });
+    //         });
+    //         console.log(user);
+    //     }
+    // });
     const googleAuthentication = async () => {
         let googleProvider = new GoogleAuthProvider();
         
